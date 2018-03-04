@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="500" height="500" style="border: 1px solid black;"></canvas>
+    <script>
+      function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+      var centerX = canvas.width / 2;
+      var centerY = canvas.height / 2;
+      var radius = 10;
+
+      var angle = Math.PI/10;
+
+      context.beginPath();
+      context.translate(centerX, centerY);
+
+      function rotate() {
+        context.clearRect(-1000, -1000, 1000, 1000);
+
+        // rotate 45 degrees clockwise
+        //console.log('Rotating... ' + angle);
+        context.rotate(angle);
+
+        //context.moveTo(centerX, centerY);
+        //context.lineTo(centerX, centerY - 100);
+        context.moveTo(0, 0);
+        context.lineTo(0, -100);
+        context.arc(0, -100, radius, 0, 2 * Math.PI, false);
+        context.lineTo(0, -100);
+
+        context.fillStyle = 'green';
+        context.fill();
+
+        context.clearRect(-centerX, -centerY, centerX, centerY);
+        //context.lineWidth = 1;
+        //context.strokeStyle = '#003300';
+        //context.stroke();
+
+        setTimeout(rotate, 1);
+      }
+
+      rotate();
+
+    </script>
+  </body>
+</html>
