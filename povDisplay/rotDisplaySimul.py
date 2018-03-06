@@ -13,7 +13,7 @@ if (len(sys.argv) < 2):
     sys.stderr.write("usage: " + sys.argv[0] + " imagePath\n")
     sys.exit(1)
 
-window = pyglet.window.Window(width=900, height=900, vsync=False)
+window = pyglet.window.Window(width=1000, height=1000, vsync=False)
 #window = pyglet.window.Window(width=900, height=900, vsync=True)
 
 def makeCircle(numPoints, centerX, centerY, radius):
@@ -31,12 +31,12 @@ def makeCircle(numPoints, centerX, centerY, radius):
 midWindowX = window.width / 2
 midWindowY = window.height / 2
 
-#imageMode = 'L'
-imageMode = 'RGB'
+imageMode = 'L'
+#imageMode = 'RGB'
+ledScheme = [0 for i in range(10)] + [1 for i in range(16)] + [0] + [1 for i in range(16)]
+#ledScheme = [0 for i in range(10)] + [1 for i in range(40)]
+ledDetails = 20 #20
 ledRadius = 5 #2 #5
-ledDetails = 10 #20
-ledCount = 32 #100 #32
-offset = 8
 angularPositionCount = 300 
 ledCenterX = midWindowX
 ledCenterY = midWindowY
@@ -44,7 +44,7 @@ ledCenterY = midWindowY
 # Process supplied image
 imagePath = sys.argv[1]
 img = PIL.Image.open(imagePath)
-imageSize = 2 * (ledCount + offset)
+imageSize = 2 * len(ledScheme)
 img = img.resize((imageSize, imageSize))
 img = img.convert(imageMode)
 #(imgWidth, imgHeight) = img.size
@@ -66,60 +66,72 @@ def get_circle_cartesian_coordinates(angle, radius):
     global ledCenterX, ledCenterY
     return (radius * cos(angle) + ledCenterX, radius * sin(angle) + ledCenterY)
 
+# Build all circles and sample image
+circlesMatrix=[[None for ledIndex in range(len(ledScheme) + 1)] for position in range(angularPositionCount)]
+imageSampleColor=[[None for ledIndex in range(len(ledScheme))] for position in range(angularPositionCount)]
 pixelCount = 0
 pixelSum = 0
 pixelMean = 128
+extremumColors = (255, 0)
+for position in range(len(circlesMatrix)):
+    for k, enable in enumerate(range(len(circlesMatrix[0]))):
+        angle = pi * 2 / angularPositionCount * position
+        radius = 2 * k * ledRadius
+        coords = get_circle_cartesian_coordinates(angle, radius)
+
+        circle = makeCircle(ledDetails, coords[0], coords[1], ledRadius)
+        circlesMatrix[position][k] = circle
+        
+        if k >= len(ledScheme):
+            continue
+
+        imageX = round(k / len(ledScheme) * (imageSize/2) * cos(angle) + imageSize/2)
+        imageY = round(k / len(ledScheme) * (imageSize/2) * sin(angle + pi) + imageSize/2)
+        pixel = img.getpixel((imageX, imageY))
+
+        if imageMode == 'L':
+            pixelSum += pixel
+            pixelCount += 1
+            pixelMean = pixelSum / pixelCount
+            sampleColor = pixel
+            extremumColors = (min(pixel, extremumColors[0]), max(pixel, extremumColors[1]))
+        else:
+            sampleColor = pixel #(pixel[0], pixel[1], pixel[2])
+
+        imageSampleColor[position][k] = sampleColor
+
 @window.event
 def on_draw():
     global animPosition, ledRadius, ledDetails, ledCount, offset, pixelCount, pixelSum, pixelMean
-    #pyglet.gl.glClearColor(0,0,0,0)
-    #window.clear()
-    if animPosition == 0 and pixelCount > 0:
-        #glClear(pyglet.gl.GL_COLOR_BUFFER_BIT)
-        newPixelMean = pixelSum / pixelCount
-        if newPixelMean >= pixelMean:
-            pixelMean = newPixelMean * 1.1
-        else:
-            pixelMean = newPixelMean * 0.9
 
-        #sys.stdout.write("pixel mean value: %d\n" % pixelMean)
-        sys.stdout.flush()
-        pixelCount = 0
-        pixelSum = 0
+    #if animPosition == 0:
+    #    glClear(pyglet.gl.GL_COLOR_BUFFER_BIT)
 
-    for k in range(ledCount + 1):
-        animAngle = pi * 2 / angularPositionCount * animPosition
-        radius = (offset + 2 * k) * ledRadius
-        coords = get_circle_cartesian_coordinates(animAngle, radius)
-        circle = makeCircle(ledDetails, coords[0], coords[1], ledRadius)
+    if imageMode == 'L':
+        rand = random.randint(ceil((extremumColors[0] + pixelMean)/2), floor((extremumColors[1] + pixelMean)/2)) 
+
+    for k, enable in enumerate(ledScheme):
+        circle = circlesMatrix[animPosition][k]
+        sampleColor = imageSampleColor[animPosition][k]
         
-        #sys.stdout.write("display coords: (%d ; %d)\n" % (coords[0], coords[1]))
+        if not sampleColor or not enable:
+            glColor3f(0, 0, 0)
 
-        if k < (ledCount):
-            imageX = round((offset + k) / (offset + ledCount) * (imageSize/2) * cos(animAngle) + imageSize/2)
-            imageY = round((offset + k) / (offset + ledCount) * (imageSize/2) * sin(animAngle + pi) + imageSize/2)
-            #sys.stdout.write("img coords: (%d ; %d)\n" % (imageX, imageY))
-
-            pixel = img.getpixel((imageX, imageY))
-            #sys.stdout.write(str(pixel))
-                
-            if imageMode == 'L':
-                pixelSum += pixel
-                pixelCount += 1
-
-                if (pixel < pixelMean):
-                    glColor3f(255,0,0)
-                else:
-                    glColor3f(0,0,0)
+        elif imageMode == 'L':
+            #if (sampleColor * (100 + rand) / 100) < pixelMean:
+            if sampleColor < rand:
+                glColor3f(255, 0, 0)
             else:
-                glColor3f(pixel[0], pixel[1], pixel[2])
-
-        #sys.stdout.write("animPosition: %d" % animPosition)
+                glColor3f(0, 0, 0)
         else:
-            glColor3f(255,255,255)
-            
+            glColor3f(sampleColor[0], sampleColor[1], sampleColor[2])
+
         circle.draw(GL_LINE_LOOP)
 
+    # Add white disks
+    circle = circlesMatrix[animPosition][k + 1]
+    glColor3f(255, 255, 255)
+    circle.draw(GL_LINE_LOOP)
 
 glClear(pyglet.gl.GL_COLOR_BUFFER_BIT)
 pyglet.clock.set_fps_limit(None)
