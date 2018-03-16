@@ -33,8 +33,8 @@ midWindowY = window.height / 2
 
 #imageMode = 'L'
 imageMode = 'RGB'
-ledScheme = [0 for i in range(10)] + [1 for i in range(16)] + [0] + [1 for i in range(16)]
-#ledScheme = [0 for i in range(10)] + [1 for i in range(40)]
+#ledScheme = [0 for i in range(10)] + [1 for i in range(16)] + [0] + [1 for i in range(16)]
+ledScheme = [0 for i in range(10)] + [1 for i in range(40)]
 ledDetails = 20 #20
 ledRadius = 5 #2 #5
 angularPositionCount = 300 
