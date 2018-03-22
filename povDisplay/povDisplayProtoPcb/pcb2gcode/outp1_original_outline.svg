@@ -1,8 +1,8 @@
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
 "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="3880" height="11740" viewBox="0 0 3880 11740" version="1.1"
+<svg width="3880" height="11680" viewBox="0 0 3880 11680" version="1.1"
 xmlns="http://www.w3.org/2000/svg"
 xmlns:xlink="http://www.w3.org/1999/xlink">
-<g fill-rule="evenodd"><path d="M 0,11740 L 0,0 L 3880,0 L 3880,11740 L 180,11740 L 0,11740 z " style="fill-opacity:1.000000;fill:rgb(103,198,105);stroke:rgb(0,0,0);stroke-width:2"/></g>
+<g fill-rule="evenodd"><path d="M 0,11680 L 0,0 L 3880,0 L 3880,11680 L 180,11680 L 0,11680 z " style="fill-opacity:1.000000;fill:rgb(103,198,105);stroke:rgb(0,0,0);stroke-width:2"/></g>
 </svg>
