@@ -1,3 +1,5 @@
+#define LOG_CYCLE_COUNTER 0
+#define SLOW_CLOCK 0
 
 const int SERIAL_LATCH_COUNT = 5;
 
@@ -16,7 +18,6 @@ const int SERIAL_DATA_2_PIN = 11;
 const int SERIAL_DATA_3_PIN = 12;
 const int SERIAL_DATA_4_PIN = 13;
 const int SERIAL_DATA_PINS[SERIAL_LATCH_COUNT] = {SERIAL_DATA_0_PIN, SERIAL_DATA_1_PIN, SERIAL_DATA_2_PIN, SERIAL_DATA_3_PIN, SERIAL_DATA_4_PIN};
-
 
 int value = 128;
 
@@ -43,7 +44,7 @@ void setup() {
   pinMode(HALL_SENSOR_PIN, INPUT_PULLUP);
   
   // Config interrupts
-  attachInterrupt(HALL_SENSOR_PIN - 2, interruptHall, RISING); // I should use digitalPinToInterrupt(), but where is it declared ?
+  //attachInterrupt(HALL_SENSOR_PIN - 2, interruptHall, RISING); // I should use digitalPinToInterrupt(), but where is it declared ?
   
   // Initialize ouptuts
   digitalWrite(A_COMMAND_PIN, HIGH);
@@ -56,16 +57,21 @@ void setup() {
   Serial.begin(115200);
   
   // Set Timer 1 to normal mode at F_CPU.
+  #if LOG_CYCLE_COUNTER == 1
   TCCR1A = 0;
   TCCR1B = 1;
+  #endif
 }
 
-void startCyclyCounter() {
+void startCycleCounter() {
+  #if LOG_CYCLE_COUNTER == 1
   cli();
   cycleCounterStart = TCNT1;
+  #endif
 }
 
 void stopCycleCounter(String message) {
+  #if LOG_CYCLE_COUNTER == 1
   cycleCounterFinish = TCNT1;
   sei();
   uint16_t overhead = 8;
@@ -74,6 +80,7 @@ void stopCycleCounter(String message) {
   Serial.print(" took ");
   Serial.print(cycles);
   Serial.println(" CPU cycles. \n");
+  #endif
 }
 
 // Called on Hall detection
@@ -95,18 +102,24 @@ void sendBitToSerialLatch(boolean data, int canal) {
 
 // Clock all serial latches
 void clockSerialLatches() {
-  // Lock on rising edge
-  digitalWrite(CLOCK_PIN, HIGH);
-  //delay(1);
+  Serial.print("Clock !\n");
+  // Clock on rising edge
   digitalWrite(CLOCK_PIN, LOW);
+  #if SLOW_CLOCK == 1
+  delay(1);
+  #endif
+  digitalWrite(CLOCK_PIN, HIGH);
 }
 
 // Lock all serial latches
 void lockSerialLatches() {
+  Serial.print("Lock !\n");
   // Lock on rising edge
-  digitalWrite(LOCK_PIN, HIGH);
-  //delay(1);
   digitalWrite(LOCK_PIN, LOW);
+  #if SLOW_CLOCK == 1
+  delay(1);
+  #endif
+  digitalWrite(LOCK_PIN, HIGH);
 }
 
 // Send one complete byte of information on a serial latch
@@ -125,18 +138,22 @@ void selectLedCurrent(int level) {
   // Note : A call on this method will not necessarely change the value of outputs, does it consume clock cycle necessarely ?
   switch(level) {
     case 3:
+      Serial.print("Current level 3\n");
       digitalWrite(A_COMMAND_PIN, LOW);
       digitalWrite(B_COMMAND_PIN, LOW);
       break;
     case 2:
+      Serial.print("Current level 2\n");
       digitalWrite(A_COMMAND_PIN, HIGH);
       digitalWrite(B_COMMAND_PIN, LOW);
       break;
     case 1:
+      Serial.print("Current level 1\n");
       digitalWrite(A_COMMAND_PIN, LOW);
       digitalWrite(B_COMMAND_PIN, HIGH);
       break;
     default:
+      Serial.print("Current level 0\n");
       digitalWrite(A_COMMAND_PIN, HIGH);
       digitalWrite(B_COMMAND_PIN, HIGH);
       break;
@@ -151,21 +168,33 @@ void selectLedCurrent(int level) {
 */
 
 const int DISPLAY_BYTE_COUNT = 5;
-byte oneLineMemory[DISPLAY_BYTE_COUNT] = {0x11, 0x11, 0x11, 0x11, 0x11};
+byte oneLineMemory[DISPLAY_BYTE_COUNT] = {0x10, 0x10, 0x10, 0x10, 0x10};
 byte byteBufferToDisplay[DISPLAY_BYTE_COUNT];
 
 /*
   This function is responsible to send data on serial latches. It will be called by interrupt and should be as fast a possible.
 */
 void sendByteBufferToSerialLatch(byte byteArray[]) {
-  startCyclyCounter();
+  startCycleCounter();
   stopCycleCounter("testCounter_shouldBe_0");
-  startCyclyCounter();
+  startCycleCounter();
   
   // The for loop should consume extra cycle clock than hardcoded shifting.
   // Idem for the multiple latch management. A loop symplify the code, but it should consume extra clock cycles.
   // An alternative is to use shiftOut to shift a byte bit per bit cf https://www.arduino.cc/reference/en/language/functions/advanced-io/shiftout/
   for(int i = 0; i < 8; i ++) {
+    
+    Serial.print("Send Byte Buffer:\n");
+    Serial.print(bitRead(byteArray[0], i));
+    Serial.print(" ");
+    Serial.print(bitRead(byteArray[1], i));
+    Serial.print(" ");
+    Serial.print(bitRead(byteArray[2], i));
+    Serial.print(" ");
+    Serial.print(bitRead(byteArray[3], i));
+    Serial.print(" ");
+    Serial.print(bitRead(byteArray[4], i));
+    Serial.print("\n");
     
     // Output 5 bits four the 5 latches. We do not use a loop to 
     digitalWrite(SERIAL_DATA_PINS[0], bitRead(byteArray[0], i));
@@ -182,37 +211,37 @@ void sendByteBufferToSerialLatch(byte byteArray[]) {
 }
 
 // Right shift all bits of a byte buffer
-void rightShiftByteBuffer(byte *byteArray, int bufferSize) {
+void rightShiftByteBuffer(byte byteArray[], int bufferSize) {
   // first shift right most, then put LSB from left byte to MSB on right most byte ...
-  byteArray[bufferSize - 1] >> 1;
+  byteArray[bufferSize - 1] = byteArray[bufferSize - 1] >> 1;
   for(int k = bufferSize - 2; k >= 0; k --) {
     bitWrite(byteArray[k + 1], 7, bitRead(byteArray[k], 0));
-    byteArray[k] >> 1;
+    byteArray[k] = byteArray[k] >> 1;
   }
 }
 
-void leftShiftByteBuffer(byte *byteArray, int bufferSize) {
-  byteArray[0] << 1;
-  for(int k = 1; k < bufferSize - 1; k ++) {
+void leftShiftByteBuffer(byte byteArray[], int bufferSize) {
+  byteArray[0] = byteArray[0] << 1;
+  for(int k = 1; k < bufferSize; k ++) {
     bitWrite(byteArray[k - 1], 0, bitRead(byteArray[k], 7));
-    byteArray[k] << 1;
+    byteArray[k] = byteArray[k] << 1;
   }
 }
 
-void rightRotateByteBuffer(byte *byteArray, int bufferSize) {
+void rightRotateByteBuffer(byte byteArray[], int bufferSize) {
   boolean mem = bitRead(byteArray[bufferSize - 1], 0);
   rightShiftByteBuffer(byteArray, bufferSize);
   bitWrite(byteArray[0], 7, mem);
 }
 
-void leftRotateByteBuffer(byte *byteArray, int bufferSize) {
+void leftRotateByteBuffer(byte byteArray[], int bufferSize) {
   boolean mem = bitRead(byteArray[0], 7);
   leftShiftByteBuffer(byteArray, bufferSize);
   bitWrite(byteArray[bufferSize - 1], 0, mem);  
 }
 
 // Complement all bits of a byte array into a new byte array.
-void complementByteBuffer(byte *byteArray, int bufferSize) {
+void complementByteBuffer(byte byteArray[], int bufferSize) {
   for (int k = 0; k < bufferSize; k++) {
     byteArray[k] = 255 - byteArray[k];
   }
@@ -223,15 +252,20 @@ void loop() {
   selectLedCurrent(1);
   
   // Copy line memory to working buffer
-  memcpy(oneLineMemory, byteBufferToDisplay, DISPLAY_BYTE_COUNT);
+  memcpy(byteBufferToDisplay, oneLineMemory, DISPLAY_BYTE_COUNT);
   // Complement working buffer because 0 is needed to light a LED
   complementByteBuffer(byteBufferToDisplay, DISPLAY_BYTE_COUNT);
   
   // Send the working buffer to the serial latches
   sendByteBufferToSerialLatch(byteBufferToDisplay);
   
+  //complementByteBuffer(oneLineMemory, DISPLAY_BYTE_COUNT);
+  //sendByteBufferToSerialLatch(oneLineMemory);
+  
   // Rotate the memory
-  rightRotateByteBuffer(oneLineMemory, DISPLAY_BYTE_COUNT);
+  leftRotateByteBuffer(oneLineMemory, DISPLAY_BYTE_COUNT);
+  
+  //rightShiftByteBuffer(oneLineMemory, DISPLAY_BYTE_COUNT);
   
   
   /*
