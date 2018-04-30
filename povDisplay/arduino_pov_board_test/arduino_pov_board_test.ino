@@ -1,14 +1,15 @@
 #include <avr/interrupt.h>
+#include <avr/pgmspace.h>
 
-#define LOG_CYCLE_COUNTER 0 // LOG_CYCLE_COUNTER interfere avec la gestion temporelle de l'afficheur
+#define LOG_CYCLE_COUNTER 1 // LOG_CYCLE_COUNTER interfere avec la gestion temporelle de l'afficheur
 #define COM_TRACE_LOG 0
 #define COMM_DEBUG_LOG 0
 #define COMM_INFO_LOG 1
-#define LOG_ENABLED 0 //COMM_DEBUG_LOG || COMM_INFO_LOG || LOG_CYCLE_COUNTER
+#define LOG_ENABLED 1 //COMM_DEBUG_LOG || COMM_INFO_LOG || LOG_CYCLE_COUNTER
 
 #define SLOW_DISPLAY_DRIVING_CLOCK 0
 #define INTERUPT_ON_HALL_DETECTION 1
-#define TIMER_MANAGEMENT 1
+#define TIMER_MANAGEMENT 0
 
 const int SERIAL_LATCH_COUNT = 5;
 
@@ -46,6 +47,15 @@ PORTD6: LOCK => set: PORTD |= 0B1000000; reset: PORTD &= 0B0111111
 
 */
 
+/* ############################################################################################# */
+/* ############################################################################################# */
+/* ############################################################################################# */
+/* ########################################## PINS CONFIG ###################################### */
+/* ############################################################################################# */
+/* ############################################################################################# */
+/* ############################################################################################# */
+
+
 // PINS are expressed in "Arduino value"
 const int HALL_SENSOR_PIN = 3; // Attention ici on utilise le pin arduino uno 3
 
@@ -62,33 +72,80 @@ const int SERIAL_DATA_3_PIN = 11;
 const int SERIAL_DATA_4_PIN = 12;
 const int SERIAL_DATA_PINS[SERIAL_LATCH_COUNT] = {SERIAL_DATA_0_PIN, SERIAL_DATA_1_PIN, SERIAL_DATA_2_PIN, SERIAL_DATA_3_PIN, SERIAL_DATA_4_PIN};
 
-volatile unsigned int hallInterruptCount = 0;
-volatile unsigned int timer0InterruptCount = 0;
-volatile unsigned int timer1InterruptCount = 0;
+/* ############################################################################################# */
+/* ############################################################################################# */
+/* ############################################################################################# */
+/* ########################################## PICTURES ######################################### */
+/* ############################################################################################# */
+/* ############################################################################################# */
+/* ############################################################################################# */
+
+
+//byte memory[8][8];
+const PROGMEM byte PICTURE_1[2048] = {
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  48, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  56, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  72, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  88, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  96, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  104, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  112, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  120, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  136, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  144, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  152, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  160, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  168, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  176, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  184, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  192, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  208, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  216, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  224, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  232, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  240, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  248, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+};
+
+
+
+volatile unsigned int _displayLapCounter = 0;
+volatile unsigned int _displayEventPosition = 0;
 
 // Cycle counter
-int cycleCounterStart = 0;
-int cycleCounterFinish = 0;
+int _cycleCounterStart = 0;
+int _cycleCounterFinish = 0;
+
 
 void startCycleCounter() {
   #if LOG_CYCLE_COUNTER == 1
   cli(); // Same as noInterrupts()
-  cycleCounterStart = TCNT1;
+  _cycleCounterStart = TCNT1;
   #endif
 }
 
 void stopCycleCounter() {
   #if LOG_CYCLE_COUNTER == 1
-  cycleCounterFinish = TCNT1;
+  _cycleCounterFinish = TCNT1;
   sei(); // Same as interrupts()
   int overhead = 24;
-  long cyclesCount = cycleCounterFinish - cycleCounterStart - overhead;
+  long cyclesCount = _cycleCounterFinish - _cycleCounterStart - overhead;
   Serial.print("took ");
   Serial.print(cyclesCount);
   Serial.print(" CPU cycles (");
-  Serial.print(cycleCounterFinish);
+  Serial.print(_cycleCounterFinish);
   Serial.print(" - ");
-  Serial.print(cycleCounterStart);
+  Serial.print(_cycleCounterStart);
   Serial.print(" - ");
   Serial.print(overhead);
   Serial.print(")\n\n");
@@ -133,11 +190,12 @@ void quickSelectLedCurrent(int level) {
 */
 
 const int DISPLAY_BYTE_COUNT = 5;
-//byte oneLineMemory[DISPLAY_BYTE_COUNT] = {0xAA, 0xAA, 0xAA, 0xAA, 0xAA};
-byte oneLineMemory[DISPLAY_BYTE_COUNT] = {0x77, 0x77, 0x77, 0x77, 0x77};
-byte byteBufferToDisplay[DISPLAY_BYTE_COUNT];
-byte transposedByteBufferToDisplay[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-byte transposeWork[DISPLAY_BYTE_COUNT] = {0, 0, 0, 0, 0};
+//byte _oneLineMemory[DISPLAY_BYTE_COUNT] = {0xAA, 0xAA, 0xAA, 0xAA, 0xAA};
+byte _oneLineMemory[DISPLAY_BYTE_COUNT] = {0x77, 0x77, 0x77, 0x77, 0x77};
+static byte STARTING_NON_TRANSPOSED_DISPLAY[8] = {0, 32, 32, 32, 32, 32, 32, 32};
+//byte _byteBufferToDisplay[DISPLAY_BYTE_COUNT];
+byte _transposedByteBufferToDisplay[8] = {0, 0, 0, 0, 0, 0, 0, 0}; // Used to buffer transposed data to send to display
+byte _transposeWork[DISPLAY_BYTE_COUNT] = {0, 0, 0, 0, 0}; // Used to transpose Datas
 
 void transposeByteBuffer(byte byteBuffer[], byte result[]) {
   
@@ -147,16 +205,16 @@ void transposeByteBuffer(byte byteBuffer[], byte result[]) {
   #endif
   
   // Copy byteBuffer to work
-  memcpy(transposeWork, byteBuffer, DISPLAY_BYTE_COUNT);
+  memcpy(_transposeWork, byteBuffer, DISPLAY_BYTE_COUNT);
   
   byte byteBufferToDisplay[DISPLAY_BYTE_COUNT];
   for(int i = 0; i < 8; i ++) {
     result[i] = 0;
     int power = 8;
     for(int k = 0; k < DISPLAY_BYTE_COUNT; k ++) {
-      result[i] += (transposeWork[k] & 0x80) / power;
+      result[i] += (_transposeWork[k] & 0x80) / power;
       //Serial.println(power);
-      transposeWork[k] = transposeWork[k] << 1;
+      _transposeWork[k] = _transposeWork[k] << 1;
       power = power << 1;
     }
   }
@@ -246,31 +304,8 @@ void complementByteBuffer(byte byteArray[], int bufferSize) {
 }
 
 
-// Called on Hall detection
-void hallCounterInterrupt() {
-  hallInterruptCount += 1;
-  
-  #if COMM_INFO_LOG == 1
-  Serial.print("Hall detected (");
-  Serial.print(hallInterruptCount);
-  Serial.println(")");
-  #endif
-  
-  // Rotate the memory
-  //leftRotateByteBuffer(oneLineMemory, DISPLAY_BYTE_COUNT);
-  //rightRotateByteBuffer(oneLineMemory, DISPLAY_BYTE_COUNT);
-  
-  
-  for (int k = 0; k < 400; k++) {
-    selectLedCurrent(3);
-  }
-  
-  selectLedCurrent(0);
-  
-}
-
 void hallDisplayInterrupt() {
-  hallInterruptCount += 1;
+  _displayLapCounter += 1;
   
   #if COMM_INFO_LOG == 1
   Serial.print("Timer1 value: ");
@@ -284,31 +319,17 @@ void hallDisplayInterrupt() {
   OCR0A = TCNT1H; // Set timer 0 interrupt compare match to TCNT1H. TCNT1H are 8 MSB of Timer1 value. => Divide by 256.
   TCNT1 = 0;
 
-  timer0InterruptCount = 0;
+  _displayEventPosition = 0;
+  
+  oneLapEvent(_displayLapCounter);
 }
 
 // Timer0 compare interrupt service routine
 SIGNAL(TIMER0_COMPA_vect) {
   // No need to reset timer we configred it to reset on compare match.
-  timer0InterruptCount ++;
+  _displayEventPosition ++;
   
-  // Division par 128 environ
-  if (timer0InterruptCount % 256 != hallInterruptCount % 256) {
-    quickSelectLedCurrent(0);
-    return;
-  }
-  
-  #if COMM_DEBUG_LOG == 1
-  Serial.println("Timer0 compare matched.");
-  #endif
-  
-  //rightRotateByteBuffer(oneLineMemory, DISPLAY_BYTE_COUNT);
-  quickSendTransposedByteBufferToSerialLatch(transposedByteBufferToDisplay);
-  quickSelectLedCurrent(3);
-    
-  // Swap TB
-  //PORTD ^= 0B00100000; // biwise XOR
-  
+  oneStepEvent(_displayLapCounter, _displayEventPosition);
 }
 
 void logByteBuffer(byte byteBuffer[], int length) {
@@ -322,6 +343,46 @@ void logByteBuffer(byte byteBuffer[], int length) {
   #endif
 }
 
+void logPicture(const byte pictureAddress[]) {
+  #if LOG_ENABLED == 1
+  for (int i = 0; i < 32; i++) {
+    for (int j = 0; j < 64; j++) {
+       Serial.print(pgm_read_byte_near(pictureAddress + i*64 + j));
+       Serial.print(", ");
+    }
+    Serial.println("");
+  }
+  Serial.println("");
+  #endif
+}
+
+/*
+Load a byte array from FLASH memory (PROGMEM) into SRAM.
+The read must be paginated to reduce impact on SRAM.
+The supplied byteBuffer need to be of the supplied pageSize.
+
+Read biggest pasges is more efficient in clock cycles :
+119 cycles to read 8 bytes (15 cycles per byte)
+638 cycles to read 64 bytes (10 cycles per byte)
+*/
+void loadFlashByteArrayToSram(const byte pictureAddress[], byte byteBuffer[], int pageSize, int pageNumber) {
+  #if LOG_CYCLE_COUNTER == 1
+  Serial.print("test ");
+  startCycleCounter();
+  stopCycleCounter();
+  
+  Serial.print("loadbytesInSram ");
+  startCycleCounter();
+  #endif
+  
+  //byteBuffer[0] = pgm_read_byte_near(pictureAddress + index*64 + 0);
+  
+  memcpy_P(byteBuffer, pictureAddress + pageSize * pageNumber, pageSize); //index*8
+
+  #if LOG_CYCLE_COUNTER == 1
+  stopCycleCounter();
+  #endif
+}
 
 // the setup function runs once when you press reset or power the board
 void setup() {
@@ -375,9 +436,9 @@ void setup() {
   
   quickSelectLedCurrent(0);
 
-  transposeByteBuffer(oneLineMemory, transposedByteBufferToDisplay);
-  
-  quickSendTransposedByteBufferToSerialLatch(transposedByteBufferToDisplay);
+  //Init display
+  //transposeByteBuffer(_oneLineMemory, _transposedByteBufferToDisplay);
+  quickSendTransposedByteBufferToSerialLatch(STARTING_NON_TRANSPOSED_DISPLAY);
 
   // Initialize serial communication
   #if LOG_ENABLED == 1
@@ -385,13 +446,43 @@ void setup() {
   Serial.println("Log enabled !");
   #endif
   
-  
 }
 
+// This function is called when the display round the clock.
+void oneLapEvent(int lapCount) {
+  quickSelectLedCurrent(2);
+}
+
+// This function is called when the display is one step further.
+void oneStepEvent(int lapCount, int displayPosition) {
+  sendPictureStepMemoryToDisplay(displayPosition);
+}
 
 // the loop function runs over and over again forever
 void loop() {
 
+
+}
+
+void preloadMemory() {
+  
+}
+
+void sendPictureStepMemoryToDisplay(int displayPosition) {
+  loadFlashByteArrayToSram(PICTURE_1, _transposedByteBufferToDisplay, 8, displayPosition);
+  quickSendTransposedByteBufferToSerialLatch(_transposedByteBufferToDisplay);
+  
+}
+
+/* ############################################################################################# */
+/* ############################################################################################# */
+/* ############################################################################################# */
+/* ########################################## TESTS ############################################ */
+/* ############################################################################################# */
+/* ############################################################################################# */
+/* ############################################################################################# */
+
+void loop_testDisplayWithoutSync() {
   //selectLedCurrent(3);
   
   /*
@@ -403,24 +494,24 @@ void loop() {
   
   /*
   // Copy line memory to working buffer
-  memcpy(byteBufferToDisplay, oneLineMemory, DISPLAY_BYTE_COUNT);
+  memcpy(byteBufferToDisplay, _oneLineMemory, DISPLAY_BYTE_COUNT);
   // Complement working buffer because 0 is needed to light a LED
-  complementByteBuffer(byteBufferToDisplay, DISPLAY_BYTE_COUNT);
+  complementByteBuffer(_byteBufferToDisplay, DISPLAY_BYTE_COUNT);
   
   // Send the working buffer to the serial latches
-  sendByteBufferToSerialLatch(byteBufferToDisplay);
+  sendByteBufferToSerialLatch(_byteBufferToDisplay);
   
   // Rotate the memory
-  //leftRotateByteBuffer(oneLineMemory, DISPLAY_BYTE_COUNT);
-  rightRotateByteBuffer(oneLineMemory, DISPLAY_BYTE_COUNT);
+  //leftRotateByteBuffer(_oneLineMemory, DISPLAY_BYTE_COUNT);
+  rightRotateByteBuffer(_oneLineMemory, DISPLAY_BYTE_COUNT);
   */
   
-  //rightRotateByteBuffer(oneLineMemory, DISPLAY_BYTE_COUNT);
-  //logByteBuffer(oneLineMemory, DISPLAY_BYTE_COUNT);
-  //logByteBuffer(transposedByteBufferToDisplay, 8);
+  //rightRotateByteBuffer(_oneLineMemory, DISPLAY_BYTE_COUNT);
+  //logByteBuffer(_oneLineMemory, DISPLAY_BYTE_COUNT);
+  //logByteBuffer(_transposedByteBufferToDisplay, 8);
 
-  //memcpy(byteBufferToDisplay, oneLineMemory, DISPLAY_BYTE_COUNT);
-  //complementByteBuffer(byteBufferToDisplay, DISPLAY_BYTE_COUNT);  
+  //memcpy(_byteBufferToDisplay, _oneLineMemory, DISPLAY_BYTE_COUNT);
+  //complementByteBuffer(_byteBufferToDisplay, DISPLAY_BYTE_COUNT);  
   
 
   
@@ -428,9 +519,26 @@ void loop() {
   //for (int k = 0; k < 0xFF; k++) {
   //  delay(1);
   //}
- 
 }
 
+void oneStepEvent_testSyncBarsWithoutPictures(int lapCount, int displayPosition) {
+   // Division par 128 environ
+  if (displayPosition % 256 != lapCount % 256) {
+    quickSelectLedCurrent(0);
+    return;
+  }
+  
+  #if COMM_DEBUG_LOG == 1
+  Serial.println("Timer0 compare matched.");
+  #endif
+  
+  //rightRotateByteBuffer(_oneLineMemory, DISPLAY_BYTE_COUNT);
+  quickSendTransposedByteBufferToSerialLatch(_transposedByteBufferToDisplay);
+  quickSelectLedCurrent(3);
+    
+  // Swap TB
+  //PORTD ^= 0B00100000; // biwise XOR 
+}
 
 /* ############################################################################################# */
 /* ############################################################################################# */
@@ -588,5 +696,242 @@ void testCycleCounter() {
   Serial.println(difference);
   
   #endif
+}
+
+
+// Called on Hall detection
+void hallCounterInterrupt() {
+  _displayLapCounter += 1;
+  
+  #if COMM_INFO_LOG == 1
+  Serial.print("Hall detected (");
+  Serial.print(_displayLapCounter);
+  Serial.println(")");
+  #endif
+  
+  // Rotate the memory
+  //leftRotateByteBuffer(oneLineMemory, DISPLAY_BYTE_COUNT);
+  //rightRotateByteBuffer(oneLineMemory, DISPLAY_BYTE_COUNT);
+  
+  
+  for (int k = 0; k < 400; k++) {
+    selectLedCurrent(3);
+  }
+  
+  selectLedCurrent(0);
+  
+}
+
+void loadPicture2(byte byteBuffer[8][8], int index) {
+
+  /*
+  Notes :
+  Enbiron 130 cycles pour copier 1 octet parmis 1 avec memcpy dans bytebuffer.
+  Environ 400 cycles pour copier 8 octets parmis 64 avec memcpy dans bytebuffer.
+  Environ 800 cycles pour copier 64 octets parmis 64 avec memcpy dans bytebuffer.
+  Environ 1600 cycles pour copier 128 octets parmis 128 avec memcpy dans bytebuffer.
+  Environ 3200 cycles pour copier 8 octets parmis 512 avec memcpy dans bytebuffer.
+  Environ 3600 cycles pour copier 64 octets parmis 512 avec memcpy dans bytebuffer.
+  
+  Idées :
+  Charger en SRAM des morceaux de 64 bytes => 400 cycles.
+  On charge les 64 premiers bytes, puis on précharge les 64 suivants dans la loop en tache de fond.
+  Dés que l'on a plus besoin de 64 premiers bytes, on passe au 64 suivants déjà préchargés et on lance le préchargement de 64 nouveaux.
+  
+  Du coup il faut définir des blocs de 64 bytes à initialiser en SRAM lors du préchargement.
+  Pour une image de 256 * 8 bytes, il faut donc 32 blocs de 64 bytes.
+  
+  Meilleur alternative : utiliser PROGMEM pour stocker les données en FLASH (mémoire programme).
+  */
+  
+  
+  #if LOG_CYCLE_COUNTER == 1
+  Serial.print("test ");
+  startCycleCounter();
+  stopCycleCounter();
+  
+  Serial.print("load8bytesInSram ");
+  startCycleCounter();
+  #endif
+/*
+  switch(index) {
+    case 0:
+      byte memory[][8] = {{0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 1:
+      byte memory[][8] = {{1, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 2:
+      byte memory[][8] = {{2, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 3:
+      byte memory[][8] = {{3, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 4:
+      byte memory[][8] = {{4, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 5:
+      byte memory[][8] = {{5, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 6:
+      byte memory[][8] = {{6, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 7:
+      byte memory[][8] = {{7, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 8:
+      byte memory[][8] = {{8, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 9:
+      byte memory[][8] = {{9, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 10:
+      byte memory[][8] = {{10, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 11:
+      byte memory[][8] = {{11, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 12:
+      byte memory[][8] = {{12, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 13:
+      byte memory[][8] = {{13, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 14:
+      byte memory[][8] = {{14, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 15:
+      byte memory[][8] = {{15, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 16:
+      byte memory[][8] = {{16, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 17:
+      byte memory[][8] = {{17, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 18:
+      byte memory[][8] = {{18, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 19:
+      byte memory[][8] = {{19, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 20:
+      byte memory[][8] = {{20, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 21:
+      byte memory[][8] = {{21, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 22:
+      byte memory[][8] = {{22, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 23:
+      byte memory[][8] = {{23, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 24:
+      byte memory[][8] = {{24, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 25:
+      byte memory[][8] = {{25, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 26:
+      byte memory[][8] = {{26, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 27:
+      byte memory[][8] = {{27, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 28:
+      byte memory[][8] = {{28, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 29:
+      byte memory[][8] = {{29, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 30:
+      byte memory[][8] = {{30, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 31:
+      byte memory[][8] = {{31, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+    case 32:
+      byte memory[][8] = {{32, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}};
+      break;
+  }
+*/
+
+  //memcpy(byteBuffer, memory, 8);
+  
+  #if LOG_CYCLE_COUNTER == 1
+  stopCycleCounter();
+  #endif
+  
+  /*
+  for (int i = 0; i < 2048; i++) {
+    for (int j = 0; j < 8; j++) {
+      Serial.print(foo[i][j]);
+      Serial.print(", ");
+    }  
+  }
+  */
+  
+  Serial.println("");
+}
+
+void loadPicture(byte byteBuffer[][8], int index) {
+  
+  /*
+  Notes :
+  Enbiron 130 cycles pour copier 1 octet parmis 1 avec memcpy dans bytebuffer.
+  Environ 400 cycles pour copier 8 octets parmis 64 avec memcpy dans bytebuffer.
+  Environ 800 cycles pour copier 64 octets parmis 64 avec memcpy dans bytebuffer.
+  Environ 1600 cycles pour copier 128 octets parmis 128 avec memcpy dans bytebuffer.
+  Environ 3200 cycles pour copier 8 octets parmis 512 avec memcpy dans bytebuffer.
+  Environ 3600 cycles pour copier 64 octets parmis 512 avec memcpy dans bytebuffer.
+  
+  Idées :
+  Charger en SRAM des morceaux de 64 bytes => 400 cycles.
+  On charge les 64 premiers bytes, puis on précharge les 64 suivants dans la loop en tache de fond.
+  Dés que l'on a plus besoin de 64 premiers bytes, on passe au 64 suivants déjà préchargés et on lance le préchargement de 64 nouveaux.
+  
+  Du coup il faut définir des blocs de 64 bytes à initialiser en SRAM lors du préchargement.
+  Pour une image de 256 * 8 bytes, il faut donc 32 blocs de 64 bytes.
+  */
+  
+  
+  #if LOG_CYCLE_COUNTER == 1
+  Serial.print("test ");
+  startCycleCounter();
+  stopCycleCounter();
+  
+  Serial.print("load8bytesInSram ");
+  startCycleCounter();
+  #endif
+      
+  // 8x8x8 bytes = 512 bytes
+  byte foo[][8] = {
+    {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0},
+   /* {1, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0},
+    {2, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0},
+    {3, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0},
+    {4, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0},
+    {5, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0},
+    {6, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0},
+    {7, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0},*/
+  };
+  
+  memcpy(byteBuffer, foo[index * 8], 8);
+  
+  #if LOG_CYCLE_COUNTER == 1
+  stopCycleCounter();
+  #endif
+  
+  /*
+  for (int i = 0; i < 2048; i++) {
+    for (int j = 0; j < 8; j++) {
+      Serial.print(foo[i][j]);
+      Serial.print(", ");
+    }  
+  }
+  */
+  
+  Serial.println("");
 }
 
