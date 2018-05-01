@@ -66,7 +66,8 @@ random = False
 imageMode = 'L'
 #imageMode = 'RGB'
 #ledScheme = [0 for i in range(10)] + [1 for i in range(16)] + [0] + [1 for i in range(16)]
-ledScheme = [0 for i in range(3)] + [1 for i in range(40)]
+ledScheme = [0 for i in range(6)] + [1 for i in range(40)]
+#ledScheme = [1 for i in range(40)]
 ledDetails = 20 #20
 ledRadius = 5 #2 #5
 angularPositionCount = 256
@@ -135,18 +136,17 @@ for position in range(len(circlesMatrix)):
 
 if dataOutput:
     # Build a led data matrix : a 3 dimensional array position/byteIndex/8_bit leds (true if LED on)
-    ledDataMatrix = [[[False for x in range(8)] for y in range(5)] for z in range(len(imageSampleColor))]
-    for position in range(len(imageSampleColor)):
+    ledDataMatrix = [[[False for x in range(8)] for y in range(5)] for z in range(angularPositionCount)]
+    for position in range(angularPositionCount):
         byteIndex = 0
         bitCount = 0
         ledIndex = 0
-        for k in range(len(circlesMatrix[0]) - 1):
-            enable = ledScheme[k]
+        #print(imageSampleColor[position])
+        for k, enable in enumerate(ledScheme):
             if imageMode == 'L' and enable:
-                #print("pos: %d ; k: %d ; ledIndex: %d" % (position, k, ledIndex))
-                ledDataMatrix[position][byteIndex][bitCount] = imageSampleColor[position][ledIndex] < threshold
+                #print("pos: %d ; k: %d ; enable: %s ; ledIndex: %d" % (position, k, enable, ledIndex))
+                ledDataMatrix[position][byteIndex][bitCount] = imageSampleColor[position][k] < threshold and imageSampleColor[position][k] != 0 # 0 is alpha we consider it off
                 bitCount += 1
-                ledIndex += 1
                 if bitCount == 8:
                     bitCount = 0
                     byteIndex += 1
@@ -162,10 +162,10 @@ if dataOutput:
         for i in range(8):     
             for j in range(len(ledDataMatrix[position])):
                 if not ledDataMatrix[position][j][i]:
-                    byteArrayOutput[byteIndex + i] = byteArrayOutput[byteIndex + i] + pow(2, j)
+                    byteArrayOutput[byteIndex + i] += pow(2, j)
 
         for i in range(8):     
-            sys.stdout.write("%d, " % byteArrayOutput[byteIndex + i])
+            sys.stdout.write("%d, " % byteArrayOutput[byteIndex + 7 - i])
 
         byteIndex += 8        
 
