@@ -159,13 +159,13 @@ if dataOutput:
     byteArrayOutput = [0 for x in range(angularPositionCount * 8)]
     byteIndex = 0
     for position in range(angularPositionCount):
-        for i in range(8):     
-            for j in range(len(ledDataMatrix[position])):
+        for i in range(8): # Loop over 8 bits of latch
+            for j in range(len(ledDataMatrix[position])): # Loop over latches
                 if not ledDataMatrix[position][j][i]:
                     byteArrayOutput[byteIndex + i] += pow(2, j)
 
         for i in range(8):     
-            sys.stdout.write("%d, " % byteArrayOutput[byteIndex + 7 - i])
+            sys.stdout.write("%d, " % byteArrayOutput[byteIndex + i])
 
         byteIndex += 8        
 
