@@ -15,9 +15,11 @@ no_of_nuts = 1;		// number of captive nuts required, standard = 1
 nut_angle = 90;		// angle between nuts, standard = 90
 nut_shaft_distance = 1.2;	// distance between inner face of nut and shaft, can be negative.
 
+motor_shaft = 5;
+
 // Config for double pulley
-motor_shaft = 11;
-bearing_diameter = 13.1;
+bearing_diameter = 14;
+bearing_hold_diameter = bearing_diameter - 2;
 bearing_width = 5;
 
 // Config for simple pulley
@@ -43,7 +45,7 @@ module half_double_pulley() {
 
         union() {
         translate([0,0,-1])
-            cylinder(h=pulley_t_ht + 2 + retainer_ht + idler_ht + pulley_b_ht, d=motor_shaft, center=[0,0,0]);
+            cylinder(h=pulley_t_ht + 2 + retainer_ht + idler_ht + pulley_b_ht, d=bearing_hold_diameter, center=[0,0,0]);
             
         translate([0,0,-1])
             cylinder(h=bearing_width + 1, d=bearing_diameter, center=[0,0,0]);
@@ -81,7 +83,7 @@ module simple_pulley() {
 
         union() {
             translate([0,0,-1])
-                cylinder(h=simple_pulley_base_width + pulley_t_ht + 2 + retainer_ht + idler_ht + pulley_b_ht, d=4.1, center=[0,0,0]);
+                cylinder(h=simple_pulley_base_width + pulley_t_ht + 2 + retainer_ht + idler_ht + pulley_b_ht, d=motor_shaft, center=[0,0,0]);
 
             }
         }
@@ -96,6 +98,6 @@ module double_pulley() {
             half_double_pulley();
 }
 
-simple_pulley();
+//simple_pulley();
 
-//double_pulley();
+double_pulley();

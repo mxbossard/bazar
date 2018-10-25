@@ -2,7 +2,9 @@ $fn = 200;
 
 // Mode 1 => 3D
 // Mode 2 => 2D
-mode = 1;
+// Mode 3 => Tests 3D
+// Mode 4 => Rondelle
+mode = 4;
 
 gap = 5;
 
@@ -205,6 +207,14 @@ module clamping_holes_3d(thickness) {
         cylinder(d=clamping_hole_diameter, h=thickness+2);
 }
 
+module rondelle(diamInt, diamExt, thickness) {
+    difference() {
+        cylinder(d=diamExt, h=thickness);
+        translate([0,0,-1])
+            cylinder(d=diamInt, h=thickness + 2);
+    }
+} 
+
 /*
 translate([0,1*(gap + regulateur_width),0])
     regulateur_3d();
@@ -217,6 +227,7 @@ translate([gap + indicateur_length,0*(gap + regulateur_width),0])
 */
 
 if( mode == 1 ) {
+    // 3D
     regulateur_end_3d();
     translate([gap + 3/2* regulateur_width, 0])
         regulateur_end_3d();
@@ -234,6 +245,7 @@ if( mode == 1 ) {
 }
 
 if( mode == 2 ) {
+    // 2D
     regulateur_end_2d();
     translate([gap + 3/2* regulateur_width, 0])
         regulateur_end_2d();
@@ -251,4 +263,29 @@ if( mode == 2 ) {
 }
    
 
+if( mode == 3 ) {
+    // Test 3D
+    
+    bearings_gap = 1;
+    difference() {
+        cube([2*regulateur_width, regulateur_width,regulateur_thickness]);
+        
+        translate([regulateur_width, regulateur_width/2, 0]) {
+            // Translate to hole center
+            // traversing hole
+            translate([0, 0, -1])
+                cylinder(d=bearing_hold_diameter, h=regulateur_thickness+2);
+            
+            translate([0, 0, -1])
+                cylinder(d=bearing_diameter, h=(regulateur_thickness - bearings_gap)/2 + 1);
+            
+            translate([0, 0, (regulateur_thickness - bearings_gap)/2 + bearings_gap])
+                cylinder(d=bearing_diameter, h=regulateur_thickness);
+        }
+    }
+}
 
+if( mode == 4 ) {
+    
+    rondelle(screw_diameter, screw_diameter+2, 1);
+}
