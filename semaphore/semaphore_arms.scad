@@ -4,7 +4,7 @@ $fn = 200;
 // Mode 2 => 2D
 mode = 1;
 
-gap = 2;
+gap = 5;
 
 regulateur_length = 276;
 regulateur_width = 21;
@@ -22,6 +22,9 @@ screw_diameter = 5.4;
 driving_hole_diameter = 3.2;
 driving_hole_pitch = 7;
 mark_hole_diameter = 1;
+clamping_hole_diameter = 3;
+clamping_hole_pitch = 10; // pitch between clamping holes
+clamping_hole_shift = 14; // disatance between clamping holes and bearing
 
 module regulateur_3d() {
     difference() {
@@ -40,6 +43,7 @@ module regulateur_3d() {
         // Right hole
         translate([regulateur_width/2,regulateur_width/2,-1]) {
             cylinder(d=bearing_hold_diameter, h=regulateur_thickness+2);
+            clamping_holes_3d(regulateur_thickness);
         }
         translate([regulateur_width/2,regulateur_width/2,bearing_width/2]) {
             cylinder(d=bearing_diameter, h=bearing_width/2+1);
@@ -48,6 +52,8 @@ module regulateur_3d() {
         // Left hole
         translate([regulateur_length - regulateur_width/2,regulateur_width/2,-1]) {
             cylinder(d=bearing_hold_diameter, h=regulateur_thickness+2);
+            rotate([0,0,180])
+                clamping_holes_3d(regulateur_thickness);
         }
         translate([regulateur_length - regulateur_width/2,regulateur_width/2,bearing_width/2]) {
             cylinder(d=bearing_diameter, h=bearing_width/2+1);
@@ -113,6 +119,9 @@ module regulateur_end_3d() {
         
         translate([regulateur_width/2, regulateur_width/2, bearing_width/2])
             cylinder(d=bearing_diameter, h=bearing_width/2 + 1);
+        
+        translate([regulateur_width/2, regulateur_width/2, -1])
+            clamping_holes_3d(regulateur_thickness);
     }
         
 }
@@ -189,6 +198,13 @@ module transmission_holes_3d(thickness) {
         cylinder(d=driving_hole_diameter, h=thickness+2);
 }
 
+module clamping_holes_3d(thickness) {
+    translate([clamping_hole_shift,clamping_hole_pitch/2])
+        cylinder(d=clamping_hole_diameter, h=thickness+2);
+    translate([clamping_hole_shift,-clamping_hole_pitch/2])
+        cylinder(d=clamping_hole_diameter, h=thickness+2);
+}
+
 /*
 translate([0,1*(gap + regulateur_width),0])
     regulateur_3d();
@@ -234,4 +250,5 @@ if( mode == 2 ) {
     }
 }
    
+
 
