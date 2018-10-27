@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" class="client-nojs">
+<head>
+<meta charset="UTF-8"/>
+<title>Erreur de permissions — Centre de Ressources Numériques - Labomedia</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgCanonicalNamespace":"Project","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":4,"wgPageName":"Centre_de_Ressources_Numériques_-_Labomedia:Avertissements_généraux","wgTitle":"Avertissements généraux","wgCurRevisionId":0,"wgRevisionId":0,"wgArticleId":0,"wgIsArticle":false,"wgIsRedirect":false,"wgAction":"edit","wgUserName":null,"wgUserGroups":["*"],"wgCategories":[],"wgBreakFrames":false,"wgPageContentLanguage":"fr","wgPageContentModel":"wikitext","wgSeparatorTransformTable":[",\t."," \t,"],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"],"wgMonthNamesShort":["","jan","fév","mar","avr","mai","juin","juil","août","sep","oct","nov","déc"],"wgRelevantPageName":"Centre_de_Ressources_Numériques_-_Labomedia:Avertissements_généraux","wgRelevantArticleId":0,"wgRequestId":"34dffe4664a5a1ec558ce0c8","wgIsProbablyEditable":false,"wgRestrictionCreate":[],"sdgDownArrowImage":"/extensions/SemanticDrilldown/skins/down-arrow.png","sdgRightArrowImage":"/extensions/SemanticDrilldown/skins/right-arrow.png","wgWikiEditorEnabledModules":{"toolbar":true,"dialogs":true,"preview":true,"publish":false},"wgPageFormsAutocompleteValues":[],"wgPageFormsAutocompleteOnAllChars":false,"wgPageFormsFieldProperties":[],"wgPageFormsCargoFields":[],"wgPageFormsDependentFields":[],"wgPageFormsGridValues":[],"wgPageFormsGridParams":[],"wgPageFormsShowOnSelect":[],"wgPageFormsScriptPath":"/extensions/PageForms","edgValues":null,"wgPageFormsEDSettings":null,"wgCategoryTreePageCategoryOptions":"{\"mode\":0,\"hideprefix\":20,\"showcount\":true,\"namespaces\":false}"});mw.loader.implement("user.options",function($,jQuery,require,module){mw.user.options.set({"variant":"fr"});});mw.loader.implement("user.tokens",function ( $, jQuery, require, module ) {
+mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});/*@nomin*/;
+
+});mw.loader.load(["mediawiki.page.startup","ext.smw.style","skins.vector.js"]);});</script>
+<link rel="stylesheet" href="/load.php?debug=false&amp;lang=fr&amp;modules=ext.smw.style%7Cext.smw.tooltip.styles&amp;only=styles&amp;skin=vector"/>
+<link rel="stylesheet" href="/load.php?debug=false&amp;lang=fr&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.sectionAnchor%7Cmediawiki.skinning.interface%7Cskins.vector.styles&amp;only=styles&amp;skin=vector"/>
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href="/load.php?debug=false&amp;lang=fr&amp;modules=site&amp;only=styles&amp;skin=vector"/>
+<script async="" src="/load.php?debug=false&amp;lang=fr&amp;modules=startup&amp;only=scripts&amp;skin=vector"></script>
+<meta name="generator" content="MediaWiki 1.27.2"/>
+<meta name="robots" content="noindex,nofollow"/>
+<link rel="ExportRDF" type="application/rdf+xml" title="Centre de Ressources Numériques - Labomedia:Avertissements généraux" href="/index.php?title=Sp%C3%A9cial:ExportRDF/Centre_de_Ressources_Num%C3%A9riques_-_Labomedia:Avertissements_g%C3%A9n%C3%A9raux&amp;xmlmime=rdf"/>
+<link rel="shortcut icon" href="/favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="/opensearch_desc.php" title="Centre de Ressources Numériques - Labomedia (fr)"/>
+<link rel="EditURI" type="application/rsd+xml" href="//wiki.labomedia.org/api.php?action=rsd"/>
+<link rel="copyright" href="https://creativecommons.org/licenses/by-sa/3.0/fr/"/>
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-4 ns-subject page-Centre_de_Ressources_Numériques_-_Labomedia_Avertissements_généraux rootpage-Centre_de_Ressources_Numériques_-_Labomedia_Avertissements_généraux skin-vector action-edit">
+		<div class="lm-center-wiki">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+
+						<div class="mw-indicators">
+</div>
+			<h1 id="firstHeading" class="firstHeading" lang="fr">Erreur de permissions</h1>
+									<div id="bodyContent" class="mw-body-content">
+								<div id="contentSub"></div>
+												<div id="jump-to-nav" class="mw-jump">
+					Aller à :					<a href="#mw-head">navigation</a>, 					<a href="#p-search">rechercher</a>
+				</div>
+				<div id="mw-content-text"><p>Vous ne pouvez pas créer des pages, pour les raisons suivantes&#160;:
+</p>
+<ul class="permissions-errors">
+<li>L’action que vous essayez de réaliser n’est permise qu’aux utilisateurs du groupe&#160;: <a href="/index.php?title=Centre_de_Ressources_Num%C3%A9riques_-_Labomedia:Utilisateurs&amp;action=edit&amp;redlink=1" class="new" title="Centre de Ressources Numériques - Labomedia:Utilisateurs (page inexistante)">Utilisateurs</a>.</li>
+<li>Vous devez confirmer votre adresse de courriel avant de modifier les pages.
+Veuillez entrer et valider votre adresse de courriel dans vos <a href="/index.php/Sp%C3%A9cial:Pr%C3%A9f%C3%A9rences" title="Spécial:Préférences">préférences</a>.</li>
+<li>Centre de Ressources Numériques - Labomedia a restreint la possibilité de créer de nouvelles pages.
+Vous pouvez revenir en arrière et modifier une page existante, ou bien <a href="/index.php/Sp%C3%A9cial:Connexion" title="Spécial:Connexion">vous connecter ou créer un compte</a>.</li>
+</ul>
+</div>					<div class="printfooter">
+						Récupérée de «&#160;<a dir="ltr" href="https://wiki.labomedia.org/index.php/Centre_de_Ressources_Numériques_-_Labomedia:Avertissements_généraux">https://wiki.labomedia.org/index.php/Centre_de_Ressources_Numériques_-_Labomedia:Avertissements_généraux</a>&#160;»					</div>
+				<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>				<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Menu de navigation</h2>
+
+			<div id="mw-head">
+									<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+						<h3 id="p-personal-label">Outils personnels</h3>
+						<ul>
+							<li id="pt-createaccount"><a href="/index.php?title=Sp%C3%A9cial:Cr%C3%A9er_un_compte&amp;returnto=Centre+de+Ressources+Num%C3%A9riques+-+Labomedia%3AAvertissements+g%C3%A9n%C3%A9raux&amp;returntoquery=action%3Dedit" title="Il vous est conseillé de créer un compte et de vous connecter ; cependant, ce n’est pas obligatoire">Créer un compte</a></li><li id="pt-login"><a href="/index.php?title=Sp%C3%A9cial:Connexion&amp;returnto=Centre+de+Ressources+Num%C3%A9riques+-+Labomedia%3AAvertissements+g%C3%A9n%C3%A9raux&amp;returntoquery=action%3Dedit" title="Il est recommandé de vous identifier ; ce n'est cependant pas obligatoire. [o]" accesskey="o">Se connecter</a></li>						</ul>
+					</div>
+									<div id="left-navigation">
+										<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+						<h3 id="p-namespaces-label">Espaces de noms</h3>
+						<ul>
+															<li  id="ca-nstab-project" class="selected new"><span><a href="/index.php?title=Centre_de_Ressources_Num%C3%A9riques_-_Labomedia:Avertissements_g%C3%A9n%C3%A9raux&amp;action=edit&amp;redlink=1"  title="Voir la page du projet [a]" accesskey="a">À propos</a></span></li>
+															<li  id="ca-talk" class="new"><span><a href="/index.php?title=Discussion_Centre_de_Ressources_Num%C3%A9riques_-_Labomedia:Avertissements_g%C3%A9n%C3%A9raux&amp;action=edit&amp;redlink=1"  title="Discussion au sujet de cette page de contenu [t]" accesskey="t" rel="discussion">Discussion</a></span></li>
+													</ul>
+					</div>
+										<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+												<h3 id="p-variants-label">
+							<span>Variantes</span><a href="#"></a>
+						</h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+									</div>
+				<div id="right-navigation">
+										<div id="p-views" role="navigation" class="vectorTabs emptyPortlet" aria-labelledby="p-views-label">
+						<h3 id="p-views-label">Affichages</h3>
+						<ul>
+													</ul>
+					</div>
+										<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label">
+						<h3 id="p-cactions-label"><span>Plus</span><a href="#"></a></h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+										<div id="p-search" role="search">
+						<h3>
+							<label for="searchInput">Rechercher</label>
+						</h3>
+
+						<form action="/index.php" id="searchform">
+							<div id="simpleSearch">
+							<input type="search" name="search" placeholder="Rechercher" title="Rechercher dans Centre de Ressources Numériques - Labomedia [f]" accesskey="f" id="searchInput"/><input type="hidden" value="Spécial:Recherche" name="title"/><input type="submit" name="fulltext" value="Rechercher" title="Rechercher les pages comportant ce texte." id="mw-searchButton" class="searchButton mw-fallbackSearchButton"/><input type="submit" name="go" value="Lire" title="Aller vers une page portant exactement ce nom si elle existe." id="searchButton" class="searchButton"/>							</div>
+						</form>
+					</div>
+									</div>
+			</div>
+			<div id="mw-panel">
+				<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="/index.php/Accueil"  title="Page principale"></a></div>
+						<div class="portal" role="navigation" id='p-Navigation' aria-labelledby='p-Navigation-label'>
+			<h3 id='p-Navigation-label'>Navigation</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-mainpage-description"><a href="/index.php/Accueil" title="Aller à l'accueil [z]" accesskey="z">Accueil</a></li><li id="n-Importer-un-fichier"><a href="/index.php/Sp%C3%A9cial:T%C3%A9l%C3%A9verser">Importer un fichier</a></li><li id="n-recentchanges"><a href="/index.php/Sp%C3%A9cial:Modifications_r%C3%A9centes" title="Liste des modifications récentes sur le wiki [r]" accesskey="r">Modifications récentes</a></li><li id="n-help"><a href="http://www.mediawiki.org/wiki/Help:Contents/fr" title="Aide">Aide</a></li><li id="n-Aide-Labomedia"><a href="/index.php/Aide_sp%C3%A9cifique_pour_l%27%C3%A9diteur">Aide Labomedia</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-Id.C3.A9es' aria-labelledby='p-Id.C3.A9es-label'>
+			<h3 id='p-Id.C3.A9es-label'>Idées</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-Cr.C3.A9er-une-fiche-id.C3.A9e"><a href="/index.php/Formulaire:Fiche_Id%C3%A9e">Créer une fiche idée</a></li><li id="n-Toutes-les-fiches-id.C3.A9es"><a href="/index.php/Cat%C3%A9gorie:R%C3%A9alisations">Toutes les fiches idées</a></li><li id="n-Aide-pour-cr.C3.A9er-une-fiche"><a href="/index.php/Cr%C3%A9er_Fiche_Id%C3%A9e">Aide pour créer une fiche</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-Cat.C3.A9gories' aria-labelledby='p-Cat.C3.A9gories-label'>
+			<h3 id='p-Cat.C3.A9gories-label'>Catégories</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-Labomedia"><a href="/index.php/Labomedia">Labomedia</a></li><li id="n-Le-monde-de-Blender"><a href="/index.php/Le_Monde_de_Blender">Le monde de Blender</a></li><li id="n-Pages-cat.C3.A9goris.C3.A9es-en-vrac"><a href="/index.php/Pages_cat%C3%A9goris%C3%A9es_en_Vrac">Pages catégorisées en vrac</a></li><li id="n-Pages-sans-cat.C3.A9gories-.C3.A0-cat.C3.A9goriser"><a href="http://wiki.labomedia.org/index.php?title=Sp%C3%A9cial:Pages_non_cat%C3%A9goris%C3%A9es&amp;limit=100&amp;offset=0" rel="nofollow">Pages sans catégories à catégoriser</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-Les_blogs' aria-labelledby='p-Les_blogs-label'>
+			<h3 id='p-Les_blogs-label'>Les blogs</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-Labomedia"><a href="http://labomedia.net/" rel="nofollow">Labomedia</a></li><li id="n-Open-Atelier"><a href="http://openatelier.labomedia.org/" rel="nofollow">Open Atelier</a></li><li id="n-Atelier-du-c01n"><a href="http://atelierduc01n.labomedia.org/" rel="nofollow">Atelier du c01n</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-Cr.C3.A9er_avec_des_bits' aria-labelledby='p-Cr.C3.A9er_avec_des_bits-label'>
+			<h3 id='p-Cr.C3.A9er_avec_des_bits-label'>Créer avec des bits</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-Interactivit.C3.A9---G.C3.A9n.C3.A9ralit.C3.A9s"><a href="/index.php/Accueil#Interactivit.C3.A9_G.C3.A9n.C3.A9ralit.C3.A9s">Interactivité - Généralités</a></li><li id="n-Logiciels"><a href="/index.php/Accueil#Logiciels">Logiciels</a></li><li id="n-Interfaces"><a href="/index.php/Accueil#Interfaces">Interfaces</a></li><li id="n-Micro-Ordinateurs"><a href="/index.php/Accueil#Micro_Ordinateurs">Micro Ordinateurs</a></li><li id="n-Routeur-Wifi"><a href="/index.php/Accueil#Routeur_Wifi">Routeur Wifi</a></li><li id="n-Microcontr.C3.B4leurs"><a href="/index.php/Accueil#Microcontr.C3.B4leurs">Microcontrôleurs</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-Cr.C3.A9er_avec_des_atomes' aria-labelledby='p-Cr.C3.A9er_avec_des_atomes-label'>
+			<h3 id='p-Cr.C3.A9er_avec_des_atomes-label'>Créer avec des atomes</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-Atelier-du-c01n"><a href="/index.php/Th%C3%A8me_Atelier_du_c01n">Atelier du c01n</a></li><li id="n-Machines"><a href="/index.php/Accueil#Machines">Machines</a></li><li id="n-Logicels-Atomiques"><a href="/index.php/Accueil#Logiciels_Atomiques">Logicels Atomiques</a></li><li id="n-R.C3.A9alisations"><a href="/index.php/Accueil#R.C3.A9alisations">Réalisations</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-A_venir' aria-labelledby='p-A_venir-label'>
+			<h3 id='p-A_venir-label'>A venir</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-Utiliser-des-contenus-libres-de-droits"><a href="/index.php/Accueil#.2A.2AAccueil.23Utiliser_des_contenus_libres_de_droits_.28sources.29">Utiliser des contenus libres de droits</a></li><li id="n-Rechercher.2C-r.C3.A9fl.C3.A9chir.2C-th.C3.A9oriser"><a href="/index.php/Accueil#Rechercher.2C_r.C3.A9fl.C3.A9chir.2C_th.C3.A9oriser">Rechercher, réfléchir, théoriser</a></li><li id="n-Projets-.40-Labomedia"><a href="/index.php/Accueil#Projets_.40_Labomedia">Projets @ Labomedia</a></li><li id="n-Comment-documenter-ses-projets-.3F"><a href="/index.php/Accueil#Comment_documenter_ses_projets_.3F">Comment documenter ses projets ?</a></li><li id="n-Charte-et-mode-de-fonctionnement"><a href="/index.php/Accueil#L.27atelier_du_coin_et_les_open_ateliers_de_Labomedia_.28charte_et_mode_de_fonctionnement.29">Charte et mode de fonctionnement</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-tb' aria-labelledby='p-tb-label'>
+			<h3 id='p-tb-label'>Outils</h3>
+
+			<div class="body">
+									<ul>
+						<li id="t-specialpages"><a href="/index.php/Sp%C3%A9cial:Pages_sp%C3%A9ciales" title="Liste de toutes les pages spéciales [q]" accesskey="q">Pages spéciales</a></li>					</ul>
+							</div>
+		</div>
+				</div>
+		</div>
+		<div id="footer" role="contentinfo">
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/index.php/Centre_de_Ressources_Num%C3%A9riques_-_Labomedia:Confidentialit%C3%A9" title="Centre de Ressources Numériques - Labomedia:Confidentialité">Politique de confidentialité</a></li>
+											<li id="footer-places-about"><a href="/index.php/Centre_de_Ressources_Num%C3%A9riques_-_Labomedia:%C3%80_propos" title="Centre de Ressources Numériques - Labomedia:À propos">À propos de Centre de Ressources Numériques - Labomedia</a></li>
+											<li id="footer-places-disclaimer"><a href="/index.php/Centre_de_Ressources_Num%C3%A9riques_-_Labomedia:Avertissements_g%C3%A9n%C3%A9raux" title="Centre de Ressources Numériques - Labomedia:Avertissements généraux">Avertissements</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+											<li id="footer-copyrightico">
+							<a href="https://creativecommons.org/licenses/by-sa/3.0/fr/"><img src="https://i.creativecommons.org/l/by-sa/3.0/fr/88x31.png" alt="Attribution - Partage dans les Mêmes Conditions 3.0 France (CC BY-SA 3.0 FR)" width="88" height="31"/></a>						</li>
+											<li id="footer-poweredbyico">
+							<a href="//www.mediawiki.org/"><img src="/resources/assets/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="/resources/assets/poweredby_mediawiki_132x47.png 1.5x, /resources/assets/poweredby_mediawiki_176x62.png 2x" width="88" height="31"/></a><a href="https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki"><img src="/extensions/SemanticMediaWiki/includes/../res/images/smw_button.png" alt="Powered by Semantic MediaWiki" width="88" height="31"/></a>						</li>
+									</ul>
+						<div style="clear:both"></div>
+		</div>
+		<script>(window.RLQ=window.RLQ||[]).push(function(){mw.loader.state({"user":"ready","user.groups":"ready"});mw.loader.load(["site","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.searchSuggest"]);});</script><script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":65});});</script>		</div> 
+	
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-19545536-24', 'labomedia.org');
+          ga('send', 'pageview');
+
+        </script>
+
+        <? /*****************/ ?>
+	</body>
+</html>
