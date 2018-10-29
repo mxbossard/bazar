@@ -1,6 +1,6 @@
 $fn=100;
 
-peice1_height = 10;
+peice1_height = 9.5;
 peice1_width = 4;
 peice1_thickness = 3;
 peice1_Ratio = 0.9;
@@ -13,7 +13,7 @@ piece2_hole_x_shift = 5.5;
 piece2_hole_y_shift = 3;
 
 global_thickness = 10;
-global_attach_gap = 12;
+global_attach_gap = 11.5;
 
 module piece1() {
 
