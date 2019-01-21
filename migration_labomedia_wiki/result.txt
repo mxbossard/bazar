@@ -1,0 +1,305 @@
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/BoiteAYeah' not redirected to 'https://ressources.labomedia.org/boiteayeah2' but to 'https://ressources.labomedia.org/boiteayeah' !
+INFO: done https://wiki.labomedia.org/index.php/BoiteAYeah => https://ressources.labomedia.org/boiteayeah2
+INFO: done https://wiki.labomedia.org/index.php/BoiteAYeah => https://ressources.labomedia.org/boiteayeah
+INFO: done https://wiki.labomedia.org/index.php/Petites_éoliennes => https://ressources.labomedia.org/petite-eolienne-pliboo-01-carnet-de-bord
+INFO: done https://wiki.labomedia.org/index.php/Lasercut-2 => https://ressources.labomedia.org/lasercut-2
+INFO: done https://wiki.labomedia.org/index.php/Decoupe-Laser-Utilisation => https://ressources.labomedia.org/decoupe-laser-utilisation
+INFO: done https://wiki.labomedia.org/index.php/Decoupe_Laser_Preparation_Fichier => https://ressources.labomedia.org/decoupe_laser_preparation_fichiers
+INFO: done https://wiki.labomedia.org/index.php/Materiel_du_c01n => https://ressources.labomedia.org/materiel_du_c01n
+INFO: done https://wiki.labomedia.org/index.php/Archet_électronique => https://ressources.labomedia.org/archet_electronique
+INFO: done https://wiki.labomedia.org/index.php/ATtiny => https://ressources.labomedia.org/attiny
+INFO: done https://wiki.labomedia.org/index.php/Baffle_guitare => https://ressources.labomedia.org/baffle_guitare
+INFO: done https://wiki.labomedia.org/index.php/Bobineuse => https://ressources.labomedia.org/bobineuse
+INFO: done https://wiki.labomedia.org/index.php/CarteSonISA => https://ressources.labomedia.org/cartesonisa
+INFO: done https://wiki.labomedia.org/index.php/DOSbox => https://ressources.labomedia.org/dosbox
+INFO: done https://wiki.labomedia.org/index.php/Dxf2gcode => https://ressources.labomedia.org/dxf2gcode
+INFO: done https://wiki.labomedia.org/index.php/Entretient_CNC => https://ressources.labomedia.org/entretient_cnc
+INFO: done https://wiki.labomedia.org/index.php/Expo_Noirlac => https://ressources.labomedia.org/expo_noirlac
+INFO: done https://wiki.labomedia.org/index.php/Floppy-disk => https://ressources.labomedia.org/foldarap
+INFO: done https://wiki.labomedia.org/index.php/Foldarap_Entretien => https://ressources.labomedia.org/foldarap_entretien
+INFO: done https://wiki.labomedia.org/index.php/Font-Single-Line => https://ressources.labomedia.org/font-single-line
+INFO: done https://wiki.labomedia.org/index.php/FreeCAD => https://ressources.labomedia.org/freecad
+INFO: done https://wiki.labomedia.org/index.php/Graver_circuit_electronique => https://ressources.labomedia.org/graver_circuit_electronique
+INFO: done https://wiki.labomedia.org/index.php/Amiga4000 => https://ressources.labomedia.org/amiga4000
+INFO: done https://wiki.labomedia.org/index.php/AtelierCnam2018 => https://ressources.labomedia.org/ateliercnam2018
+INFO: done https://wiki.labomedia.org/index.php/HeekScad => https://ressources.labomedia.org/heekscad
+INFO: done https://wiki.labomedia.org/index.php/Heekscnc => https://ressources.labomedia.org/heekscnc
+INFO: done https://wiki.labomedia.org/index.php/Kokompe => https://ressources.labomedia.org/kokompe
+INFO: done https://wiki.labomedia.org/index.php/Kicad => https://ressources.labomedia.org/kicad
+INFO: done https://wiki.labomedia.org/index.php/Pcb2gcode => https://ressources.labomedia.org/pcb2gcode
+INFO: done https://wiki.labomedia.org/index.php/Echopen-technique => https://ressources.labomedia.org/echopen_technique
+INFO: done https://wiki.labomedia.org/index.php/FIFA => https://ressources.labomedia.org/fifa
+INFO: done https://wiki.labomedia.org/index.php/FIFI_premier => https://ressources.labomedia.org/fifi_premier
+INFO: done https://wiki.labomedia.org/index.php/Karaoke_Midi_Mobile_et_Autonome => https://ressources.labomedia.org/karaoke_midi_mobile_et_autonome
+INFO: done https://wiki.labomedia.org/index.php/Tampon-laser => https://ressources.labomedia.org/tampon_laser
+INFO: done https://wiki.labomedia.org/index.php/SupportCrayonCNC => https://ressources.labomedia.org/support_crayon_cnc
+INFO: done https://wiki.labomedia.org/index.php/Solenoide => https://ressources.labomedia.org/solenoide
+INFO: done https://wiki.labomedia.org/index.php/Midi-Karaoke => https://ressources.labomedia.org/karaoke_midi
+INFO: done https://wiki.labomedia.org/index.php/PickUp => https://ressources.labomedia.org/pickup
+INFO: done https://wiki.labomedia.org/index.php/Pochette_invisibilité => https://ressources.labomedia.org/pochette-invisibilite
+INFO: done https://wiki.labomedia.org/index.php/Pédale_de_boucle => https://ressources.labomedia.org/pedale_de_boucle
+INFO: done https://wiki.labomedia.org/index.php/Space-4046 => https://ressources.labomedia.org/space-4046
+INFO: done https://wiki.labomedia.org/index.php/LoveTape => https://ressources.labomedia.org/lovetape
+INFO: done https://wiki.labomedia.org/index.php/Distortion_pedal => https://ressources.labomedia.org/distortion_pedal
+INFO: done https://wiki.labomedia.org/index.php/Multi_Pong => https://ressources.labomedia.org/multi_pong
+INFO: done https://wiki.labomedia.org/index.php/Loop-Vinyl => https://ressources.labomedia.org/loop_vinyl
+INFO: done https://wiki.labomedia.org/index.php/VideoMixTape => https://ressources.labomedia.org/video_lovetape
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Tête_à_Tonton' not redirected to 'https://ressources.labomedia.org/Tête_à_Tonton' but to 'https://ressources.labomedia.org/T%c3%aate_%c3%a0_Tonton' !
+INFO: done https://wiki.labomedia.org/index.php/Tête_à_Tonton => https://ressources.labomedia.org/Tête_à_Tonton
+INFO: done https://wiki.labomedia.org/index.php/Qcad => https://ressources.labomedia.org/Qcad
+INFO: done https://wiki.labomedia.org/index.php/Kivy:_Kivent_Moteur_de_jeux_pour_Android => https://ressources.labomedia.org/kivent_moteur_de_jeux_pour_android
+INFO: done https://wiki.labomedia.org/index.php/GIT_pour_aller_plus_loin => https://ressources.labomedia.org/GIT_pour_aller_plus_loin
+INFO: done https://wiki.labomedia.org/index.php/GIT_Publier_sur_GitHub_pour_les_nuls => https://ressources.labomedia.org/GIT_Publier_sur_GitHub_pour_les_nuls
+INFO: done https://wiki.labomedia.org/index.php/Processing_vs_Kinect_:_Installation_interactive_le_Bestiaire_RadioInterActif => https://ressources.labomedia.org/Processing_vs_Kinect_Installation_interactive_Le_Bestiaire_RadioInterActif
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Émettre_en_DVB-T_TNT_avec_Gnuradio_et_USRP' not redirected to 'https://ressources.labomedia.org/Émettre_en_DVB-T_TNT_avec_Gnuradio_et_USRP' but to 'https://ressources.labomedia.org/%c3%89mettre_en_DVB-T_TNT_avec_Gnuradio_et_USRP' !
+INFO: done https://wiki.labomedia.org/index.php/Émettre_en_DVB-T_TNT_avec_Gnuradio_et_USRP => https://ressources.labomedia.org/Émettre_en_DVB-T_TNT_avec_Gnuradio_et_USRP
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/WikikIRC_Mécanique' not redirected to 'https://ressources.labomedia.org/WikikIRC_Mécanique' but to 'https://ressources.labomedia.org/WikikIRC_M%c3%a9canique' !
+INFO: done https://wiki.labomedia.org/index.php/WikikIRC_Mécanique => https://ressources.labomedia.org/WikikIRC_Mécanique
+INFO: done https://wiki.labomedia.org/index.php/WikikIRC => https://ressources.labomedia.org/WikikIRC
+INFO: done https://wiki.labomedia.org/index.php/Installation_d'un_serveur_web_sous_Debian_GNU/Linux => https://ressources.labomedia.org/Installation_d'un_serveur_web_sous_Debian_GNU_Linux
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Le_Principe_des_logiciels_Temps_réel' not redirected to 'https://ressources.labomedia.org/Le_Principe_des_logiciels_Temps_réel' but to 'https://ressources.labomedia.org/Le_Principe_des_logiciels_Temps_r%c3%a9el' !
+INFO: done https://wiki.labomedia.org/index.php/Le_Principe_des_logiciels_Temps_réel => https://ressources.labomedia.org/Le_Principe_des_logiciels_Temps_réel
+INFO: done https://wiki.labomedia.org/index.php/Parametrage1000Lieus => https://ressources.labomedia.org/Parametrage1000Lieus
+INFO: done https://wiki.labomedia.org/index.php/Liens_ressources_tutoriaux_Arduino => https://ressources.labomedia.org/Liens_ressources_tutoriaux_Arduino
+INFO: done https://wiki.labomedia.org/index.php/Installation_de_Yunohost_2.5_sur_Raspberry_Pi => https://ressources.labomedia.org/Installation_de_Yunohost_2.5_sur_Raspberry_Pi
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Yunohost_2.5_Release_Installation_de_certificats_de_sécurité' not redirected to 'https://ressources.labomedia.org/Yunohost_2.5_Installation_du_certificat_de_sécurité' but to 'https://ressources.labomedia.org/Yunohost_2.5_Installation_du_certificat_de_s%c3%a9curit%c3%a9' !
+INFO: done https://wiki.labomedia.org/index.php/Yunohost_2.5_Release_Installation_de_certificats_de_sécurité => https://ressources.labomedia.org/Yunohost_2.5_Installation_du_certificat_de_sécurité
+INFO: done https://wiki.labomedia.org/index.php/VGA_et_Arduino => https://ressources.labomedia.org/VGA_et_Arduino
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Microcontrôleurs_Généralités' not redirected to 'https://ressources.labomedia.org/Microcontrôleurs_Généralités' but to 'https://ressources.labomedia.org/Microcontr%c3%b4leurs_G%c3%a9n%c3%a9ralit%c3%a9s' !
+INFO: done https://wiki.labomedia.org/index.php/Microcontrôleurs_Généralités => https://ressources.labomedia.org/Microcontrôleurs_Généralités
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Tableau_de_bord_et_données_de_capteurs_en_temps_réel' not redirected to 'https://ressources.labomedia.org/Tableau_de_bord_et_données_de_capteurs_en_temps_réel' but to 'https://ressources.labomedia.org/Tableau_de_bord_et_donn%c3%a9es_de_capteurs_en_temps_r%c3%a9el' !
+INFO: done https://wiki.labomedia.org/index.php/Tableau_de_bord_et_données_de_capteurs_en_temps_réel => https://ressources.labomedia.org/Tableau_de_bord_et_données_de_capteurs_en_temps_réel
+ERROR: old URL 'https://wiki.labomedia.org/index.php/Humanisme' not redirected !
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Humanisme' not redirected to 'https://ressources.labomedia.org/Humanisme,_transhumanisme,_posthumanisme' but to '' !
+ERROR: no valid page found for old URL 'https://wiki.labomedia.org/index.php/Humanisme' !
+INFO: done https://wiki.labomedia.org/index.php/Humanisme => https://ressources.labomedia.org/Humanisme,_transhumanisme,_posthumanisme
+INFO: done https://wiki.labomedia.org/index.php/Pure_Data_vs_Android => https://ressources.labomedia.org/Pure_Data_vs_Android
+INFO: done https://wiki.labomedia.org/index.php/BeagleBoard => https://ressources.labomedia.org/BeagleBoard
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Charte_de_déontologie_-_code_de_conduite_événements_hackerspaces_fablabs_medialabs' not redirected to 'https://ressources.labomedia.org/Charte_de_déontologie_-_code_de_conduite_événements_hackerspaces_fablabs_medialabs' but to 'https://ressources.labomedia.org/Charte_de_d%c3%a9ontologie_-_code_de_conduite_%c3%a9v%c3%a9nements_hackerspaces_fablabs_medialabs' !
+INFO: done https://wiki.labomedia.org/index.php/Charte_de_déontologie_-_code_de_conduite_événements_hackerspaces_fablabs_medialabs => https://ressources.labomedia.org/Charte_de_déontologie_-_code_de_conduite_événements_hackerspaces_fablabs_medialabs
+INFO: done https://wiki.labomedia.org/index.php/Raspberry_Pi_Utilisations => https://ressources.labomedia.org/Raspberry_Pi_Utilisations
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Présentation_Labomedia' not redirected to 'https://ressources.labomedia.org/Présentation_Labomedia' but to 'https://ressources.labomedia.org/Pr%c3%a9sentation_Labomedia' !
+INFO: done https://wiki.labomedia.org/index.php/Présentation_Labomedia => https://ressources.labomedia.org/Présentation_Labomedia
+INFO: done https://wiki.labomedia.org/index.php/Pure_Data_vs_Blender => https://ressources.labomedia.org/Pure_Data_vs_Blender
+INFO: done https://wiki.labomedia.org/index.php/Scratch => https://ressources.labomedia.org/Scratch
+INFO: done https://wiki.labomedia.org/index.php/Patch_Analyse_Audio_Diaporama => https://ressources.labomedia.org/Patch_Analyse_Audio_Diaporama
+INFO: done https://wiki.labomedia.org/index.php/Pure_Data_vs_GStreamer => https://ressources.labomedia.org/Pure_Data_vs_GStreamer
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Formation_outils_collaboratifs_et_hygiène_informatique' not redirected to 'https://ressources.labomedia.org/Formation_outils_collaboratifs_et_hygiène_informatique' but to 'https://ressources.labomedia.org/Formation_outils_collaboratifs_et_hygi%c3%a8ne_informatique' !
+INFO: done https://wiki.labomedia.org/index.php/Formation_outils_collaboratifs_et_hygiène_informatique => https://ressources.labomedia.org/Formation_outils_collaboratifs_et_hygiène_informatique
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Têtes_de_vainqueurs' not redirected to 'https://ressources.labomedia.org/Têtes_de_vainqueurs' but to 'https://ressources.labomedia.org/T%c3%aates_de_vainqueurs' !
+INFO: done https://wiki.labomedia.org/index.php/Têtes_de_vainqueurs => https://ressources.labomedia.org/Têtes_de_vainqueurs
+INFO: done https://wiki.labomedia.org/index.php/Routeur_wifi => https://ressources.labomedia.org/Routeur_wifi
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/La_philosophie_aléatoire_et_générative_de_l'économie_créative' not redirected to 'https://ressources.labomedia.org/La_philosophie_aléatoire_et_générative_de_l'économie_créative' but to 'https://ressources.labomedia.org/La_philosophie_al%c3%a9atoire_et_g%c3%a9n%c3%a9rative_de_l'%c3%a9conomie_cr%c3%a9ative' !
+INFO: done https://wiki.labomedia.org/index.php/La_philosophie_aléatoire_et_générative_de_l'économie_créative => https://ressources.labomedia.org/La_philosophie_aléatoire_et_générative_de_l'économie_créative
+INFO: done https://wiki.labomedia.org/index.php/Installation_Kinect_Linux => https://ressources.labomedia.org/Installation_Kinect_Linux
+INFO: done https://wiki.labomedia.org/index.php/LaboM_Yunohost_sur_raspberrypi => https://ressources.labomedia.org/LaboM_Yunohost_sur_raspberrypi
+INFO: done https://wiki.labomedia.org/index.php/Environnementaux => https://ressources.labomedia.org/Environnementaux
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Perturbations_par_court-circuit_du_réseau_220v' not redirected to 'https://ressources.labomedia.org/Perturbations_par_court-circuit_du_réseau_220v' but to 'https://ressources.labomedia.org/Perturbations_par_court-circuit_du_r%c3%a9seau_220v' !
+INFO: done https://wiki.labomedia.org/index.php/Perturbations_par_court-circuit_du_réseau_220v => https://ressources.labomedia.org/Perturbations_par_court-circuit_du_réseau_220v
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Transmettre_de_l'électricité_sans_fils' not redirected to 'https://ressources.labomedia.org/Transmettre_de_l'électricité_sans_fils' but to 'https://ressources.labomedia.org/Transmettre_de_l'%c3%a9lectricit%c3%a9_sans_fils' !
+INFO: done https://wiki.labomedia.org/index.php/Transmettre_de_l'électricité_sans_fils => https://ressources.labomedia.org/Transmettre_de_l'électricité_sans_fils
+INFO: done https://wiki.labomedia.org/index.php/Live_coding => https://ressources.labomedia.org/Live_coding
+INFO: done https://wiki.labomedia.org/index.php/GPG => https://ressources.labomedia.org/GPG
+ERROR: old URL 'https://wiki.labomedia.org/index.php/Outils_collaboratif_en_ligne_libres_et_éthiques' not redirected !
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Outils_collaboratif_en_ligne_libres_et_éthiques' not redirected to 'https://ressources.labomedia.org/Outils_collaboratif_en_ligne_libres_et_éthiques,_modèles_économiques' but to '' !
+ERROR: no valid page found for old URL 'https://wiki.labomedia.org/index.php/Outils_collaboratif_en_ligne_libres_et_éthiques' !
+INFO: done https://wiki.labomedia.org/index.php/Outils_collaboratif_en_ligne_libres_et_éthiques => https://ressources.labomedia.org/Outils_collaboratif_en_ligne_libres_et_éthiques,_modèles_économiques
+INFO: done https://wiki.labomedia.org/index.php/PirateBox_sur_RaspberryPi => https://ressources.labomedia.org/PirateBox_sur_RaspberryPi
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Patch_Webcam_Zones_Déclenchement_lecture_Audio_et_Video' not redirected to 'https://ressources.labomedia.org/Patch_Webcam_Zones_Déclenchement_lecture_Audio_et_Video' but to 'https://ressources.labomedia.org/Patch_Webcam_Zones_D%c3%a9clenchement_lecture_Audio_et_Video' !
+INFO: done https://wiki.labomedia.org/index.php/Patch_Webcam_Zones_Déclenchement_lecture_Audio_et_Video => https://ressources.labomedia.org/Patch_Webcam_Zones_Déclenchement_lecture_Audio_et_Video
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Survival_Kit_Telecom_Réseau_Communication' not redirected to 'https://ressources.labomedia.org/Survival_Kit_Telecom_Réseau_Communication' but to 'https://ressources.labomedia.org/Survival_Kit_Telecom_R%c3%a9seau_Communication' !
+INFO: done https://wiki.labomedia.org/index.php/Survival_Kit_Telecom_Réseau_Communication => https://ressources.labomedia.org/Survival_Kit_Telecom_Réseau_Communication
+INFO: done https://wiki.labomedia.org/index.php/Perturbations_par_ondes_sonores_d'un_Data_Center => https://ressources.labomedia.org/Perturbations_par_ondes_sonores_d'un_Data_Center
+INFO: done https://wiki.labomedia.org/index.php/Pure_Data_vs_OpenCV => https://ressources.labomedia.org/Pure_Data_vs_OpenCV
+INFO: done https://wiki.labomedia.org/index.php/Micro_Ordinateur => https://ressources.labomedia.org/Micro_Ordinateur
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Le_réseau_à_la_labomedia' not redirected to 'https://ressources.labomedia.org/Le_réseau_à_la_labomedia' but to 'https://ressources.labomedia.org/Le_r%c3%a9seau_%c3%a0_la_labomedia' !
+INFO: done https://wiki.labomedia.org/index.php/Le_réseau_à_la_labomedia => https://ressources.labomedia.org/Le_réseau_à_la_labomedia
+INFO: done https://wiki.labomedia.org/index.php/Hello_barbie => https://ressources.labomedia.org/Hello_barbie
+ERROR: old URL 'https://wiki.labomedia.org/index.php/Radio_Définie_par_Logiciel_(SDR)' not redirected !
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Radio_Définie_par_Logiciel_(SDR)' not redirected to 'https://ressources.labomedia.org/Radio_Définie_par_Logiciel_(SDR)' but to '' !
+INFO: done https://wiki.labomedia.org/index.php/Radio_Définie_par_Logiciel_(SDR) => https://ressources.labomedia.org/Radio_Définie_par_Logiciel_(SDR)
+INFO: done https://wiki.labomedia.org/index.php/Blockchain_cryptos_monnaies_bitcoin_et_ethereum => https://ressources.labomedia.org/Blockchain_cryptos_monnaies_bitcoin_et_ethereum
+INFO: done https://wiki.labomedia.org/index.php/Pure_Data_vs_Twitter => https://ressources.labomedia.org/Pure_Data_vs_Twitter
+INFO: done https://wiki.labomedia.org/index.php/Serveur => https://ressources.labomedia.org/Serveur
+INFO: done https://wiki.labomedia.org/index.php/LIAA_Libre_et_Intelligent_Assistant_Autonome => https://ressources.labomedia.org/LIAA_Libre_et_Intelligent_Assistant_Autonome
+INFO: done https://wiki.labomedia.org/index.php/GSM => https://ressources.labomedia.org/GSM
+INFO: done https://wiki.labomedia.org/index.php/Les_mots_de_Labomedia => https://ressources.labomedia.org/Les_mots_de_Labomedia
+ERROR: old URL 'https://wiki.labomedia.org/index.php/Logiciels_libres' not redirected !
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Logiciels_libres' not redirected to 'https://ressources.labomedia.org/Logiciels_libres,_connaissances_ouvertes_et_cultures_libres' but to '' !
+ERROR: no valid page found for old URL 'https://wiki.labomedia.org/index.php/Logiciels_libres' !
+INFO: done https://wiki.labomedia.org/index.php/Logiciels_libres => https://ressources.labomedia.org/Logiciels_libres,_connaissances_ouvertes_et_cultures_libres
+INFO: done https://wiki.labomedia.org/index.php/Corinne_Dadat => https://ressources.labomedia.org/Corinne_Dadat
+INFO: done https://wiki.labomedia.org/index.php/PirateBox_TP-Link_MR3020 => https://ressources.labomedia.org/PirateBox_TP-Link_MR3020
+INFO: done https://wiki.labomedia.org/index.php/Computer-b-gone_Teensy => https://ressources.labomedia.org/Computer-b-gone_Teensy
+INFO: done https://wiki.labomedia.org/index.php/Capteurs_environnementaux_et_Arduino => https://ressources.labomedia.org/Capteurs_environnementaux_et_Arduino
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Pure_Data_vs_Caméra_téléphone_Android' not redirected to 'https://ressources.labomedia.org/Pure_Data_vs_Caméra_téléphone_Android' but to 'https://ressources.labomedia.org/Pure_Data_vs_Cam%c3%a9ra_t%c3%a9l%c3%a9phone_Android' !
+INFO: done https://wiki.labomedia.org/index.php/Pure_Data_vs_Caméra_téléphone_Android => https://ressources.labomedia.org/Pure_Data_vs_Caméra_téléphone_Android
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Libérer_un_chromebook_de_google' not redirected to 'https://ressources.labomedia.org/Libérer_un_chromebook_de_google' but to 'https://ressources.labomedia.org/Lib%c3%a9rer_un_chromebook_de_google' !
+INFO: done https://wiki.labomedia.org/index.php/Libérer_un_chromebook_de_google => https://ressources.labomedia.org/Libérer_un_chromebook_de_google
+INFO: done https://wiki.labomedia.org/index.php/Labo_Eye_Tracking => https://ressources.labomedia.org/Labo_Eye_Tracking
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Créer_une_webradio_avec_Airtime' not redirected to 'https://ressources.labomedia.org/Créer_une_webradio_avec_Airtime' but to 'https://ressources.labomedia.org/Cr%c3%a9er_une_webradio_avec_Airtime' !
+INFO: done https://wiki.labomedia.org/index.php/Créer_une_webradio_avec_Airtime => https://ressources.labomedia.org/Créer_une_webradio_avec_Airtime
+INFO: done https://wiki.labomedia.org/index.php/Pure_Data_vs_Kinect => https://ressources.labomedia.org/Pure_Data_vs_Kinect
+INFO: done https://wiki.labomedia.org/index.php/SSH => https://ressources.labomedia.org/SSH
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Formation_numérique_et_éducation_artistique' not redirected to 'https://ressources.labomedia.org/Formation_numérique_et_éducation_artistique' but to 'https://ressources.labomedia.org/Formation_num%c3%a9rique_et_%c3%a9ducation_artistique' !
+INFO: done https://wiki.labomedia.org/index.php/Formation_numérique_et_éducation_artistique => https://ressources.labomedia.org/Formation_numérique_et_éducation_artistique
+INFO: done https://wiki.labomedia.org/index.php/Computer-b-gone => https://ressources.labomedia.org/Computer-b-gone
+INFO: done https://wiki.labomedia.org/index.php/PirateBox => https://ressources.labomedia.org/PirateBox
+INFO: done https://wiki.labomedia.org/index.php/Scripts_bash_linux_audiovisuel => https://ressources.labomedia.org/Scripts_bash_linux_audiovisuel
+INFO: done https://wiki.labomedia.org/index.php/Raspberry_Pi => https://ressources.labomedia.org/Raspberry_Pi
+INFO: done https://wiki.labomedia.org/index.php/Patch_Analyse_Mouvement_Diaporama => https://ressources.labomedia.org/Patch_Analyse_Mouvement_Diaporama
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/FAI-orléans' not redirected to 'https://ressources.labomedia.org/FAI-orléans' but to 'https://ressources.labomedia.org/FAI-orl%c3%a9ans' !
+INFO: done https://wiki.labomedia.org/index.php/FAI-orléans => https://ressources.labomedia.org/FAI-orléans
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Internet_décentralisé' not redirected to 'https://ressources.labomedia.org/Internet_décentralisé' but to 'https://ressources.labomedia.org/Internet_d%c3%a9centralis%c3%a9' !
+INFO: done https://wiki.labomedia.org/index.php/Internet_décentralisé => https://ressources.labomedia.org/Internet_décentralisé
+INFO: done https://wiki.labomedia.org/index.php/QR-Code => https://ressources.labomedia.org/QR-Code
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Émettre_en_DVB-T___TNT_avec_Gnuradio_et_USRP' not redirected to 'https://ressources.labomedia.org/Émettre_en_DVB-T___TNT_avec_Gnuradio_et_USRP' but to 'https://ressources.labomedia.org/%c3%89mettre_en_DVB-T___TNT_avec_Gnuradio_et_USRP' !
+INFO: done https://wiki.labomedia.org/index.php/Émettre_en_DVB-T___TNT_avec_Gnuradio_et_USRP => https://ressources.labomedia.org/Émettre_en_DVB-T___TNT_avec_Gnuradio_et_USRP
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Mapping_vidéo' not redirected to 'https://ressources.labomedia.org/Mapping_vidéo' but to 'https://ressources.labomedia.org/Mapping_vid%c3%a9o' !
+INFO: done https://wiki.labomedia.org/index.php/Mapping_vidéo => https://ressources.labomedia.org/Mapping_vidéo
+INFO: done https://wiki.labomedia.org/index.php/Sampler_Pure_Data_Wiimote => https://ressources.labomedia.org/Sampler_Pure_Data_Wiimote
+ERROR: old URL 'https://wiki.labomedia.org/index.php/Problématiques' not redirected !
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Problématiques' not redirected to 'https://ressources.labomedia.org/Problématiques,_Projets,_Acteurs_et_réseaux_dans_le_champ_du_handicap_et_de_l'interactivité,_du_numérique' but to '' !
+ERROR: no valid page found for old URL 'https://wiki.labomedia.org/index.php/Problématiques' !
+INFO: done https://wiki.labomedia.org/index.php/Problématiques => https://ressources.labomedia.org/Problématiques,_Projets,_Acteurs_et_réseaux_dans_le_champ_du_handicap_et_de_l'interactivité,_du_numérique
+INFO: done https://wiki.labomedia.org/index.php/We_are_robots => https://ressources.labomedia.org/We_are_robots
+INFO: done https://wiki.labomedia.org/index.php/VideoThon_Pure_Data_Linux => https://ressources.labomedia.org/VideoThon_Pure_Data_Linux
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Capteurs_de_pollution_atmosphérique' not redirected to 'https://ressources.labomedia.org/Capteurs_de_pollution_atmosphérique' but to 'https://ressources.labomedia.org/Capteurs_de_pollution_atmosph%c3%a9rique' !
+INFO: done https://wiki.labomedia.org/index.php/Capteurs_de_pollution_atmosphérique => https://ressources.labomedia.org/Capteurs_de_pollution_atmosphérique
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Monitoring_serveur_et_activités_du_disque_dur_avec_Raspberry_Pi' not redirected to 'https://ressources.labomedia.org/Monitoring_serveur_et_activités_du_disque_dur_avec_Raspberry_Pi' but to 'https://ressources.labomedia.org/Monitoring_serveur_et_activit%c3%a9s_du_disque_dur_avec_Raspberry_Pi' !
+INFO: done https://wiki.labomedia.org/index.php/Monitoring_serveur_et_activités_du_disque_dur_avec_Raspberry_Pi => https://ressources.labomedia.org/Monitoring_serveur_et_activités_du_disque_dur_avec_Raspberry_Pi
+INFO: done https://wiki.labomedia.org/index.php/CHIP => https://ressources.labomedia.org/CHIP
+INFO: done https://wiki.labomedia.org/index.php/Cartographie_ESLO_Corpus_de_la_parole => https://ressources.labomedia.org/Cartographie_ESLO_Corpus_de_la_parole
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Internet_sécurité_et_anonymat' not redirected to 'https://ressources.labomedia.org/Internet_sécurité_et_anonymat' but to 'https://ressources.labomedia.org/Internet_s%c3%a9curit%c3%a9_et_anonymat' !
+INFO: done https://wiki.labomedia.org/index.php/Internet_sécurité_et_anonymat => https://ressources.labomedia.org/Internet_sécurité_et_anonymat
+INFO: done https://wiki.labomedia.org/index.php/Logiciels_libres_en_pratique => https://ressources.labomedia.org/Logiciels_libres_en_pratique
+INFO: done https://wiki.labomedia.org/index.php/Labo_Capteurs_neuronaux => https://ressources.labomedia.org/Labo_Capteurs_neuronaux
+INFO: done https://wiki.labomedia.org/index.php/Le_code_ASCII => https://ressources.labomedia.org/Le_code_ASCII
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Sonification_de_données' not redirected to 'https://ressources.labomedia.org/Sonification_de_données' but to 'https://ressources.labomedia.org/Sonification_de_donn%c3%a9es' !
+INFO: done https://wiki.labomedia.org/index.php/Sonification_de_données => https://ressources.labomedia.org/Sonification_de_données
+ERROR: old URL 'https://wiki.labomedia.org/index.php/L'ordinateur' not redirected !
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/L'ordinateur' not redirected to 'https://ressources.labomedia.org/L'ordinateur,_des_premiers_pas_aux_outils_collaboratifs' but to '' !
+ERROR: no valid page found for old URL 'https://wiki.labomedia.org/index.php/L'ordinateur' !
+INFO: done https://wiki.labomedia.org/index.php/L'ordinateur => https://ressources.labomedia.org/L'ordinateur,_des_premiers_pas_aux_outils_collaboratifs
+INFO: done https://wiki.labomedia.org/index.php/Processing_vs_Arduino_vs_Minitel => https://ressources.labomedia.org/Processing_vs_Arduino_vs_Minitel
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/How_to_La_Labomedia_admin_activités' not redirected to 'https://ressources.labomedia.org/How_to_La_Labomedia_admin_activités' but to 'https://ressources.labomedia.org/How_to_La_Labomedia_admin_activit%c3%a9s' !
+INFO: done https://wiki.labomedia.org/index.php/How_to_La_Labomedia_admin_activités => https://ressources.labomedia.org/How_to_La_Labomedia_admin_activités
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Livres_numériques' not redirected to 'https://ressources.labomedia.org/Livres_numériques' but to 'https://ressources.labomedia.org/Livres_num%c3%a9riques' !
+INFO: done https://wiki.labomedia.org/index.php/Livres_numériques => https://ressources.labomedia.org/Livres_numériques
+INFO: done https://wiki.labomedia.org/index.php/Processing_vs_OpenCV => https://ressources.labomedia.org/Processing_vs_OpenCV
+INFO: done https://wiki.labomedia.org/index.php/Le_DataMoshing => https://ressources.labomedia.org/Le_DataMoshing
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Patch_Synthétiseur_Audio_Visuel' not redirected to 'https://ressources.labomedia.org/Patch_Synthétiseur_Audio_Visuel' but to 'https://ressources.labomedia.org/Patch_Synth%c3%a9tiseur_Audio_Visuel' !
+INFO: done https://wiki.labomedia.org/index.php/Patch_Synthétiseur_Audio_Visuel => https://ressources.labomedia.org/Patch_Synthétiseur_Audio_Visuel
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Économie_créative' not redirected to 'https://ressources.labomedia.org/Économie_créative' but to 'https://ressources.labomedia.org/%c3%89conomie_cr%c3%a9ative' !
+INFO: done https://wiki.labomedia.org/index.php/Économie_créative => https://ressources.labomedia.org/Économie_créative
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/La_lampe_anti-conversation_pénible' not redirected to 'https://ressources.labomedia.org/La_lampe_anti-conversation_pénible' but to 'https://ressources.labomedia.org/La_lampe_anti-conversation_p%c3%a9nible' !
+INFO: done https://wiki.labomedia.org/index.php/La_lampe_anti-conversation_pénible => https://ressources.labomedia.org/La_lampe_anti-conversation_pénible
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Perturbations_par_clefs_USB_de_systèmes_informatiques' not redirected to 'https://ressources.labomedia.org/Perturbations_par_clefs_USB_de_systèmes_informatiques' but to 'https://ressources.labomedia.org/Perturbations_par_clefs_USB_de_syst%c3%a8mes_informatiques' !
+INFO: done https://wiki.labomedia.org/index.php/Perturbations_par_clefs_USB_de_systèmes_informatiques => https://ressources.labomedia.org/Perturbations_par_clefs_USB_de_systèmes_informatiques
+INFO: done https://wiki.labomedia.org/index.php/Pure_Data_vs_iOS => https://ressources.labomedia.org/Pure_Data_vs_iOS
+INFO: done https://wiki.labomedia.org/index.php/BIO_COGNO_NANO => https://ressources.labomedia.org/BIO_COGNO_NANO
+INFO: done https://wiki.labomedia.org/index.php/Capteurs_environnementaux_Biofeedback => https://ressources.labomedia.org/Capteurs_environnementaux_Biofeedback
+INFO: done https://wiki.labomedia.org/index.php/PirateBox_sur_Ordinateur => https://ressources.labomedia.org/PirateBox_sur_Ordinateur
+INFO: done https://wiki.labomedia.org/index.php/Deep_web_-_dark_web_-_web_profond => https://ressources.labomedia.org/Deep_web_-_dark_web_-_web_profond
+INFO: done https://wiki.labomedia.org/index.php/GIT => https://ressources.labomedia.org/GIT
+INFO: done https://wiki.labomedia.org/index.php/VLF_Very_Low_Frequency => https://ressources.labomedia.org/VLF_Very_Low_Frequency
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Diffusion_vidéo_live_-_streaming' not redirected to 'https://ressources.labomedia.org/Diffusion_vidéo_live_-_streaming' but to 'https://ressources.labomedia.org/Diffusion_vid%c3%a9o_live_-_streaming' !
+INFO: done https://wiki.labomedia.org/index.php/Diffusion_vidéo_live_-_streaming => https://ressources.labomedia.org/Diffusion_vidéo_live_-_streaming
+INFO: done https://wiki.labomedia.org/index.php/Kinect => https://ressources.labomedia.org/Kinect
+INFO: done https://wiki.labomedia.org/index.php/Human_tech_summit_2018 => https://ressources.labomedia.org/Human_tech_summit_2018
+INFO: done https://wiki.labomedia.org/index.php/Ateliers_de_cartographie_culturelle => https://ressources.labomedia.org/Ateliers_de_cartographie_culturelle
+INFO: done https://wiki.labomedia.org/index.php/Pure_Data_vs_OpenGL => https://ressources.labomedia.org/Pure_Data_vs_OpenGL
+INFO: done https://wiki.labomedia.org/index.php/Atelier_PD_Gem_Opengl_GLSL => https://ressources.labomedia.org/Atelier_PD_Gem_Opengl_GLSL
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Panorama_de_la_création_artistique_numérique' not redirected to 'https://ressources.labomedia.org/Panorama_de_la_création_artistique_numérique' but to 'https://ressources.labomedia.org/Panorama_de_la_cr%c3%a9ation_artistique_num%c3%a9rique' !
+INFO: done https://wiki.labomedia.org/index.php/Panorama_de_la_création_artistique_numérique => https://ressources.labomedia.org/Panorama_de_la_création_artistique_numérique
+ERROR: old URL 'https://wiki.labomedia.org/index.php/Une_Histoire_des_arts_numériques' not redirected !
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Une_Histoire_des_arts_numériques' not redirected to 'https://ressources.labomedia.org/Une_Histoire_des_arts_numériques,_des_nouveaux_medias,_multimedia,_interactif_-_de_1900_à_nos_jours' but to '' !
+ERROR: no valid page found for old URL 'https://wiki.labomedia.org/index.php/Une_Histoire_des_arts_numériques' !
+INFO: done https://wiki.labomedia.org/index.php/Une_Histoire_des_arts_numériques => https://ressources.labomedia.org/Une_Histoire_des_arts_numériques,_des_nouveaux_medias,_multimedia,_interactif_-_de_1900_à_nos_jours
+ERROR: old URL 'https://wiki.labomedia.org/index.php/Usages_responsables_d'Internet' not redirected !
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Usages_responsables_d'Internet' not redirected to 'https://ressources.labomedia.org/Usages_responsables_d'Internet,_de_l'ordinateur_et_des_dispositifs_mobiles_dans_une_perspective_environnementale' but to '' !
+ERROR: no valid page found for old URL 'https://wiki.labomedia.org/index.php/Usages_responsables_d'Internet' !
+INFO: done https://wiki.labomedia.org/index.php/Usages_responsables_d'Internet => https://ressources.labomedia.org/Usages_responsables_d'Internet,_de_l'ordinateur_et_des_dispositifs_mobiles_dans_une_perspective_environnementale
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Atelier_les_outils_numériques_au_service_des_associations' not redirected to 'https://ressources.labomedia.org/Atelier_les_outils_numériques_au_service_des_associations' but to 'https://ressources.labomedia.org/Atelier_les_outils_num%c3%a9riques_au_service_des_associations' !
+INFO: done https://wiki.labomedia.org/index.php/Atelier_les_outils_numériques_au_service_des_associations => https://ressources.labomedia.org/Atelier_les_outils_numériques_au_service_des_associations
+INFO: done https://wiki.labomedia.org/index.php/Tomb => https://ressources.labomedia.org/Tomb
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Atelier_Internet_sécurité_respect_de_la_vie_privée_et_anonymat' not redirected to 'https://ressources.labomedia.org/Atelier_Internet_sécurité_respect_de_la_vie_privée_et_anonymat' but to 'https://ressources.labomedia.org/Atelier_Internet_s%c3%a9curit%c3%a9_respect_de_la_vie_priv%c3%a9e_et_anonymat' !
+INFO: done https://wiki.labomedia.org/index.php/Atelier_Internet_sécurité_respect_de_la_vie_privée_et_anonymat => https://ressources.labomedia.org/Atelier_Internet_sécurité_respect_de_la_vie_privée_et_anonymat
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Atelier_Internet_sécurité_journalistes' not redirected to 'https://ressources.labomedia.org/Atelier_Internet_sécurité_journalistes' but to 'https://ressources.labomedia.org/Atelier_Internet_s%c3%a9curit%c3%a9_journalistes' !
+INFO: done https://wiki.labomedia.org/index.php/Atelier_Internet_sécurité_journalistes => https://ressources.labomedia.org/Atelier_Internet_sécurité_journalistes
+INFO: done https://wiki.labomedia.org/index.php/Atelierduc01n => https://ressources.labomedia.org/Atelier_du_C01N
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Configurer_sa_carte_vidéo_optimus_sandy_bridge' not redirected to 'https://ressources.labomedia.org/Configurer_sa_carte_vidéo_optimus_sandy_bridge' but to 'https://ressources.labomedia.org/Configurer_sa_carte_vid%c3%a9o_optimus_sandy_bridge' !
+INFO: done https://wiki.labomedia.org/index.php/Configurer_sa_carte_vidéo_optimus_sandy_bridge => https://ressources.labomedia.org/Configurer_sa_carte_vidéo_optimus_sandy_bridge
+INFO: done https://wiki.labomedia.org/index.php/ASUS_n53sv => https://ressources.labomedia.org/ASUS_n53sv
+INFO: done https://wiki.labomedia.org/index.php/Pure_Data_vs_Alias8 => https://ressources.labomedia.org/Pure_Data_vs_Alias8
+INFO: done https://wiki.labomedia.org/index.php/AstroFluxTechnique => https://ressources.labomedia.org/AstroFlux_Technique
+INFO: done https://wiki.labomedia.org/index.php/Astroflux_-_Cahier_des_charges => https://ressources.labomedia.org/Astroflux_Cahier_des_charges
+INFO: done https://wiki.labomedia.org/index.php/AstroFlux => https://ressources.labomedia.org/AstroFlux
+INFO: done https://wiki.labomedia.org/index.php/Art_robotique => https://ressources.labomedia.org/Art_robotique
+INFO: done https://wiki.labomedia.org/index.php/Le_NetArt_CONTENU => https://ressources.labomedia.org/Le_NetArt
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Art_:_Code_&_Littérature' not redirected to 'https://ressources.labomedia.org/Art_Code_et_Littérature' but to 'https://ressources.labomedia.org/Art_Code_et_Litt%c3%a9rature' !
+INFO: done https://wiki.labomedia.org/index.php/Art_:_Code_&_Littérature => https://ressources.labomedia.org/Art_Code_et_Littérature
+INFO: done https://wiki.labomedia.org/index.php/ARP_Poisoning => https://ressources.labomedia.org/ARP_Poisoning
+INFO: done https://wiki.labomedia.org/index.php/Liens_ressources_tutoriaux_Mobile_Processing => https://ressources.labomedia.org/Liens_ressources_tutoriaux_Mobile_Processing
+INFO: done https://wiki.labomedia.org/index.php/Android => https://ressources.labomedia.org/Android
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Algorithmes_et_réalités' not redirected to 'https://ressources.labomedia.org/Algorithmes_et_réalités' but to 'https://ressources.labomedia.org/Algorithmes_et_r%c3%a9alit%c3%a9s' !
+INFO: done https://wiki.labomedia.org/index.php/Algorithmes_et_réalités => https://ressources.labomedia.org/Algorithmes_et_réalités
+INFO: done https://wiki.labomedia.org/index.php/Kivy:_TapOSC => https://ressources.labomedia.org/TapOSC
+INFO: done https://wiki.labomedia.org/index.php/Blender:Exemple_simple_pour_recevoir_de_l'OSC_dans_Blender => https://ressources.labomedia.org/Exemple_simple_pour_recevoir_de_l'OSC_dans_Blender
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Alternatives_à_OSC' not redirected to 'https://ressources.labomedia.org/Alternatives_à_OSC' but to 'https://ressources.labomedia.org/Alternatives_%c3%a0_OSC' !
+INFO: done https://wiki.labomedia.org/index.php/Alternatives_à_OSC => https://ressources.labomedia.org/Alternatives_à_OSC
+INFO: done https://wiki.labomedia.org/index.php/Envoyer_et_recevoir_de_l'OSC_en_python => https://ressources.labomedia.org/Envoyer_et_recevoir_de_l'OSC_en_python
+INFO: done https://wiki.labomedia.org/index.php/Latence_de_l'_OSC_dans_Blender => https://ressources.labomedia.org/Latence_de_l'_OSC_dans_Blender
+INFO: done https://wiki.labomedia.org/index.php/Open_Sound_Control_:_OSC => https://ressources.labomedia.org/Open_Sound_Control_OSC
+INFO: done https://wiki.labomedia.org/index.php/Communication_entre_Pure-data_et_Blender_en_OSC => https://ressources.labomedia.org/Communication_entre_Pure-data_et_Blender_en_OSC
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/BoiteAYeah' not redirected to 'https://ressources.labomedia.org/BoiteAYeah' but to 'https://ressources.labomedia.org/boiteayeah' !
+INFO: done https://wiki.labomedia.org/index.php/BoiteAYeah => https://ressources.labomedia.org/BoiteAYeah
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Stéréoscope' not redirected to 'https://ressources.labomedia.org/Stéréoscope' but to 'https://ressources.labomedia.org/St%c3%a9r%c3%a9oscope' !
+INFO: done https://wiki.labomedia.org/index.php/Stéréoscope => https://ressources.labomedia.org/Stéréoscope
+INFO: done https://wiki.labomedia.org/index.php/Serveur_multimedia_ArtNet => https://ressources.labomedia.org/Serveur_multimedia_ArtNet
+INFO: done https://wiki.labomedia.org/index.php/Serveur_Minitel_en_local => https://ressources.labomedia.org/Serveur_Minitel_en_local
+INFO: done https://wiki.labomedia.org/index.php/Serveur_Minitel => https://ressources.labomedia.org/Serveur_Minitel
+INFO: done https://wiki.labomedia.org/index.php/Papatte => https://ressources.labomedia.org/Papatte
+INFO: done https://wiki.labomedia.org/index.php/Nomenclatures => https://ressources.labomedia.org/Nomenclatures
+INFO: done https://wiki.labomedia.org/index.php/GrandMA2 => https://ressources.labomedia.org/GrandMA2
+INFO: done https://wiki.labomedia.org/index.php/FOOC => https://ressources.labomedia.org/FOOC
+ERROR: old URL 'https://wiki.labomedia.org/index.php/C++_:_Communication_OSC' not redirected !
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/C++_:_Communication_OSC' not redirected to 'https://ressources.labomedia.org/C++_Communication_OSC' but to '' !
+INFO: done https://wiki.labomedia.org/index.php/C++_:_Communication_OSC => https://ressources.labomedia.org/C++_Communication_OSC
+ERROR: old URL 'https://wiki.labomedia.org/index.php/C++:Conversion_int_en_String' not redirected !
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/C++:Conversion_int_en_String' not redirected to 'https://ressources.labomedia.org/C++_Conversion_int_en_String' but to '' !
+INFO: done https://wiki.labomedia.org/index.php/C++:Conversion_int_en_String => https://ressources.labomedia.org/C++_Conversion_int_en_String
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Raspberry_Pi_Configurations_complémentaires' not redirected to 'https://ressources.labomedia.org/Raspberry_Pi_Configurations_complémentaires' but to 'https://ressources.labomedia.org/Raspberry_Pi_Configurations_compl%c3%a9mentaires' !
+INFO: done https://wiki.labomedia.org/index.php/Raspberry_Pi_Configurations_complémentaires => https://ressources.labomedia.org/Raspberry_Pi_Configurations_complémentaires
+INFO: done https://wiki.labomedia.org/index.php/Raspberry_Pi_Installation => https://ressources.labomedia.org/Raspberry_Pi_Installation
+INFO: done https://wiki.labomedia.org/index.php/OpenFrameworks_avec_Raspberry_Pi => https://ressources.labomedia.org/Raspberry_Pi_OpenFrameworks
+INFO: done https://wiki.labomedia.org/index.php/DMX_sans_fil => https://ressources.labomedia.org/DMX_sans_fil
+INFO: done https://wiki.labomedia.org/index.php/Kivy:_Introduction => https://ressources.labomedia.org/Kivy_Introduction
+INFO: done https://wiki.labomedia.org/index.php/Kivy:_Installation => https://ressources.labomedia.org/Kivy_Installation
+INFO: done https://wiki.labomedia.org/index.php/Kivy:_Les_fichiers_kv => https://ressources.labomedia.org/Kivy_Les_fichiers_kv
+INFO: done https://wiki.labomedia.org/index.php/Kivy:_Exemples_simples_pour_apprendre => https://ressources.labomedia.org/Kivy_Exemples_simples_pour_apprendre
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Kivy:_Liste_des_éléments_graphiques' not redirected to 'https://ressources.labomedia.org/Kivy_Liste_des_éléments_graphiques' but to 'https://ressources.labomedia.org/Kivy_Liste_des_%c3%a9l%c3%a9ments_graphiques' !
+INFO: done https://wiki.labomedia.org/index.php/Kivy:_Liste_des_éléments_graphiques => https://ressources.labomedia.org/Kivy_Liste_des_éléments_graphiques
+INFO: done https://wiki.labomedia.org/index.php/Installation_et_configuration_de_Pure_Data_sur_Linux => https://ressources.labomedia.org/Installation_et_configuration_de_Pure_Data_sur_Linux
+INFO: done https://wiki.labomedia.org/index.php/Debian_Installation_Configuration => https://ressources.labomedia.org/Debian_Installation_Configuration
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Kivy:_Buildozer_pour_créer_une_application_Android_avec_un_script_python' not redirected to 'https://ressources.labomedia.org/Kivy_Buildozer_pour_créer_une_application_Android_avec_un_script_python' but to 'https://ressources.labomedia.org/Kivy_Buildozer_pour_cr%c3%a9er_une_application_Android_avec_un_script_python' !
+INFO: done https://wiki.labomedia.org/index.php/Kivy:_Buildozer_pour_créer_une_application_Android_avec_un_script_python => https://ressources.labomedia.org/Kivy_Buildozer_pour_créer_une_application_Android_avec_un_script_python
+INFO: done https://wiki.labomedia.org/index.php/Kivy:_Buildozer_avec_python_2.7 => https://ressources.labomedia.org/Kivy_Buildozer_avec_python_2.7
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Kivy:_Liste_des_éléments_graphiques_Widgets_de_comportement_et_Gestion_d'écrans' not redirected to 'https://ressources.labomedia.org/Kivy_Liste_des_éléments_graphiques_Widgets_de_comportement_et_Gestion_d'écrans' but to 'https://ressources.labomedia.org/Kivy_Liste_des_%c3%a9l%c3%a9ments_graphiques_Widgets_de_comportement_et_Gestion_d'%c3%a9crans' !
+INFO: done https://wiki.labomedia.org/index.php/Kivy:_Liste_des_éléments_graphiques_Widgets_de_comportement_et_Gestion_d'écrans => https://ressources.labomedia.org/Kivy_Liste_des_éléments_graphiques_Widgets_de_comportement_et_Gestion_d'écrans
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Kivy:_Liste_des_éléments_graphiques_Widgets_complexes' not redirected to 'https://ressources.labomedia.org/Kivy_Liste_des_éléments_graphiques_Widgets_complexes' but to 'https://ressources.labomedia.org/Kivy_Liste_des_%c3%a9l%c3%a9ments_graphiques_Widgets_complexes' !
+INFO: done https://wiki.labomedia.org/index.php/Kivy:_Liste_des_éléments_graphiques_Widgets_complexes => https://ressources.labomedia.org/Kivy_Liste_des_éléments_graphiques_Widgets_complexes
+INFO: done https://wiki.labomedia.org/index.php/Kivy:_Comment_faire_un_tas_de_chose => https://ressources.labomedia.org/Kivy_Comment_faire_un_tas_de_chose
+INFO: done https://wiki.labomedia.org/index.php/Kivy:_Canvas => https://ressources.labomedia.org/Kivy_Canvas
+INFO: done https://wiki.labomedia.org/index.php/Installation_de_Twisted_pour_python_3.x => https://ressources.labomedia.org/Installation_de_Twisted
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Créer_son_propre_package_python' not redirected to 'https://ressources.labomedia.org/Créer_son_propre_package_python' but to 'https://ressources.labomedia.org/Cr%c3%a9er_son_propre_package_python' !
+INFO: done https://wiki.labomedia.org/index.php/Créer_son_propre_package_python => https://ressources.labomedia.org/Créer_son_propre_package_python
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Présentation_Labomedia' not redirected to 'https://ressources.labomedia.org/Présentation_Labomedia_' but to 'https://ressources.labomedia.org/Pr%c3%a9sentation_Labomedia' !
+INFO: done https://wiki.labomedia.org/index.php/Présentation_Labomedia => https://ressources.labomedia.org/Présentation_Labomedia_
+INFO: done https://wiki.labomedia.org/index.php/Godot => https://ressources.labomedia.org/Godot
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Godot_:_Créer_un_projet' not redirected to 'https://ressources.labomedia.org/Godot_Créer_un_projet' but to 'https://ressources.labomedia.org/Godot_Cr%c3%a9er_un_projet' !
+INFO: done https://wiki.labomedia.org/index.php/Godot_:_Créer_un_projet => https://ressources.labomedia.org/Godot_Créer_un_projet
+INFO: done https://wiki.labomedia.org/index.php/Godot_:_Listes_et_Boutons => https://ressources.labomedia.org/Godot_Listes_et_Boutons
+   ERROR: old URL 'https://wiki.labomedia.org/index.php/Godot_:_Scènes_et_Scripts' not redirected to 'https://ressources.labomedia.org/Godot_Scènes_et_Scripts' but to 'https://ressources.labomedia.org/Godot_Sc%c3%a8nes_et_Scripts' !
+INFO: done https://wiki.labomedia.org/index.php/Godot_:_Scènes_et_Scripts => https://ressources.labomedia.org/Godot_Scènes_et_Scripts
+INFO: done https://wiki.labomedia.org/index.php/Godot_pour_les_nuls => https://ressources.labomedia.org/Godot_Comparaison_avec_Blender_Game_Engine_et_Kivy_Kivent_
