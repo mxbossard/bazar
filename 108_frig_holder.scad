@@ -1,6 +1,6 @@
 $fn=100;
 
-peice1_height = 10;
+peice1_height = 9.5;
 peice1_width = 4;
 peice1_thickness = 3;
 peice1_Ratio = 0.9;
@@ -13,6 +13,7 @@ piece2_hole_x_shift = 5.5;
 piece2_hole_y_shift = 3;
 
 global_thickness = 10;
+global_attach_gap = 11.5;
 
 module piece1() {
 
@@ -31,18 +32,23 @@ module piece2() {
 }
 
 module global() {
-    translate([-peice1_width,1])
+    piece1_y1 = (peice2_height - global_attach_gap - 2*peice1_height)/2;
+    piece1_y2 = piece1_y1 + global_attach_gap + peice1_height;
+    
+    translate([-peice1_width, piece1_y1])
         piece1();
-
-    translate([-peice1_width, peice2_height - peice1_height - 1])
+    
+    translate([-peice1_width, piece1_y2])
         piece1();
 
     piece2();
 }
 
+// Etrude global
 linear_extrude(height = global_thickness)
     global();
 
+// Extrude piece2 on top of global
 translate([0,0,global_thickness])
-    linear_extrude(height = 4)
+    linear_extrude(height = 2)
         piece2();

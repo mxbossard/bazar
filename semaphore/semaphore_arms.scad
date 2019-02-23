@@ -88,12 +88,15 @@ module regulateur_2d() {
         translate([regulateur_width/2,regulateur_width/2]) {
             // Need CNC
             circle(d=mark_hole_diameter);
+            clamping_holes_2d();
         }
         
         // Left hole
         translate([regulateur_length - regulateur_width/2,regulateur_width/2]) {
             // Need CNC
             circle(d=mark_hole_diameter);
+            rotate([0,0,180])
+                clamping_holes_2d();
         }
         
         // Center hole
@@ -200,6 +203,13 @@ module transmission_holes_3d(thickness) {
         cylinder(d=driving_hole_diameter, h=thickness+2);
 }
 
+module clamping_holes_2d() {
+    translate([clamping_hole_shift,clamping_hole_pitch/2])
+        circle(d=mark_hole_diameter);
+    translate([clamping_hole_shift,-clamping_hole_pitch/2])
+        circle(d=mark_hole_diameter);
+}
+
 module clamping_holes_3d(thickness) {
     translate([clamping_hole_shift,clamping_hole_pitch/2])
         cylinder(d=clamping_hole_diameter, h=thickness+2);
@@ -276,16 +286,35 @@ if( mode == 3 ) {
             translate([0, 0, -1])
                 cylinder(d=bearing_hold_diameter, h=regulateur_thickness+2);
             
+            // bottom larger hole
+            /*
             translate([0, 0, -1])
                 cylinder(d=bearing_diameter, h=(regulateur_thickness - bearings_gap)/2 + 1);
+            */
             
-            translate([0, 0, (regulateur_thickness - bearings_gap)/2 + bearings_gap])
+            //top larger hole
+            translate([0, 0, 1])
                 cylinder(d=bearing_diameter, h=regulateur_thickness);
         }
     }
 }
 
 if( mode == 4 ) {
+    external_diameter = screw_diameter+3;
+    width = 2;
     
-    rondelle(screw_diameter, screw_diameter+2, 1);
+    rondelle(screw_diameter+0.5, external_diameter, width);
+    
+    translate([1*(external_diameter+5),0,0])
+        rondelle(screw_diameter+0.5, external_diameter, width + 0.1);
+    
+    translate([2*(external_diameter+5),0,0])
+        rondelle(screw_diameter+0.5, external_diameter, width + 0.2);
+    
+    translate([3*(external_diameter+5),0,0])
+        rondelle(screw_diameter+0.5, external_diameter, width + 0.3);
+    
+    translate([4*(external_diameter+5),0,0])
+        rondelle(screw_diameter+0.5, external_diameter, width + 0.4);
 }
+
