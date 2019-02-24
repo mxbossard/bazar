@@ -18,11 +18,11 @@ indicateur_length = 120;
 indicateur_width = 18;
 indicateur_thickness = 5;
 
-bearing_diameter = 13.2;
+bearing_diameter = 13.4;
 bearing_hold_diameter = bearing_diameter - 2;
-bearing_width = 5.2;
+bearing_width = 5.8;
 
-screw_diameter = 4.4;
+screw_diameter = 4.6;
 driving_hole_diameter = 3.2;
 driving_hole_pitch = 7;
 mark_hole_diameter = 1;
