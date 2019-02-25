@@ -18,7 +18,7 @@
  */
 
 
-bearing_diameter = 13.4;
+bearing_diameter = 13.5;
 bearing_hold_diameter = bearing_diameter - 2;
 //bearing_width = 5.2;
 bearing_shift = 3;
@@ -27,7 +27,7 @@ pulley_length = 30;
 
 // tuneable constants
 
-teeth = 32;			// Number of teeth, standard Mendel T5 belt = 8, gives Outside Diameter of 11.88mm
+teeth = 28;			// Number of teeth, standard Mendel T5 belt = 8, gives Outside Diameter of 11.88mm
 profile = 12;		// 1=MXL 2=40DP 3=XL 4=H 5=T2.5 6=T5 7=T10 8=AT5 9=HTD_3mm 10=HTD_5mm 11=HTD_8mm 12=GT2_2mm 13=GT2_3mm 14=GT2_5mm
 
 motor_shaft = bearing_hold_diameter;	// NEMA17 motor shaft exact diameter = 5
@@ -37,9 +37,9 @@ m3_nut_flats = 5.7;	// normal M3 hex nut exact width = 5.5
 m3_nut_depth = 2.7;	// normal M3 hex nut exact depth = 2.4, nyloc = 4
 
 retainer = 1;		// Belt retainer above teeth, 0 = No, 1 = Yes
-retainer_ht = 0.5;	// height of retainer flange over pulley, standard = 1.5
+retainer_ht = 1;	// height of retainer flange over pulley, standard = 1.5
 idler = 1;			// Belt retainer below teeth, 0 = No, 1 = Yes
-idler_ht = 0.5;		// height of idler flange over pulley, standard = 1.5
+idler_ht = 1;		// height of idler flange over pulley, standard = 1.5
 
 pulley_t_ht = 7;	// length of toothed part of pulley, standard = 12
 pulley_b_ht = 0;		// pulley base height, standard = 8. Set to same as idler_ht if you want an idler but no pulley.
@@ -102,8 +102,8 @@ if ( profile == 12 ) {
             pulley ( "GT2 2mm" , GT2_2mm_pulley_dia , 0.764 , 1.494 ); 
             translate([0, 0, pulley_length - pulley_t_ht])
                 pulley ( "GT2 2mm" , GT2_2mm_pulley_dia , 0.764 , 1.494 );
-            translate([0, 0, pulley_t_ht])
-                cylinder(d=GT2_2mm_pulley_dia+1, h=pulley_length-2*pulley_t_ht, $fn=100);
+            translate([0, 0, pulley_t_ht + retainer_ht])
+                cylinder(d=GT2_2mm_pulley_dia+2*retainer_ht, h=pulley_length-2*pulley_t_ht - retainer_ht - idler_ht, $fn=100);
         }
         
         translate([0, 0, bearing_shift])
