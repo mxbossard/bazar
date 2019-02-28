@@ -18,6 +18,7 @@ piece_width =  30;
 piece_fixation_hole_diameter = 2;
 piece_fixation_hole_width = 6;
 piece_fixation_hole_side_shift = 4;
+bearing_hold_chamfer = 2;
 
 
 // ----- calculated -----
@@ -46,11 +47,21 @@ module piece() {
             translate([-1, piece_thickness, piece_thickness])
                 cube([piece_width + 2, regulator_thickness_slacked, regulator_width_slacked]);
             
-            // Bearing hole
+            // Bearing stop hole
             translate([piece_bearing_center_shift, -1, piece_height/2])
                 rotate([-90, 0, 0])
                     cylinder(d=bearing_hold_diameter, h=regulateur_thickness + 2*piece_thickness + 2);
             
+            // Bearing stop chamfer 1
+            translate([piece_bearing_center_shift, -1, piece_height/2])
+                rotate([-90, 0, 0])
+                    cylinder(d1=bearing_hold_diameter + 2*bearing_hold_chamfer, d2=0, h=bearing_hold_diameter/2);
+            
+            // Bearing stop chamfer 2
+            translate([piece_bearing_center_shift, piece_depth - bearing_hold_diameter/2 + 1, piece_height/2])
+                rotate([-90, 0, 0])
+                    cylinder(d2=bearing_hold_diameter + 2*bearing_hold_chamfer, d1=0, h=bearing_hold_diameter/2);
+                    
             // Fixation hole
             translate([piece_fixation_hole_side_shift, -1, piece_height/2])
                 rotate([-90, 0, 0])
