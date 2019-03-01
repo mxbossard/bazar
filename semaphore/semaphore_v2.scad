@@ -18,7 +18,7 @@ gap = 5;
 loose_slack = 0;
 tight_slack = -0.1;
 
-regulateur_length = 277; // Test à 277 pour des poulies à 28 dents. Originalement 276mm
+regulateur_length = 282; // Test à 282, 277 n'était vraiment pas suffisant pour des poulies à 28 dents. Originalement 276mm
 regulateur_width = 21;
 regulateur_thickness = 5;
 regulateur_oblong_holes_width = 8; // Width of indicator mounting holes in regulator.

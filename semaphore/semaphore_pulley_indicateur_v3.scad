@@ -31,7 +31,7 @@ tight_slack = 0.1;
 //fixation_hole_shift = 5;
 
 screw_diameter = 4 + 2*loose_slack;
-screw_head_embedment = 3;
+screw_head_embedment = 3.5;
 
 // tuneable constants
 
@@ -45,11 +45,11 @@ m3_nut_flats = 5.7;	// normal M3 hex nut exact width = 5.5
 m3_nut_depth = 2.7;	// normal M3 hex nut exact depth = 2.4, nyloc = 4
 
 retainer = 1;		// Belt retainer above teeth, 0 = No, 1 = Yes
-retainer_ht = 1;	// height of retainer flange over pulley, standard = 1.5
+retainer_ht = 0.5;	// height of retainer flange over pulley, standard = 1.5
 idler = 1;			// Belt retainer below teeth, 0 = No, 1 = Yes
 idler_ht = 0.5;		// height of idler flange over pulley, standard = 1.5
 
-pulley_t_ht = 7;	// length of toothed part of pulley, standard = 12
+pulley_t_ht = 6.5;	// length of toothed part of pulley, standard = 12
 pulley_b_ht = 0;		// pulley base height, standard = 8. Set to same as idler_ht if you want an idler but no pulley.
 pulley_b_dia = 18.5;	// pulley base diameter, standard = 20
 no_of_nuts = 0;		// number of captive nuts required, standard = 1
