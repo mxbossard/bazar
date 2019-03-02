@@ -28,7 +28,7 @@ indicateur_length = 120;
 indicateur_width = 18;
 indicateur_thickness = 5;
 
-mat_length = 390; // >> regulateur_length/2 + indicateur_length
+mat_length = 393 - 20; // >> regulateur_length/2 + indicateur_length
 mat_width = 25;
 mat_thickness = 5;
 mat_bottom_to_center_distance = 393; //mat_length - mat_width/2;
@@ -38,6 +38,7 @@ mat_fixation_hole_1_height = 10;
 mat_fixation_hole_2_height = 25;
 mat_fixation_hole_3_height = 40;
 mat_bearing_diameter = 13;
+mat_bearing_hold_diameter = mat_bearing_diameter - 2;
 
 bearing_diameter_slack = 2 * tight_slack;
 bearing_diameter = 13 + bearing_diameter_slack;
@@ -62,21 +63,19 @@ indicator_windowing_margin = 20;
 indicator_windowing_length = 90;
 indicator_window_border = 3.5;
 
+
+// Calculated
+mat_total_length = mat_bottom_to_center_distance + mat_end_width * sqrt(2) /4 + mat_end_width/2/sqrt(2)/1.8;
+
 module mat() {
     difference() {
         union() {
             // Mat
             cube([mat_length, mat_width, mat_thickness]);
             
-            translate([mat_bottom_to_center_distance + mat_end_width/4, mat_width/2, 0]) {
+            translate([mat_bottom_to_center_distance + mat_end_width/2/sqrt(2)/1.8, mat_width/2, 0]) {
                 // pseudo Labomedia logo end
-                rotate([0, 0, -45])
-                    translate([-mat_end_width/2, -mat_end_width/2, 0]) {
-                        union() {
-                            cube([mat_end_width, mat_end_width/2, mat_thickness]);
-                            cube([mat_end_width/2, mat_end_width, mat_thickness]);
-                        }
-                    }
+                mat_end(mat_bearing_diameter);
             }
         }
         
@@ -87,11 +86,37 @@ module mat() {
             cylinder(d=mat_fixation_hole_diameter + loose_slack, h=mat_thickness + 2);
         translate([mat_fixation_hole_3_height, mat_width/2, -1])
             cylinder(d=mat_fixation_hole_diameter + loose_slack, h=mat_thickness + 2);
-        
-        // Regulateur bearing hole
-        translate([mat_bottom_to_center_distance, mat_width/2, -1])
-            cylinder(d=mat_bearing_diameter + tight_slack, h=mat_thickness + 2);
     }
+}
+
+module labomedia_logo_end() {
+    // pseudo Labomedia logo end
+    rotate([0, 0, -45])
+        translate([-mat_end_width/2, -mat_end_width/2, 0]) {
+            union() {
+                cube([mat_end_width, mat_end_width/2, mat_thickness]);
+                cube([mat_end_width/2, mat_end_width, mat_thickness]);
+            }
+        }
+}
+
+module mat_end(bearing_diameter = 3) {
+    difference() {
+        labomedia_logo_end();
+        
+        // Bearing hole
+        translate([-mat_end_width/2/sqrt(2)/1.8, 0, -1])
+            cylinder(d=bearing_diameter + tight_slack, h=mat_thickness + 2);
+        
+        // Left fixation hole
+        translate([0, mat_end_width*sqrt(2)/4, -1])
+            cylinder(d=mat_fixation_hole_diameter + loose_slack, h=mat_thickness + 2);
+        
+        // Right fixation hole
+        translate([0, -mat_end_width*sqrt(2)/4, -1])
+            cylinder(d=mat_fixation_hole_diameter + loose_slack, h=mat_thickness + 2);
+    }
+        
 }
 
 module regulateur_3d() {
@@ -220,21 +245,35 @@ module indicateur_3d() {
 }
 
 module 3d() {
-    indicateur_3d();
-    translate([gap + indicateur_length, 0])
-        indicateur_3d();
-
-    translate([0,gap + indicateur_width]) {
-        regulateur_3d();
+//    indicateur_3d();
+//    translate([gap + indicateur_length, 0])
+//        indicateur_3d();
+//
+//    translate([0,gap + indicateur_width]) {
+//        regulateur_3d();
+//    
+//        translate([0,gap + regulateur_width])
+//            regulateur_3d();
+//    }
     
-        translate([0,gap + regulateur_width])
-            regulateur_3d();
+    mat();
+    
+    // 5 mat_end
+    translate([mat_end_width/4*sqrt(2)/2 + gap, mat_end_width*sqrt(2) / 2 + mat_width + gap, 0])
+    for ( i = [1 : 1 : 5]) {
+        translate([i * mat_end_width*sqrt(2)*3/4, 0, 0])
+            mat_end(mat_bearing_hold_diameter);
     }
+    
+    translate([mat_total_length, mat_end_width*sqrt(2) + mat_width + 2*gap, 0])
+        mirror()
+            mat();
 }
 
 if( mode == 1 ) {
-    //3d();
-    mat();
+    3d();
+    
+
 }
 
 if( mode == 2 ) {
