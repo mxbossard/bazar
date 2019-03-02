@@ -12,12 +12,13 @@ mount_fixation_hole_diameter = 4;
 
 nema_width = 42.3;
 nema_height = 42.3;
+nema_shaft_diameter = 25;
 nema_fixation_center_to_center_length = 31;
 nema_fixation_hole_diameter = 3;
 
 // calculated
 mount_width = nema_width + 2*mount_thickness + 2*mount_fixation_side_width + 2*loose_slack;
-mount_height = nema_height + mount_base_height + 2*loose_slack;
+mount_height = nema_height + mount_base_height + 1*loose_slack;
 nema_hole_to_border_length = (nema_width - nema_fixation_center_to_center_length) / 2;
 
 module nema17_mount() {
@@ -34,6 +35,11 @@ module nema17_mount() {
             translate([mount_fixation_side_width, 0, 0])
                 cube([nema_width + 2*mount_thickness + 2*loose_slack, mount_thickness, mount_height]);
         }
+        
+        // Shaft hole
+        translate([mount_width/2, -1, mount_height - nema_height/2])
+            rotate([-90, 0, 0])
+                cylinder(d=nema_shaft_diameter, h=mount_depth+2);
         
         // Nema fixation holes
         translate([mount_width/2 - nema_fixation_center_to_center_length/2, -1, mount_height - nema_hole_to_border_length]) {
