@@ -28,6 +28,17 @@ indicateur_length = 120;
 indicateur_width = 18;
 indicateur_thickness = 5;
 
+mat_length = 390; // >> regulateur_length/2 + indicateur_length
+mat_width = 25;
+mat_thickness = 5;
+mat_bottom_to_center_distance = 393; //mat_length - mat_width/2;
+mat_end_width = 64;
+mat_fixation_hole_diameter = 4;
+mat_fixation_hole_1_height = 10;
+mat_fixation_hole_2_height = 25;
+mat_fixation_hole_3_height = 40;
+mat_bearing_diameter = 13;
+
 bearing_diameter_slack = 2 * tight_slack;
 bearing_diameter = 13 + bearing_diameter_slack;
 bearing_hold_diameter = bearing_diameter - 2;
@@ -50,6 +61,38 @@ regulator_window_border = 5;
 indicator_windowing_margin = 20;
 indicator_windowing_length = 90;
 indicator_window_border = 3.5;
+
+module mat() {
+    difference() {
+        union() {
+            // Mat
+            cube([mat_length, mat_width, mat_thickness]);
+            
+            translate([mat_bottom_to_center_distance + mat_end_width/4, mat_width/2, 0]) {
+                // pseudo Labomedia logo end
+                rotate([0, 0, -45])
+                    translate([-mat_end_width/2, -mat_end_width/2, 0]) {
+                        union() {
+                            cube([mat_end_width, mat_end_width/2, mat_thickness]);
+                            cube([mat_end_width/2, mat_end_width, mat_thickness]);
+                        }
+                    }
+            }
+        }
+        
+        // Fixation holes
+        translate([mat_fixation_hole_1_height, mat_width/2, -1])
+            cylinder(d=mat_fixation_hole_diameter + loose_slack, h=mat_thickness + 2);
+        translate([mat_fixation_hole_2_height, mat_width/2, -1])
+            cylinder(d=mat_fixation_hole_diameter + loose_slack, h=mat_thickness + 2);
+        translate([mat_fixation_hole_3_height, mat_width/2, -1])
+            cylinder(d=mat_fixation_hole_diameter + loose_slack, h=mat_thickness + 2);
+        
+        // Regulateur bearing hole
+        translate([mat_bottom_to_center_distance, mat_width/2, -1])
+            cylinder(d=mat_bearing_diameter + tight_slack, h=mat_thickness + 2);
+    }
+}
 
 module regulateur_3d() {
     difference() {
@@ -190,7 +233,8 @@ module 3d() {
 }
 
 if( mode == 1 ) {
-    3d();
+    //3d();
+    mat();
 }
 
 if( mode == 2 ) {
