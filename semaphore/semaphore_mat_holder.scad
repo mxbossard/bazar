@@ -6,7 +6,7 @@ tight_slack = 0.1;
 mat_width = 30;
 mat_thickness = 5;
 mat_fixation_hole_diameter = 4;
-mat_base_fixation_hole_diameter = 8;
+mat_base_fixation_hole_diameter = 6;
 
 mat_holder_thickness = 8;
 mat_holder_width = 80;
