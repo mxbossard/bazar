@@ -8,7 +8,7 @@ mode = 1;
 // bearing_arrangement 2 => bearing inside regulator
 bearing_arrangement = 2;
 
-gap = 5;
+gap = 2;
 
 // slack config for 3d printing
 //loose_slack = 0.3;
@@ -28,11 +28,10 @@ indicateur_length = 120;
 indicateur_width = 18;
 indicateur_thickness = 5;
 
-mat_length = 393 - 20; // >> regulateur_length/2 + indicateur_length
-mat_width = 25;
+mat_width = 21;
 mat_thickness = 5;
 mat_bottom_to_center_distance = 393; //mat_length - mat_width/2;
-mat_end_width = 64;
+mat_end_width = 40;
 mat_fixation_hole_diameter = 4;
 mat_fixation_hole_1_height = 10;
 mat_fixation_hole_2_height = 25;
@@ -65,17 +64,21 @@ indicator_window_border = 3.5;
 
 
 // Calculated
-mat_total_length = mat_bottom_to_center_distance + mat_end_width * sqrt(2) /4 + mat_end_width/2/sqrt(2)/1.8;
+mat_total_length = mat_bottom_to_center_distance + mat_end_width/2*sqrt(2)*1/3 + mat_end_width/4*sqrt(2);
 
-module mat() {
+module mat(bearing_diameter = 5, length_shift = 0) {
+    echo(str("mat total length: ", mat_total_length + length_shift));
+    
+    mat_length = mat_bottom_to_center_distance - bearing_diameter/2;
+    
     difference() {
         union() {
             // Mat
             cube([mat_length, mat_width, mat_thickness]);
             
-            translate([mat_bottom_to_center_distance + mat_end_width/2/sqrt(2)/1.8, mat_width/2, 0]) {
+            translate([mat_bottom_to_center_distance, mat_width/2, 0]) {
                 // pseudo Labomedia logo end
-                mat_end(mat_bearing_diameter);
+                mat_end(bearing_diameter, length_shift);
             }
         }
         
@@ -100,12 +103,14 @@ module labomedia_logo_end() {
         }
 }
 
-module mat_end(bearing_diameter = 3) {
+module mat_end(bearing_diameter = 3, length_shift = 0) {
+    translate([mat_end_width/2*sqrt(2)*1/3 + length_shift, 0, 0])
     difference() {
         labomedia_logo_end();
         
         // Bearing hole
-        translate([-mat_end_width/2/sqrt(2)/1.8, 0, -1])
+        //translate([-mat_end_width/2/sqrt(2)/1.8, 0, -1])
+        translate([-mat_end_width/2*sqrt(2)*1/3 - length_shift, 0, -1])
             cylinder(d=bearing_diameter + tight_slack, h=mat_thickness + 2);
         
         // Left fixation hole
@@ -256,18 +261,34 @@ module 3d() {
 //            regulateur_3d();
 //    }
     
-    mat();
+    // 2x mat with bearing hole diameter
+    mat(mat_bearing_diameter, 2);
+    
+    translate([mat_total_length, mat_end_width + gap, 0])
+        mirror()
+            mat(mat_bearing_diameter, 2);
+    
+    // 3x mat with bearing hole hold diameter
+    
+    translate([0, 2*(mat_end_width + gap), 0])
+        mat(mat_bearing_hold_diameter, -3);
+        
+    translate([mat_total_length, 3*(mat_end_width + gap), 0])
+        mirror()
+            mat(mat_bearing_hold_diameter, -3);
+        
+    translate([0, 4*(mat_end_width + gap), 0])
+        mat(mat_bearing_hold_diameter, -3);
     
     // 5 mat_end
-    translate([mat_end_width/4*sqrt(2)/2 + gap, mat_end_width*sqrt(2) / 2 + mat_width + gap, 0])
-    for ( i = [1 : 1 : 5]) {
-        translate([i * mat_end_width*sqrt(2)*3/4, 0, 0])
-            mat_end(mat_bearing_hold_diameter);
-    }
-    
-    translate([mat_total_length, mat_end_width*sqrt(2) + mat_width + 2*gap, 0])
-        mirror()
-            mat();
+//    translate([mat_end_width/4*sqrt(2)/2 + gap, mat_end_width*sqrt(2) / 2 + mat_width + gap, 0])
+//    for ( i = [1 : 1 : 5]) {
+//        translate([i * mat_end_width*sqrt(2)*3/4, 0, 0])
+//            mat_end(mat_bearing_hold_diameter);
+//    }    
+//    translate([mat_total_length, mat_end_width*sqrt(2) + mat_width + 2*gap, 0])
+//        mirror()
+//            mat(mat_bearing_diameter);
 }
 
 if( mode == 1 ) {
