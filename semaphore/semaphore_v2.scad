@@ -30,7 +30,7 @@ indicateur_thickness = 5;
 
 mat_width = 21;
 mat_thickness = 5;
-mat_bottom_to_center_distance = 393; //mat_length - mat_width/2;
+mat_bottom_to_center_distance = 413; // previously 393, add 20mm to add tension on gt2 belt.
 mat_end_width = 40;
 mat_fixation_hole_diameter = 4;
 mat_fixation_hole_1_height = 10;
@@ -66,10 +66,12 @@ indicator_window_border = 3.5;
 // Calculated
 mat_total_length = mat_bottom_to_center_distance + mat_end_width/2*sqrt(2)*1/3 + mat_end_width/4*sqrt(2);
 
+function calculateMatLength(bearing_diameter) = (mat_bottom_to_center_distance - bearing_diameter/2);
+
 module mat(bearing_diameter = 5, length_shift = 0) {
     echo(str("mat total length: ", mat_total_length + length_shift));
     
-    mat_length = mat_bottom_to_center_distance - bearing_diameter/2;
+    mat_length = calculateMatLength(bearing_diameter);
     
     difference() {
         union() {
@@ -114,11 +116,11 @@ module mat_end(bearing_diameter = 3, length_shift = 0) {
             cylinder(d=bearing_diameter + tight_slack, h=mat_thickness + 2);
         
         // Left fixation hole
-        translate([0, mat_end_width*sqrt(2)/4, -1])
+        translate([- length_shift, mat_end_width*sqrt(2)/4, -1])
             cylinder(d=mat_fixation_hole_diameter + loose_slack, h=mat_thickness + 2);
         
         // Right fixation hole
-        translate([0, -mat_end_width*sqrt(2)/4, -1])
+        translate([- length_shift, -mat_end_width*sqrt(2)/4, -1])
             cylinder(d=mat_fixation_hole_diameter + loose_slack, h=mat_thickness + 2);
     }
         
@@ -262,22 +264,25 @@ module 3d() {
 //    }
     
     // 2x mat with bearing hole diameter
+    alignment_shift = calculateMatLength(bearing_diameter) - 5;
+    spacing_shift = mat_end_width/sqrt(2) + gap/2;
+    
     mat(mat_bearing_diameter, 2);
     
-    translate([mat_total_length, mat_end_width + gap, 0])
+    translate([alignment_shift, spacing_shift, 0])
         mirror()
             mat(mat_bearing_diameter, 2);
     
     // 3x mat with bearing hole hold diameter
     
-    translate([0, 2*(mat_end_width + gap), 0])
+    translate([0, 2*spacing_shift, 0])
         mat(mat_bearing_hold_diameter, -3);
         
-    translate([mat_total_length, 3*(mat_end_width + gap), 0])
+    translate([alignment_shift, 3*spacing_shift, 0])
         mirror()
             mat(mat_bearing_hold_diameter, -3);
         
-    translate([0, 4*(mat_end_width + gap), 0])
+    translate([0, 4*spacing_shift, 0])
         mat(mat_bearing_hold_diameter, -3);
     
     // 5 mat_end
