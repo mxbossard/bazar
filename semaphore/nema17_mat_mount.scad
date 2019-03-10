@@ -6,12 +6,12 @@ mode = 1; // 3D
 gap = 3;
 
 // Lasercut slack
-loose_slack = 0;
-tight_slack = -0.1;
+//loose_slack = 0;
+//tight_slack = -0.1;
 
 // 3D print slack
-//loose_slack = 0.3;
-//tight_slack = 0.1;
+loose_slack = 0.3;
+tight_slack = 0.1;
 
 mount_thickness = 5;
 mount_fixation_hole_diameter = 4;
@@ -78,16 +78,16 @@ module nema17_mount() {
         
         // Mount fixation holes
         translate([nema_width + mount_inter_space + mount_fixation_hole_border + mount_fixation_hole_diameter/2, mount_fixation_hole_border + mount_fixation_hole_diameter/2, -1])
-            cylinder(d=mount_fixation_hole_diameter, h=2*mount_thickness+2);
+            cylinder(d=mount_fixation_hole_diameter + 2*loose_slack, h=2*mount_thickness+2);
         
         translate([nema_width + mount_inter_space + mount_fixation_hole_border + mount_fixation_hole_diameter/2, nema_height - mount_fixation_hole_border - mount_fixation_hole_diameter/2, -1])
-            cylinder(d=mount_fixation_hole_diameter, h=2*mount_thickness+2);
+            cylinder(d=mount_fixation_hole_diameter + 2*loose_slack, h=2*mount_thickness+2);
         
         translate([mount_width - mount_fixation_hole_border - mount_fixation_hole_diameter/2, mount_fixation_hole_border + mount_fixation_hole_diameter/2, -1])
-            cylinder(d=mount_fixation_hole_diameter, h=2*mount_thickness+2);
+            cylinder(d=mount_fixation_hole_diameter + 2*loose_slack, h=2*mount_thickness+2);
         
         translate([mount_width - mount_fixation_hole_border - mount_fixation_hole_diameter/2, nema_height - mount_fixation_hole_border - mount_fixation_hole_diameter/2, -1])
-            cylinder(d=mount_fixation_hole_diameter, h=2*mount_thickness+2);
+            cylinder(d=mount_fixation_hole_diameter + 2*loose_slack, h=2*mount_thickness+2);
         
     }
     
@@ -112,9 +112,8 @@ module base_fixation_hole(length = 10) {
 module 3D() {
     nema17_mount();
 
-    translate([mount_width, mount_height + 2*mount_thickness + gap, 0])
-        mirror([1,0,0])
-            nema17_mount();
+    translate([0, mount_height + 2*mount_thickness + gap, 0])
+        nema17_mount();
 }
 
 if (mode == 1) {
