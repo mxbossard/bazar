@@ -1,11 +1,17 @@
 $fn=100;
 
-base_mode = 1; // Base fixation is inside the mount
-//base_mode = 2; // Base fixation is outside the mount
+mode = 1; // 3D
+//mode = 2; // 2D
 
+gap = 3;
 
-loose_slack = 0.3;
-tight_slack = 0.1;
+// Lasercut slack
+loose_slack = 0;
+tight_slack = -0.1;
+
+// 3D print slack
+//loose_slack = 0.3;
+//tight_slack = 0.1;
 
 mount_thickness = 5;
 mount_fixation_hole_diameter = 4;
@@ -19,7 +25,7 @@ belt_axe_to_axe_length = 450;
 
 nema_width = 42.3;
 nema_height = 42.3;
-nema_shaft_diameter = 30;
+nema_shaft_diameter = 28;
 nema_fixation_center_to_center_length = 31;
 nema_fixation_hole_diameter = 3;
 
@@ -103,8 +109,20 @@ module base_fixation_hole(length = 10) {
 }
 
 
-nema17_mount();
+module 3D() {
+    nema17_mount();
 
-translate([153, -60, 0])
-    mirror([1,0,0])
-        nema17_mount();
+    translate([mount_width, mount_height + 2*mount_thickness + gap, 0])
+        mirror([1,0,0])
+            nema17_mount();
+}
+
+if (mode == 1) {
+    3D();
+}
+
+if (mode == 2) {
+    projection() {
+        3D();
+    }
+}
