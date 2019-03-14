@@ -35,6 +35,51 @@ nema_hole_to_border_length = (nema_width - nema_fixation_center_to_center_length
 mount_width = nema_width + mount_inter_space + mat_width + mat_width_slack + 2*mount_fixation_hole_diameter + 2*mount_fixation_hole_border;
 mat_middle_x = nema_width + mount_inter_space + mat_width/2 + mount_fixation_hole_diameter + mount_fixation_hole_border;
 
+mount_backplane_width = mat_width + mat_width_slack + 2*mount_fixation_hole_diameter + 2*mount_fixation_hole_border;
+
+module nema17_spacer() {
+    difference() {
+        union() {
+            // Front holder
+            cube([nema_width, nema_height, mount_thickness]);
+        }
+        
+        // Shaft hole
+        translate([nema_width/2, nema_height/2, -1])
+                cylinder(d=nema_shaft_diameter, h=2*mount_thickness+2);
+        
+        // Nema fixation holes
+        translate([nema_width/2 - nema_fixation_center_to_center_length/2, mount_height - nema_hole_to_border_length, -1]) {
+            nema17_fixation_hole();
+            translate([0, -nema_fixation_center_to_center_length, 0])
+                nema17_fixation_hole();
+            translate([nema_fixation_center_to_center_length, 0, 0])
+                nema17_fixation_hole();
+            translate([nema_fixation_center_to_center_length, -nema_fixation_center_to_center_length, 0])
+                nema17_fixation_hole();
+        }
+    }
+}
+
+module nema17_backplane() {
+    difference() {
+        cube([mount_backplane_width, mount_height, mount_thickness]);
+        
+        // Mount fixation holes
+        translate([mount_fixation_hole_border + mount_fixation_hole_diameter/2, mount_fixation_hole_border + mount_fixation_hole_diameter/2, -1])
+            cylinder(d=mount_fixation_hole_diameter + 2*loose_slack, h=2*mount_thickness+2);
+        
+        translate([mount_fixation_hole_border + mount_fixation_hole_diameter/2, nema_height - mount_fixation_hole_border - mount_fixation_hole_diameter/2, -1])
+            cylinder(d=mount_fixation_hole_diameter + 2*loose_slack, h=2*mount_thickness+2);
+        
+        translate([mount_backplane_width - mount_fixation_hole_border - mount_fixation_hole_diameter/2, mount_fixation_hole_border + mount_fixation_hole_diameter/2, -1])
+            cylinder(d=mount_fixation_hole_diameter + 2*loose_slack, h=2*mount_thickness+2);
+        
+        translate([mount_backplane_width - mount_fixation_hole_border - mount_fixation_hole_diameter/2, nema_height - mount_fixation_hole_border - mount_fixation_hole_diameter/2, -1])
+            cylinder(d=mount_fixation_hole_diameter + 2*loose_slack, h=2*mount_thickness+2);
+    }
+}
+
 module nema17_mount() {
     difference() {
         union() {
@@ -109,19 +154,30 @@ module base_fixation_hole(length = 10) {
 }
 
 
-module 3D() {
+module mount_3D() {
     nema17_mount();
 
     translate([0, mount_height + 2*mount_thickness + gap, 0])
         nema17_mount();
+    
+    translate([-nema_width - mount_thickness - gap, 0, 0]) {
+        nema17_spacer();
+    
+        translate([0, mount_height + gap, 0])
+            nema17_spacer();
+    }
+    
+    translate([-nema_width - mount_thickness - mount_backplane_width - 2*gap, 0, 0])
+        nema17_backplane();
+    
 }
 
 if (mode == 1) {
-    3D();
+    mount_3D();
 }
 
 if (mode == 2) {
     projection() {
-        3D();
+        mount_3D();
     }
 }

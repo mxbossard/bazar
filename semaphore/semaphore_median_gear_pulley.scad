@@ -12,7 +12,7 @@ bearing_embedment = 5;
 
 n1 = 35; //red gear number of teeth
 mm_per_tooth = 4;
-thickness    = 5;
+thickness    = 6;
 hole         = 3;
 height       = 12;
 
@@ -43,12 +43,12 @@ difference() {
     }
 
     translate([0, 0, -1]) {
-        cylinder(d=bearing_diameter + tight_slack, h=bearing_embedment + 1 +  + loose_slack);
+        cylinder(d=bearing_diameter + 2*tight_slack, h=bearing_embedment + 1 +  + loose_slack);
         cylinder(d=bearing_hold_diameter, h= thickness + gt2Pulley_Thickness + 2);
     }
     
     translate([0, 0, thickness + gt2Pulley_Thickness - bearing_embedment])
-        cylinder(d=bearing_diameter + tight_slack, h=bearing_embedment + tight_slack + 1);
+        cylinder(d=bearing_diameter + 2*tight_slack, h=bearing_embedment + tight_slack + 1);
     
     
     

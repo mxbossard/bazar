@@ -12,13 +12,13 @@ bearing_hold_height = 2;
 
 n1 = 18; //red gear number of teeth
 mm_per_tooth = 4;
-thickness    = 5;
+thickness    = 6;
 hole         = 3;
 height       = 12;
 
 gt2PulleyThickness = 7.5;
 
-bridge_length = 6;
+bridge_length = 2.5;
 bridge_diameter = 19;
 
 module 35teethGear() {

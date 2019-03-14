@@ -28,10 +28,13 @@ indicateur_length = 120;
 indicateur_width = 18;
 indicateur_thickness = 5;
 
-mat_width = 21;
+mat_width = 20;
 mat_thickness = 5;
-mat_bottom_to_center_distance = 413; // previously 393, add 20mm to add tension on gt2 belt.
-mat_end_width = 40;
+mat_bottom_to_center_distance = 520; // previously 393mm on v1. 520mm on v2
+mat_axe_to_window_distance = 20;
+mat_window_length = 20;
+mat_window_width = 4;
+mat_end_width = 38; //40
 mat_fixation_hole_diameter = 4;
 mat_fixation_hole_1_height = 10;
 mat_fixation_hole_2_height = 25;
@@ -81,6 +84,16 @@ module mat(bearing_diameter = 5, length_shift = 0) {
             translate([mat_bottom_to_center_distance, mat_width/2, 0]) {
                 // pseudo Labomedia logo end
                 mat_end(bearing_diameter, length_shift);
+            }
+        }
+        
+        // Window
+        translate([mat_bottom_to_center_distance - mat_axe_to_window_distance, mat_width/2, -1]) {
+            hull() {
+                cylinder(d=mat_window_width + loose_slack, h=mat_thickness + 2);
+                
+                translate([-mat_window_length, 0, 0])
+                    cylinder(d=mat_window_width + loose_slack, h=mat_thickness + 2);
             }
         }
         
@@ -276,14 +289,14 @@ module 3d() {
     // 3x mat with bearing hole hold diameter
     
     translate([0, 2*spacing_shift, 0])
-        mat(mat_bearing_hold_diameter, -3);
+        mat(mat_bearing_hold_diameter, -2);
         
     translate([alignment_shift, 3*spacing_shift, 0])
         mirror()
-            mat(mat_bearing_hold_diameter, -3);
+            mat(mat_bearing_hold_diameter, -2);
         
     translate([0, 4*spacing_shift, 0])
-        mat(mat_bearing_hold_diameter, -3);
+        mat(mat_bearing_hold_diameter, -2);
     
     // 5 mat_end
 //    translate([mat_end_width/4*sqrt(2)/2 + gap, mat_end_width*sqrt(2) / 2 + mat_width + gap, 0])
