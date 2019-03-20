@@ -18,6 +18,9 @@ height       = 12;
 
 gt2Pulley_Thickness = 7.5;
 
+bridge_length = 1;
+bridge_diameter = 19;
+
 module 35teethGear() {
     translate([0, 0, thickness/2])
         color([1.00,0.75,0.75]) 
@@ -38,8 +41,11 @@ difference() {
     union() {
         35teethGear();
 
-        translate([0, 0, thickness])
+        translate([0, 0, thickness + bridge_length])
             clean28teethGt2Pulley();
+        
+        // Bridge
+        cylinder(d=bridge_diameter, h=thickness + bridge_length);
     }
 
     translate([0, 0, -1]) {

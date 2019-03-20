@@ -18,7 +18,7 @@ height       = 12;
 
 gt2PulleyThickness = 7.5;
 
-bridge_length = 2.5;
+bridge_length = 6.5;
 bridge_diameter = 19;
 
 module 35teethGear() {
