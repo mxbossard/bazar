@@ -6,9 +6,7 @@ use <publicDomainGearV1.1.scad>;
 loose_slack = 0.3;
 tight_slack = 0.1;
 
-bearing_diameter = 13;
-bearing_hold_diameter = bearing_diameter - 2;
-bearing_hold_height = 2;
+screw_diameter = 4;
 
 n1 = 18; //red gear number of teeth
 mm_per_tooth = 4;
@@ -19,7 +17,7 @@ height       = 12;
 gt2PulleyThickness = 7.5;
 
 bridge_length = 6.5;
-bridge_diameter = 19;
+bridge_diameter = 10;
 
 module 18teethGear() {
     translate([0, 0, thickness/2])
@@ -27,29 +25,16 @@ module 18teethGear() {
             gear(mm_per_tooth,n1,thickness,hole);
 }
 
-module 28teethGt2Pulley() {
-    include <./gt2_pulley_28_teeth.scad>;
-}
-
-module clean28teethGt2Pulley() {
-    translate([0, 0, 0.5])
-        28teethGt2Pulley();
-}
-
-
 difference() {
     union() {
         18teethGear();
 
-        translate([0, 0, thickness + bridge_length])
-            clean28teethGt2Pulley();
-        
         // Bridge
         cylinder(d=bridge_diameter, h=thickness + bridge_length);
     }
 
     translate([0, 0, -1]) {
-        cylinder(d=bearing_hold_diameter, h=thickness + bridge_length + gt2PulleyThickness + 2);
+        cylinder(d=screw_diameter + loose_slack, h=thickness + bridge_length + gt2PulleyThickness + 2);
     }
     
     translate([0, 0, bearing_hold_height])

@@ -264,18 +264,20 @@ module indicateur_3d() {
     }
 }
 
-module 3d() {
-//    indicateur_3d();
-//    translate([gap + indicateur_length, 0])
-//        indicateur_3d();
-//
-//    translate([0,gap + indicateur_width]) {
-//        regulateur_3d();
-//    
-//        translate([0,gap + regulateur_width])
-//            regulateur_3d();
-//    }
+module mobile_3d() {
+    indicateur_3d();
+    translate([gap + indicateur_length, 0])
+        indicateur_3d();
+
+    translate([0,gap + indicateur_width]) {
+        regulateur_3d();
     
+        translate([0,gap + regulateur_width])
+            regulateur_3d();
+    }
+}
+
+module mats_3d() { 
     // 2x mat with bearing hole diameter
     alignment_shift = calculateMatLength(bearing_diameter) - 5;
     spacing_shift = mat_end_width/sqrt(2) + gap/2;
@@ -285,9 +287,10 @@ module 3d() {
     translate([alignment_shift, spacing_shift, 0])
         mirror()
             mat(mat_bearing_diameter, 2);
-    
+}
+
+module mats_side_3d() {
     // 3x mat with bearing hole hold diameter
-    
     translate([0, 2*spacing_shift, 0])
         mat(mat_bearing_hold_diameter, -2);
         
@@ -296,22 +299,30 @@ module 3d() {
             mat(mat_bearing_hold_diameter, -2);
         
     translate([0, 4*spacing_shift, 0])
-        mat(mat_bearing_hold_diameter, -2);
+        mat(mat_bearing_hold_diameter, -2);   
+}
+
+module mats_ends_3d() {
+    mat_end(bearing_hold_diameter, -2);
     
-    // 5 mat_end
-//    translate([mat_end_width/4*sqrt(2)/2 + gap, mat_end_width*sqrt(2) / 2 + mat_width + gap, 0])
-//    for ( i = [1 : 1 : 5]) {
-//        translate([i * mat_end_width*sqrt(2)*3/4, 0, 0])
-//            mat_end(mat_bearing_hold_diameter);
-//    }    
-//    translate([mat_total_length, mat_end_width*sqrt(2) + mat_width + 2*gap, 0])
-//        mirror()
-//            mat(mat_bearing_diameter);
+    translate([mat_end_width, 0, 0]) {
+        mat_end(bearing_hold_diameter, -2);
+        
+        translate([mat_end_width, 0, 0]) {
+            mat_end(bearing_hold_diameter, -2);
+        }
+    }
+}
+
+module mats_x5_3d() { 
+    mats_3d();
+    translate([alignment_shift, spacing_shift, 0]) {
+        mats_side_3d();
+    }
 }
 
 if( mode == 1 ) {
-    3d();
-    
+    mats_ends_3d();
 
 }
 
