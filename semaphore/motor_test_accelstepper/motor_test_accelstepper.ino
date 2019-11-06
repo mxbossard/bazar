@@ -14,32 +14,36 @@ const int CNC_ENABLE_PIN = 8;
 const int STEP_REGUL_PIN = CNC_STEP_Y_PIN;
 const int DIR_REGUL_PIN = CNC_DIR_Y_PIN;
 
-const int STEP_INDICA_PIN = CNC_STEP_Z_PIN;
-const int DIR_INDICA_PIN = CNC_DIR_Z_PIN;
+const int STEP_A_INDIC_PIN = CNC_STEP_Z_PIN;
+const int DIR_A_INDIC_PIN = CNC_DIR_Z_PIN;
 
-const int STEP_INDICB_PIN = CNC_STEP_X_PIN;
-const int DIR_INDICB_PIN = CNC_DIR_X_PIN;
+const int STEP_B_INDIC_PIN = CNC_STEP_X_PIN;
+const int DIR_B_INDIC_PIN = CNC_DIR_X_PIN;
 
 const int MOTOR_ENABLE_PIN = CNC_ENABLE_PIN;
 
-const float STEPPER_REGUL_MAX_SPEED = 2000;
-const float STEPPER_INDIC_MAX_SPEED = 2000;
+const float STEPPER_REGUL_MAX_SPEED = 1000;
+const float STEPPER_INDIC_MAX_SPEED = 1000;
 
-const float STEPPER_REGUL_ACCELERATION = 4000;
-const float STEPPER_INDIC_ACCELERATION = 4000;
+const float STEPPER_REGUL_ACCELERATION = 200;
+const float STEPPER_INDIC_ACCELERATION = 200;
 
 
-const float REGUL_STEP_RATIO = 28.0 / 16;
+const float REGUL_STEP_RATIO = 1.0/2.5;//28.0 / 16;
 const uint16_t REGUL_STEP_COUNT = 800;
 const float REGUL_OFFSET = 0;
 
-const float INDICA_STEP_RATIO = 28.0 / 36;
-const uint16_t INDICA_STEP_COUNT = 800;
-const float INDICA_OFFSET = 0;
+const float A_INDIC_STEP_RATIO = 1.0/2.5;//28.0 / 36;
+const uint16_t A_INDIC_STEP_COUNT = 800;
+const float A_INDIC_OFFSET = 0;
 
-const float INDICB_STEP_RATIO = 28.0 / 16;
-const int16_t INDICB_STEP_COUNT = 800;
-const float INDICB_OFFSET = - 1.0 / 2;
+const float B_INDIC_STEP_RATIO = 1.0/2.5;//28.0 / 16;
+const int16_t B_INDIC_STEP_COUNT = 800;
+const float B_INDIC_OFFSET = 1.0 / 2;
+
+const uint16_t REGUL_STEP_PER_TOUR = REGUL_STEP_RATIO * REGUL_STEP_COUNT;
+const uint16_t A_INDIC_STEP_PER_TOUR = A_INDIC_STEP_RATIO * A_INDIC_STEP_COUNT;
+const uint16_t B_INDIC_STEP_PER_TOUR = B_INDIC_STEP_RATIO * B_INDIC_STEP_COUNT;
 
 /*
 const float RELATIVE_SYMBOL_A[3] = {0, 1.0/4, 1.0/4};
@@ -105,8 +109,8 @@ const float* RELATIVE_36_ALPHA_CHAPPE[36] = {RELATIVE_36_ALPHA_CHAPPE_A, RELATIV
 
 // Define some steppers and the pins the will use
 AccelStepper stepperRegulateur(AccelStepper::DRIVER, STEP_REGUL_PIN, DIR_REGUL_PIN);
-AccelStepper stepperIndicateurA(AccelStepper::DRIVER, STEP_INDICA_PIN, DIR_INDICA_PIN);
-AccelStepper stepperIndicateurB(AccelStepper::DRIVER, STEP_INDICB_PIN, DIR_INDICB_PIN);
+AccelStepper stepperIndicateurA(AccelStepper::DRIVER, STEP_A_INDIC_PIN, DIR_A_INDIC_PIN);
+AccelStepper stepperIndicateurB(AccelStepper::DRIVER, STEP_B_INDIC_PIN, DIR_B_INDIC_PIN);
 
 void setup() {
   // put your setup code here, to run once:
@@ -114,20 +118,20 @@ void setup() {
 
   pinMode(STEP_REGUL_PIN, OUTPUT);
   pinMode(DIR_REGUL_PIN, OUTPUT);
-  pinMode(STEP_INDICA_PIN, OUTPUT);
-  pinMode(DIR_INDICA_PIN, OUTPUT);
-  pinMode(STEP_INDICB_PIN, OUTPUT);
-  pinMode(DIR_INDICB_PIN, OUTPUT);
+  pinMode(STEP_A_INDIC_PIN, OUTPUT);
+  pinMode(DIR_A_INDIC_PIN, OUTPUT);
+  pinMode(STEP_B_INDIC_PIN, OUTPUT);
+  pinMode(DIR_B_INDIC_PIN, OUTPUT);
   pinMode(MOTOR_ENABLE_PIN, OUTPUT);
 
   pinMode(LED_BUILTIN, OUTPUT);
 
   digitalWrite(STEP_REGUL_PIN, LOW);
   digitalWrite(DIR_REGUL_PIN, LOW);
-  digitalWrite(STEP_INDICA_PIN, LOW);
-  digitalWrite(DIR_INDICA_PIN, LOW);
-  digitalWrite(STEP_INDICB_PIN, LOW);
-  digitalWrite(DIR_INDICB_PIN, LOW);
+  digitalWrite(STEP_A_INDIC_PIN, LOW);
+  digitalWrite(DIR_A_INDIC_PIN, LOW);
+  digitalWrite(STEP_B_INDIC_PIN, LOW);
+  digitalWrite(DIR_B_INDIC_PIN, LOW);
 
   // Disable motors
   digitalWrite(MOTOR_ENABLE_PIN, HIGH);
@@ -135,16 +139,22 @@ void setup() {
   stepperRegulateur.setMaxSpeed(STEPPER_REGUL_MAX_SPEED);
   stepperRegulateur.setAcceleration(STEPPER_REGUL_ACCELERATION);
   stepperRegulateur.setCurrentPosition(0);
-  stepperRegulateur.setPinsInverted(true);
+  stepperRegulateur.setPinsInverted(false);
 
   stepperIndicateurA.setMaxSpeed(STEPPER_INDIC_MAX_SPEED);
   stepperIndicateurA.setAcceleration(STEPPER_INDIC_ACCELERATION);
   stepperIndicateurA.setCurrentPosition(0);
+  stepperIndicateurB.setPinsInverted(true);
 
   stepperIndicateurB.setMaxSpeed(STEPPER_INDIC_MAX_SPEED);
   stepperIndicateurB.setAcceleration(STEPPER_INDIC_ACCELERATION);
   stepperIndicateurB.setCurrentPosition(0);
-  stepperIndicateurB.setPinsInverted(true);
+  stepperIndicateurB.setPinsInverted(false);
+
+  // Setup steppers offsets
+  stepperRegulateur.setCurrentPosition(REGUL_OFFSET * REGUL_STEP_PER_TOUR);
+  stepperIndicateurA.setCurrentPosition(A_INDIC_OFFSET * A_INDIC_STEP_PER_TOUR);
+  stepperIndicateurB.setCurrentPosition(B_INDIC_OFFSET * B_INDIC_STEP_PER_TOUR);
 
   randomSeed(analogRead(0));
 }
@@ -164,11 +174,11 @@ void disableMotors() {
 
 void _naiveMoveTo(int16_t regulPos, int16_t indicAPos, int16_t indicBPos) {
   stepperRegulateur.moveTo(regulPos);
-  stepperIndicateurA.move(indicAPos);
+  stepperIndicateurA.moveTo(indicAPos);
   stepperIndicateurB.moveTo(indicBPos);
 }
 
-int32_t calcShortestDistance(int32_t currentPosition, int32_t positionToGo, int16_t stepCountPerTour) {
+int16_t calcShortestDistance(int32_t currentPosition, int32_t positionToGo, int16_t stepCountPerTour) {
   // FIXME it seem there is some move in chappe alphabet which are not shortest (ex between S and T).
   
   // Calculate shortest move for Indicator A
@@ -177,12 +187,12 @@ int32_t calcShortestDistance(int32_t currentPosition, int32_t positionToGo, int1
   if (distance < 0) {
     reducedDistance = -1 * reducedDistance;
   }
-  int32_t minDistance = reducedDistance;
+  int16_t minDistance = reducedDistance;
   if (reducedDistance > 1.0/2 * stepCountPerTour) {
-    minDistance = reducedDistance - stepCountPerTour;
+    minDistance = - stepCountPerTour + reducedDistance;
   }
   else if (reducedDistance < -1.0/2 * stepCountPerTour) {
-    minDistance = stepCountPerTour - reducedDistance;
+    minDistance = stepCountPerTour + reducedDistance;
   }
 
   //Serial.println("indicADistance: " + String(indicADistance, DEC) + ", stepPerIndicATour: " + String(stepPerIndicATour, DEC) + ", indicAReducedDistance: " + String(indicAReducedDistance, DEC) + ", indicAMinDistance:" + String(indicAMinDistance, DEC) + "");
@@ -192,39 +202,75 @@ int32_t calcShortestDistance(int32_t currentPosition, int32_t positionToGo, int1
 
 void _shortestPathMoveTo(int32_t regulPos, int32_t indicAPos, int32_t indicBPos) {
   // TODO calc shortest path for regulator
+
+  int32_t currentRegulPos = stepperRegulateur.currentPosition();
+  int32_t currentIndicAPos = stepperIndicateurA.currentPosition();
+  int32_t currentIndicBPos = stepperIndicateurB.currentPosition();
   
-  stepperRegulateur.moveTo(regulPos);
-  stepperIndicateurA.move(calcShortestDistance(stepperIndicateurA.currentPosition(), indicAPos, INDICA_STEP_RATIO * INDICA_STEP_COUNT));
-  stepperIndicateurB.move(calcShortestDistance(stepperIndicateurB.currentPosition(), indicBPos, INDICB_STEP_RATIO * INDICB_STEP_COUNT));
+  int16_t regulShortestDistance = calcShortestDistance(currentRegulPos, regulPos, REGUL_STEP_RATIO * REGUL_STEP_COUNT * 1.0/2); // Half step count per tour for the regulator because it returns in position after half a tour but in reverse state.
+  uint16_t regulStepCountPerTour = REGUL_STEP_RATIO * REGUL_STEP_COUNT;
+
+  // normalizedCurrentRegulPos range between 0 and regulStepCountPerTour for a complete regulator tour.
+  int16_t normalizedCurrentRegulPos = 0;
+  if (currentRegulPos >= 0) {
+    normalizedCurrentRegulPos = currentRegulPos % regulStepCountPerTour;
+  } else {
+    normalizedCurrentRegulPos = regulStepCountPerTour - (abs(currentRegulPos) % regulStepCountPerTour);
+  }
+  
+  if (normalizedCurrentRegulPos > 1.0/4 * regulStepCountPerTour && normalizedCurrentRegulPos <= 3.0/4 * regulStepCountPerTour) {
+    // Regulator is in a reverse state. So Indicator A is left or bottom.
+    //Serial.println("Regulator in reverse state.");
+    //Serial.println("Before swap Indic A pos: " + String(indicAPos, DEC) + " ; Indic B pos: " + String(indicBPos, DEC));
+    // Swap indicator A and B
+    int32_t tempA = indicAPos;
+    // Offset of each indicator is included so we need to remove and reinclude it.
+    
+    indicAPos = A_INDIC_STEP_RATIO * A_INDIC_STEP_COUNT * ((float) indicBPos / (B_INDIC_STEP_RATIO * B_INDIC_STEP_COUNT));
+    indicBPos = B_INDIC_STEP_RATIO * B_INDIC_STEP_COUNT * ((float) tempA / (A_INDIC_STEP_RATIO * A_INDIC_STEP_COUNT));
+
+    Serial.println("After swap Indic A pos: " + String(indicAPos, DEC) + " ; Indic B pos: " + String(indicBPos, DEC));
+  }
+
+  int16_t indicAShortestDistance = calcShortestDistance(currentIndicAPos, indicAPos, A_INDIC_STEP_RATIO * A_INDIC_STEP_COUNT);
+  int16_t indicBShortestDistance = calcShortestDistance(currentIndicBPos, indicBPos, B_INDIC_STEP_RATIO * B_INDIC_STEP_COUNT);
+
+  //int32_t regulatorDistance = regulPos - stepperRegulateur.currentPosition();
+  //stepperRegulateur.move(regulatorDistance);
+  stepperRegulateur.move(regulShortestDistance);
+  stepperIndicateurA.move(indicAShortestDistance);
+  stepperIndicateurB.move(indicBShortestDistance);
 }
 
 void _oneRandomPathMoveTo(int32_t regulPos, int32_t indicAPos, int32_t indicBPos) {
   // TODO calc shortest path for regulator
 
-  int randExtraLoop = random(0,3);
-  
-  stepperRegulateur.moveTo(regulPos + REGUL_STEP_RATIO * REGUL_STEP_COUNT * randExtraLoop);
-  stepperIndicateurA.move(calcShortestDistance(stepperIndicateurA.currentPosition(), indicAPos, INDICA_STEP_RATIO * INDICA_STEP_COUNT) + INDICA_STEP_RATIO * INDICA_STEP_COUNT * randExtraLoop);
-  stepperIndicateurB.move(calcShortestDistance(stepperIndicateurB.currentPosition(), indicBPos, INDICB_STEP_RATIO * INDICB_STEP_COUNT) + INDICB_STEP_RATIO * INDICB_STEP_COUNT * randExtraLoop);
+  int randExtraLoop = random(-3, 3);
+
+  int32_t regulatorDistance = regulPos - stepperRegulateur.currentPosition();
+  stepperRegulateur.move(regulatorDistance + REGUL_STEP_RATIO * REGUL_STEP_COUNT * randExtraLoop);
+  stepperIndicateurA.move(calcShortestDistance(stepperIndicateurA.currentPosition(), indicAPos, A_INDIC_STEP_RATIO * A_INDIC_STEP_COUNT) + A_INDIC_STEP_RATIO * A_INDIC_STEP_COUNT * randExtraLoop);
+  stepperIndicateurB.move(calcShortestDistance(stepperIndicateurB.currentPosition(), indicBPos, B_INDIC_STEP_RATIO * B_INDIC_STEP_COUNT) + B_INDIC_STEP_RATIO * B_INDIC_STEP_COUNT * randExtraLoop);
 }
 
 void _allRandomPathMoveTo(int32_t regulPos, int32_t indicAPos, int32_t indicBPos) {
   // TODO calc shortest path for regulator
   
-  stepperRegulateur.moveTo(regulPos + REGUL_STEP_RATIO * REGUL_STEP_COUNT * random(0,3));
-  stepperIndicateurA.move(calcShortestDistance(stepperIndicateurA.currentPosition(), indicAPos, INDICA_STEP_RATIO * INDICA_STEP_COUNT) + INDICA_STEP_RATIO * INDICA_STEP_COUNT * random(0,3));
-  stepperIndicateurB.move(calcShortestDistance(stepperIndicateurB.currentPosition(), indicBPos, INDICB_STEP_RATIO * INDICB_STEP_COUNT) + INDICB_STEP_RATIO * INDICB_STEP_COUNT * random(0,3));
+  int32_t regulatorDistance = regulPos - stepperRegulateur.currentPosition();
+  stepperRegulateur.move(regulatorDistance + REGUL_STEP_RATIO * REGUL_STEP_COUNT * random(-3, 3));
+  stepperIndicateurA.move(calcShortestDistance(stepperIndicateurA.currentPosition(), indicAPos, A_INDIC_STEP_RATIO * A_INDIC_STEP_COUNT) + A_INDIC_STEP_RATIO * A_INDIC_STEP_COUNT * random(-3, 3));
+  stepperIndicateurB.move(calcShortestDistance(stepperIndicateurB.currentPosition(), indicBPos, B_INDIC_STEP_RATIO * B_INDIC_STEP_COUNT) + B_INDIC_STEP_RATIO * B_INDIC_STEP_COUNT * random(-3, 3));
 }
 
 
 void moveToSymbol(float symbol[3]) {
-  //Serial.println("Symbol: (" + String(symbol[0], DEC) + ", " + String(symbol[1], DEC) + ", " + String(symbol[2], DEC) + ")");
-  
-  int16_t regulPos = (float) REGUL_STEP_COUNT * (symbol[0] + REGUL_OFFSET) * REGUL_STEP_RATIO;
-  int16_t indicAPos = (float) INDICA_STEP_COUNT * (symbol[1] + INDICA_OFFSET) * INDICA_STEP_RATIO;
-  int16_t indicBPos = (float) INDICB_STEP_COUNT * (symbol[2] + INDICB_OFFSET) * INDICB_STEP_RATIO;
+  Serial.println("Symbol: (" + String(symbol[0], DEC) + ", " + String(symbol[1], DEC) + ", " + String(symbol[2], DEC) + ")");
 
-  //Serial.println("Move to: (" + String(regulPos, DEC) + ", " + String(indicAPos, DEC) + ", " + String(indicBPos, DEC) + ")");
+  int16_t regulPos = (float) REGUL_STEP_COUNT * symbol[0] * REGUL_STEP_RATIO;
+  int16_t indicAPos = (float) A_INDIC_STEP_COUNT * symbol[1] * A_INDIC_STEP_RATIO;
+  int16_t indicBPos = (float) B_INDIC_STEP_COUNT * symbol[2] * B_INDIC_STEP_RATIO;
+
+  Serial.println("Move to: (" + String(regulPos, DEC) + ", " + String(indicAPos, DEC) + ", " + String(indicBPos, DEC) + ")");
 
   //_naiveMoveTo(regulPos, indicAPos, indicBPos);
   //_shortestPathMoveTo(regulPos, indicAPos, indicBPos);
@@ -249,6 +295,142 @@ void moveToSymbol(float symbol[3]) {
   }
 }
 
+void blockUntilStepperMoveEnd() {
+  uint16_t stepToGo = max(abs(stepperRegulateur.distanceToGo()), abs(stepperIndicateurA.distanceToGo()));
+  stepToGo = max(stepToGo, abs(stepperIndicateurB.distanceToGo()));
+
+  // Fastest way to call run() a reasonable amount of time ?
+  for(uint16_t k = 0 ; k < stepToGo ; k++) {
+    stepperRegulateur.run();
+    stepperIndicateurA.run();
+    stepperIndicateurB.run();
+  }
+
+  // Go on calling run() just in case
+  while(stepperRegulateur.isRunning() || stepperIndicateurA.isRunning() || stepperIndicateurB.isRunning()) {
+    stepperRegulateur.run();
+    stepperIndicateurA.run();
+    stepperIndicateurB.run();
+  }
+
+  boxStepperPosition();
+}
+
+void moveSemaphoreByRelativeAngle(float regulAngle, float aIndicAngle, float bIndicAngle) {
+  Serial.println("moveSemaphoreByRelativeAngle ; regulAngle: " + String(regulAngle, DEC) + " ; aIndicAngle: " + String(aIndicAngle, DEC) + " ; bIndicAngle: " + String(bIndicAngle, DEC));
+  int32_t regulStepCount = regulAngle * REGUL_STEP_PER_TOUR;
+  int32_t aIndicStepCount = aIndicAngle * A_INDIC_STEP_PER_TOUR;
+  int32_t bIndicStepCount = bIndicAngle * B_INDIC_STEP_PER_TOUR;
+  Serial.println("moveSemaphoreByRelativeAngle ; regulStepCount: " + String(regulStepCount, DEC) + " ; aIndicStepCount: " + String(aIndicStepCount, DEC) + " ; bIndicStepCount: " + String(bIndicStepCount, DEC));
+  
+  stepperRegulateur.move(regulStepCount);
+  stepperIndicateurA.move(aIndicStepCount);
+  stepperIndicateurB.move(bIndicStepCount);
+
+  blockUntilStepperMoveEnd();
+
+  Serial.println("moveSemaphoreByRelativeAngle movedTo: regulPosition= " + String(stepperRegulateur.currentPosition(), DEC) + " ; indicAposition= " + String(stepperIndicateurA.currentPosition(), DEC) + " ; indicBposition= " + String(stepperIndicateurB.currentPosition(), DEC));
+}
+
+float extractDecimalPart(float number) {
+  int32_t integerPart = number;
+  return number - integerPart;
+}
+
+void moveSemaphoreToAbsoluteAngle(float regulAngle, float aIndicAngle, float bIndicAngle) {
+  Serial.println("moveSemaphoreToAbsoluteAngle ; regulAngle: " + String(regulAngle, DEC) + " ; aIndicAngle: " + String(aIndicAngle, DEC) + " ; bIndicAngle: " + String(bIndicAngle, DEC));
+  int32_t regulStepPosition = regulAngle * REGUL_STEP_PER_TOUR;
+  int32_t aIndicStepPosition = aIndicAngle * A_INDIC_STEP_PER_TOUR;
+  int32_t bIndicStepPosition = bIndicAngle * B_INDIC_STEP_PER_TOUR;
+
+  stepperRegulateur.moveTo(regulStepPosition);
+  stepperIndicateurA.moveTo(aIndicStepPosition);
+  stepperIndicateurB.moveTo(bIndicStepPosition);
+
+  blockUntilStepperMoveEnd();
+
+  Serial.println("moveSemaphoreToAbsoluteAngle movedTo: regulPosition= " + String(stepperRegulateur.currentPosition(), DEC) + " ; indicAposition= " + String(stepperIndicateurA.currentPosition(), DEC) + " ; indicBposition= " + String(stepperIndicateurB.currentPosition(), DEC));
+}
+
+bool isRegulatorInReverseState() {
+  return willRegulatorEndInReverseState(0.0);
+}
+
+bool willRegulatorEndInReverseState(float regulRelativeAngle) {
+  int32_t regulStepCount = regulRelativeAngle * REGUL_STEP_PER_TOUR;
+
+  int32_t regulateurEndPosition = stepperRegulateur.currentPosition() + regulStepCount;
+
+  // 0 <= boxedRegulateurEndPosition < REGUL_STEP_PER_TOUR
+  uint16_t boxedRegulateurEndPosition = 0;
+  if (regulateurEndPosition < 0) {
+    boxedRegulateurEndPosition = REGUL_STEP_PER_TOUR - (abs(regulateurEndPosition) % REGUL_STEP_PER_TOUR);
+  } else {
+    boxedRegulateurEndPosition = regulateurEndPosition % REGUL_STEP_PER_TOUR;
+  }
+
+  if (boxedRegulateurEndPosition < 1.0/4 * REGUL_STEP_PER_TOUR || boxedRegulateurEndPosition >= 3.0/4 * REGUL_STEP_PER_TOUR) {
+    return false;
+  }
+  return true;
+}
+
+// Calculate the shortest angle move between 2 float angles with : -maxAngularMove < shortestAngularMove <= maxAngularMove
+float calculateShortestAngularMove(float angle1, float angle2, float maxAngularMove) {
+  float distance = extractDecimalPart(angle2 - angle1);
+
+  while (distance <= -maxAngularMove) {
+    distance = distance + maxAngularMove * 2;
+  }
+  while (distance >= maxAngularMove) {
+    distance = distance - maxAngularMove * 2;
+  }
+
+  //Serial.println("calculateShortestAngularMove: angle1= " + String(angle1, DEC) + " ; angle2= " + String(angle2, DEC) + " ; maxAngularMove= " + String(maxAngularMove, DEC) + " => distance= " + String(distance, DEC));
+
+  return distance;
+}
+
+void calculateSymbolShortestAngularMove(float symbol1[3], float symbol2[3], float symbolMove[3]) {
+
+  float shortestRegulMove = calculateShortestAngularMove(symbol1[0], symbol2[0], 1.0/4);
+  float shortestAIndicMove = 0.0;
+  float shortestBIndicMove = 0.0;
+  
+  if(!isRegulatorInReverseState() && !willRegulatorEndInReverseState(shortestRegulMove)) {
+    // Stay in normal state
+    shortestAIndicMove = calculateShortestAngularMove(symbol1[1], symbol2[1], 1.0/2);
+    shortestBIndicMove = calculateShortestAngularMove(symbol1[2], symbol2[2], 1.0/2);
+    Serial.println("Regulator stay in normal state ; shortestRegulMove: " + String(shortestRegulMove, DEC) + " ; shortestAIndicMove: " + String(shortestAIndicMove, DEC) + " ; shortestBIndicMove: " + String(shortestBIndicMove, DEC));
+  } else if (!isRegulatorInReverseState() && willRegulatorEndInReverseState(shortestRegulMove)) {
+    // Not in reverse state but will be in reverse state after move
+    shortestAIndicMove = calculateShortestAngularMove(symbol1[2], symbol2[1], 1.0/2);
+    shortestBIndicMove = calculateShortestAngularMove(symbol1[1], symbol2[2], 1.0/2);
+    Serial.println("Regulator enter in reverse state ; shortestRegulMove: " + String(shortestRegulMove, DEC) + " ; shortestAIndicMove: " + String(shortestAIndicMove, DEC) + " ; shortestBIndicMove: " + String(shortestBIndicMove, DEC));
+  } else if (isRegulatorInReverseState() && willRegulatorEndInReverseState(shortestRegulMove)) {
+    // Stay in reverse state
+    shortestAIndicMove = calculateShortestAngularMove(symbol1[2], symbol2[2], 1.0/2);
+    shortestBIndicMove = calculateShortestAngularMove(symbol1[1], symbol2[1], 1.0/2);
+    Serial.println("Regulator stay in reverse state ; shortestRegulMove: " + String(shortestRegulMove, DEC) + " ; shortestAIndicMove: " + String(shortestAIndicMove, DEC) + " ; shortestBIndicMove: " + String(shortestBIndicMove, DEC));
+  } else {
+    // Come back to normal state
+    shortestAIndicMove = calculateShortestAngularMove(symbol1[1], symbol2[2], 1.0/2);
+    shortestBIndicMove = calculateShortestAngularMove(symbol1[2], symbol2[1], 1.0/2);
+    Serial.println("Regulator enter in normal state ; shortestRegulMove: " + String(shortestRegulMove, DEC) + " ; shortestAIndicMove: " + String(shortestAIndicMove, DEC) + " ; shortestBIndicMove: " + String(shortestBIndicMove, DEC));
+  }
+
+  symbolMove[0] = shortestRegulMove;
+  symbolMove[1] = shortestAIndicMove;
+  symbolMove[2] = shortestBIndicMove;
+}
+
+void displaySemaphoreSymbol(float symbol[]) {
+    // symbol is made of absolute angles
+    
+    
+}
+
+
 void testSemaphore() {
   enableMotors();
 
@@ -265,9 +447,46 @@ void testSemaphore() {
   //disableMotors();
 }
 
+void boxStepperPosition() {
+  int32_t regulPos = stepperRegulateur.currentPosition();
+  if (regulPos < 0) {
+    stepperRegulateur.setCurrentPosition(REGUL_STEP_PER_TOUR - abs(regulPos) % REGUL_STEP_PER_TOUR);
+  } else {
+    stepperRegulateur.setCurrentPosition(regulPos % REGUL_STEP_PER_TOUR);
+  }
+
+  int32_t aIndicPos = stepperIndicateurA.currentPosition();
+  if (aIndicPos < 0) {
+    stepperIndicateurA.setCurrentPosition(A_INDIC_STEP_PER_TOUR - abs(aIndicPos) % A_INDIC_STEP_PER_TOUR);
+  } else {
+    stepperIndicateurA.setCurrentPosition(aIndicPos % A_INDIC_STEP_PER_TOUR);
+  }
+
+  int32_t bIndicPos = stepperIndicateurB.currentPosition();
+  if (bIndicPos < 0) {
+    stepperIndicateurB.setCurrentPosition(A_INDIC_STEP_PER_TOUR - abs(bIndicPos) % B_INDIC_STEP_PER_TOUR);
+  } else {
+    stepperIndicateurB.setCurrentPosition(bIndicPos % B_INDIC_STEP_PER_TOUR);
+  }
+  
+}
+
 void listChappeAlphabet() {
   enableMotors();
 
+  float previousSymbol[3] = {(float)stepperRegulateur.currentPosition()/REGUL_STEP_PER_TOUR, (float)stepperIndicateurA.currentPosition()/A_INDIC_STEP_PER_TOUR, (float)stepperIndicateurB.currentPosition()/B_INDIC_STEP_PER_TOUR};
+  float symbolMove[3] = {0, 0, 0};
+
+  /*
+  for (int k = 0; k < 36 ; k++) {
+    calculateSymbolShortestAngularMove(previousSymbol, RELATIVE_36_ALPHA_CHAPPE[k], symbolMove);
+    moveSemaphoreByRelativeAngle(symbolMove[0], symbolMove[1], symbolMove[2]);
+
+    memcpy(previousSymbol, RELATIVE_36_ALPHA_CHAPPE[k], 3*sizeof(previousSymbol[0]));
+    delay(2000);
+  }
+  */
+  
   for (int k = 0; k < 36 ; k++) {
     moveToSymbol(RELATIVE_36_ALPHA_CHAPPE[k]);
     delay(2000);
