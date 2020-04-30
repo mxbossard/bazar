@@ -4,7 +4,7 @@ $fn = 200;
 // Mode 2 => 2D
 // Mode 3 => Tests 3D
 // Mode 4 => Rondelle
-mode = 2;
+mode = 1;
 
 gap = 5;
 

@@ -18,36 +18,56 @@
  */
 
 
+bearing_diameter_slack = 0.4;
+bearing_diameter = 13 + bearing_diameter_slack;
+bearing_hold_diameter = bearing_diameter - 2;
+//bearing_width = 5.2;
+bearing_embedment = 5.4;
+
+pulley_length = 30;
+fixation_hole_diameter = 3.5;
+fixation_hole_shift = 5;
+
 // tuneable constants
 
-teeth = 8;			// Number of teeth, standard Mendel T5 belt = 8, gives Outside Diameter of 11.88mm
-profile = 6;		// 1=MXL 2=40DP 3=XL 4=H 5=T2.5 6=T5 7=T10 8=AT5 9=HTD_3mm 10=HTD_5mm 11=HTD_8mm 12=GT2_2mm 13=GT2_3mm 14=GT2_5mm
+teeth = 28;			// Number of teeth, standard Mendel T5 belt = 8, gives Outside Diameter of 11.88mm
+profile = 12;		// 1=MXL 2=40DP 3=XL 4=H 5=T2.5 6=T5 7=T10 8=AT5 9=HTD_3mm 10=HTD_5mm 11=HTD_8mm 12=GT2_2mm 13=GT2_3mm 14=GT2_5mm
 
-motor_shaft = 5.2;	// NEMA17 motor shaft exact diameter = 5
+motor_shaft = bearing_hold_diameter;	// NEMA17 motor shaft exact diameter = 5
 m3_dia = 3.2;		// 3mm hole diameter
 m3_nut_hex = 1;		// 1 for hex, 0 for square nut
 m3_nut_flats = 5.7;	// normal M3 hex nut exact width = 5.5
 m3_nut_depth = 2.7;	// normal M3 hex nut exact depth = 2.4, nyloc = 4
 
-retainer = 0;		// Belt retainer above teeth, 0 = No, 1 = Yes
-retainer_ht = 1.5;	// height of retainer flange over pulley, standard = 1.5
-idler = 0;			// Belt retainer below teeth, 0 = No, 1 = Yes
-idler_ht = 1.5;		// height of idler flange over pulley, standard = 1.5
+retainer = 1;		// Belt retainer above teeth, 0 = No, 1 = Yes
+retainer_ht = 1;	// height of retainer flange over pulley, standard = 1.5
+idler = 1;			// Belt retainer below teeth, 0 = No, 1 = Yes
+idler_ht = 0.5;		// height of idler flange over pulley, standard = 1.5
 
-pulley_t_ht = 12;	// length of toothed part of pulley, standard = 12
-pulley_b_ht = 8;		// pulley base height, standard = 8. Set to same as idler_ht if you want an idler but no pulley.
-pulley_b_dia = 20;	// pulley base diameter, standard = 20
-no_of_nuts = 1;		// number of captive nuts required, standard = 1
+pulley_t_ht = 7;	// length of toothed part of pulley, standard = 12
+pulley_b_ht = 3;		// pulley base height, standard = 8. Set to same as idler_ht if you want an idler but no pulley.
+pulley_b_dia = 18.5;	// pulley base diameter, standard = 20
+no_of_nuts = 0;		// number of captive nuts required, standard = 1
 nut_angle = 90;		// angle between nuts, standard = 90
 nut_shaft_distance = 1.2;	// distance between inner face of nut and shaft, can be negative.
 
+total_ht = pulley_t_ht + pulley_b_ht;
+if ( retainer == 1 ) {
+    total_ht = total_ht +retainer_ht;
+}
+
+if ( idler == 1 ) {
+    total_ht = total_ht + idler_ht;
+}
+
+echo (str("Total heigth: ", total_ht));
 
 //	********************************
 //	** Scaling tooth for good fit **
 //	********************************
 /*	To improve fit of belt to pulley, set the following constant. Decrease or increase by 0.1mm at a time. We are modelling the *BELT* tooth here, not the tooth on the pulley. Increasing the number will *decrease* the pulley tooth size. Increasing the tooth width will also scale proportionately the tooth depth, to maintain the shape of the tooth, and increase how far into the pulley the tooth is indented. Can be negative */
 
-additional_tooth_width = 0.2; //mm
+additional_tooth_width = -0.2; //mm
 
 //	If you need more tooth depth than this provides, adjust the following constant. However, this will cause the shape of the tooth to change.
 
@@ -88,7 +108,33 @@ if ( profile == 8 ) { pulley ( "AT5" , AT5_pulley_dia , 1.19 , 4.268 ); }
 if ( profile == 9 ) { pulley ( "HTD 3mm" , HTD_3mm_pulley_dia , 1.289 , 2.27 ); }
 if ( profile == 10 ) { pulley ( "HTD 5mm" , HTD_5mm_pulley_dia , 2.199 , 3.781 ); }
 if ( profile == 11 ) { pulley ( "HTD 8mm" , HTD_8mm_pulley_dia , 3.607 , 6.603 ); }
-if ( profile == 12 ) { pulley ( "GT2 2mm" , GT2_2mm_pulley_dia , 0.764 , 1.494 ); }
+if ( profile == 12 ) { 
+    
+    difference() {
+        union() {
+            pulley ( "GT2 2mm" , GT2_2mm_pulley_dia , 0.764 , 1.494 ); 
+            translate([-pulley_b_dia/2, 0, 0])
+                cube([pulley_b_dia, pulley_length - pulley_b_dia/2, pulley_b_ht - 0.5]);
+        }
+        
+        // Bearing holes
+        translate([0, 0, -1])
+            cylinder(d=bearing_hold_diameter, h=bearing_embedment+2, $fn=100);
+        translate([0, 0, 1 + total_ht - bearing_embedment])
+            cylinder(d=bearing_diameter, h=bearing_embedment+1, $fn=100);
+        
+        // Fixation hole
+        translate([0, pulley_length - pulley_b_dia/2 - fixation_hole_shift, -1])
+            cylinder(d=fixation_hole_diameter, h=pulley_b_ht + 2, $fn=100);
+        
+        // Chanfrein
+        translate([0, pulley_length - pulley_b_dia/2 - fixation_hole_shift, pulley_b_ht - 1.5])
+            cylinder(d=fixation_hole_diameter + 3, h=pulley_b_ht, $fn=100);
+        
+        
+    }
+        
+}
 if ( profile == 13 ) { pulley ( "GT2 3mm" , GT2_3mm_pulley_dia , 1.169 , 2.31 ); }
 if ( profile == 14 ) { pulley ( "GT2 5mm" , GT2_5mm_pulley_dia , 1.969 , 3.952 ); }
 
@@ -97,12 +143,12 @@ if ( profile == 14 ) { pulley ( "GT2 5mm" , GT2_5mm_pulley_dia , 1.969 , 3.952 )
 function tooth_spaceing_curvefit (b,c,d)
 	= ((c * pow(teeth,d)) / (b + pow(teeth,d))) * teeth ;
 
-function tooth_spacing(tooth_pitch,pitch_line_offset, teeth=teeth)
+function tooth_spacing(tooth_pitch,pitch_line_offset)
 	= (2*((teeth*tooth_pitch)/(3.14159265*2)-pitch_line_offset)) ;
 
 // Main Module
 
-module pulley( belt_type , pulley_OD , tooth_depth , tooth_width , teeth=teeth )
+module pulley( belt_type , pulley_OD , tooth_depth , tooth_width )
 	{
 	echo (str("Belt type = ",belt_type,"; Number of teeth = ",teeth,"; Pulley Outside Diameter = ",pulley_OD,"mm "));
 	tooth_distance_from_centre = sqrt( pow(pulley_OD/2,2) - pow((tooth_width+additional_tooth_width)/2,2));
