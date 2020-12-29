@@ -13,10 +13,11 @@ def on_publish(client, userdata, mid):
 def on_log(client, userdata, level, buf):
   print("log: ", buf)
 
-topic = "amipo/%s" % sys.argv[1]
-value = "%s" % sys.argv[2]
+hostname = sys.argv[1]
+topic = "amipo/%s" % sys.argv[2]
+value = "%s" % sys.argv[3]
 
-publish.single(topic, payload=value, qos=1, retain=False, hostname="127.0.0.1",
+publish.single(topic, payload=value, qos=1, retain=False, hostname=hostname,
   port=1883, client_id="", keepalive=5, will=None, auth=None, tls=None,
   protocol=mqtt.MQTTv311, transport="tcp")
 
