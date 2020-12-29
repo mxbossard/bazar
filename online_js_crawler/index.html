@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+		<script type="text/javascript">
+			var urlToCrawl = "https://www.amipo.fr";
+			alert(urlToCrawl);
+
+			$.ajax({
+				url: urlToCrawl,
+				context: $( "#crawled" )
+			}).done(function(data) {
+				$( this ).html( data );
+			});
+		</script>
+	</head>
+
+	<body>
+
+		<h1>
+			Target:
+		</h1>
+
+		<div id="crawled">
+		</div>
+
+	</body>
+
+</html>
