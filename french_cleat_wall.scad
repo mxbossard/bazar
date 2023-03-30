@@ -4,13 +4,20 @@ wall_height = 150;
 wall_width = 250;
 wall_heith_first_cleat = 20;
 
-cleat_width = 9.8/2;
+planche_width = 18.5;
+nCut = 4;
+cutWidth = 0.3;
+
+cleat_width = (planche_width - 0.3 * (nCut-1)) / nCut;
 cleat_thickness = 2;
 cleat_length = 250;
 cleat_angle = 45; // In degree
 cleat_semi_delta = cleat_thickness/2;
-cleat_interval = (cleat_width + cleat_semi_delta) * 2 + 1.5;
+cleat_interval = (cleat_width + cleat_semi_delta) * 2 + 2;
 
+echo("Cleat width (min, max): ", cleat_width - cleat_semi_delta, cleat_width + cleat_semi_delta );
+echo("Void width: ", cleat_interval - cleat_width - cleat_semi_delta);
+echo("Cleat interval: ", cleat_interval);
 
 module wall() {
     color("LightGrey", 1.0) {
