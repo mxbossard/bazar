@@ -1,32 +1,36 @@
 mode = "TG10";
+piece = 0;
 
 if ( mode == "TG10" ) {
-    r_height = 7;
+    r_height = 8;
     r_width = 33;
     r_length = 40;
     r_side_arrow = 8.5;
     r_side_width = 4.2;
-    r_bottom_thickness = 2.2;
+    r_bottom_thickness = 1;
     r_side_thickness = 1;
     r_top_thickness = 2;
     r_internal_angle_length = 8;
     r_internal_angle_width = 5;
+    if (piece <= 0)
     rectanglePad(r_height, r_width, r_length, r_side_arrow, r_side_width, r_bottom_thickness, r_side_thickness, r_top_thickness, r_internal_angle_length, r_internal_angle_width, mode);
     
-    c_height = 7.2;
+    c_external_height = 8;
+    c_internal_height = 5;
     c_external_radius = 17;
-    c_internal_radius = 16;
-    c_width = 1;
+    c_internal_radius = 15;
+    c_width = 0.8;
+    if (piece >= 0)
     translate([r_length/2,r_width + 30,0])
-    circlePad(c_height, c_external_radius, c_internal_radius, c_width);
+    circlePad(c_external_height, c_internal_height, c_external_radius, c_internal_radius, c_width);
 
 } else {
     assert(false, str("Unsupported mode: ", mode, " !"));
 }
 
-module circlePad(c_height, c_external_radius, c_internal_radius, c_width) {
+module circlePad(c_external_height, c_internal_height, c_external_radius, c_internal_radius, c_width) {
     rotate_extrude($fn=200)
-    polygon([[0,0],[c_external_radius,0],[c_external_radius,c_height],[c_internal_radius-c_width,c_height-2*c_width],[c_external_radius-c_width,c_height-2*c_width],[c_external_radius-c_width,c_width],[0,c_width]]);
+    polygon([[0,0],[c_external_radius,0],[c_external_radius,c_external_height],[c_internal_radius,c_internal_height+c_width],[c_external_radius-c_width,c_internal_height+c_width],[c_external_radius-c_width,c_width],[0,c_width]]);
     
     text_size=5;
     color("orange")
